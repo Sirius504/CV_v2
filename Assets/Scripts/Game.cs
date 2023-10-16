@@ -17,8 +17,10 @@ public class Game : MonoBehaviour
             .OfType<IInitializable>()
             .OrderBy(i => i.InitOrder))
         {
-            initializable.Init(monoBehaviours);
+            initializable.Init();
         }
+
+        Injector.Instance.AllowResolve();
     }
 
     // Update is called once per frame

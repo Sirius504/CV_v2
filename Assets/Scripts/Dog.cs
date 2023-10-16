@@ -1,12 +1,7 @@
-using System;
-using UnityEngine;
-
-public class Dog : MonoBehaviour, ICellHabitant
+public class Dog : MyMono, ICellHabitant
 {
-    public event Action<MonoBehaviour> OnDestroyEvent;
-
-    private void OnDestroy()
+    public void Init(Level level)
     {
-        OnDestroyEvent?.Invoke(this);
+        
     }
 }

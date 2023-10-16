@@ -1,12 +1,13 @@
-using System;
 using System.Linq;
-using UnityEngine;
 
-public class Enemy : MonoBehaviour, ICellHabitant, ITickable
+public class Enemy : MyMono, ICellHabitant, ITickable
 {
-    [SerializeField] private Level _level;
+    private Level _level;
 
-    public event Action<MonoBehaviour> OnDestroyEvent;
+    public void Init(Level level)
+    {
+        _level = level;
+    }
 
     public void OnTick(uint tick)
     {
@@ -17,10 +18,5 @@ public class Enemy : MonoBehaviour, ICellHabitant, ITickable
         var target = adjacent[UnityEngine.Random.Range(0, adjacent.Count)];
         _level.Move(this, target);
         transform.position = _level.CellToWorld(this);
-    }
-
-    private void OnDestroy()
-    {
-        OnDestroyEvent?.Invoke(this);
     }
 }

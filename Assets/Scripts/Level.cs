@@ -13,7 +13,7 @@ public class Level : MonoBehaviour, IInitializable
     private Dictionary<ICellHabitant, Vector2Int> _entities;
 
     public int InitOrder => 1;
-    public void Init(IEnumerable<MonoBehaviour> monoBehaviours)
+    public void Init()
     {
         _cells = new CellInfo[_gridSize.x, _gridSize.y];
         for (var i = 0; i < _gridSize.x; i++)
@@ -23,16 +23,6 @@ public class Level : MonoBehaviour, IInitializable
             }
 
         _entities = new Dictionary<ICellHabitant, Vector2Int>(64);
-
-        // cell habitants
-        foreach (var cellHabitant in monoBehaviours.OfType<ICellHabitant>())
-        {
-            var mb = (MonoBehaviour)cellHabitant;
-            var cellPosition = WorldToCell(mb.transform.position);
-            Add(cellHabitant, cellPosition);
-            mb.transform.position = CellToWorld(cellPosition);
-            cellHabitant.OnDestroyEvent += OnEntityDestroy;
-        }
     }
 
     #region Cells related methods
@@ -84,6 +74,14 @@ public class Level : MonoBehaviour, IInitializable
     #endregion
 
     #region Entities related methods
+    
+    public void Add(ICellHabitant entity)
+    {
+        var mb = (MonoBehaviour)entity;
+        var cellPosition = WorldToCell(mb.transform.position);
+        Add(entity, cellPosition);
+        mb.transform.position = CellToWorld(cellPosition);
+    }
 
     public void Add(ICellHabitant entity, Vector2Int position)
     {
@@ -91,13 +89,13 @@ public class Level : MonoBehaviour, IInitializable
         {
             var cell = GetCellInternal(position);
             cell.Put(entity.GetType(), entity);
+            entity.OnDestroyEvent += OnEntityDestroy;
         }
         else
         {
             Debug.LogError("Can't add entity; entity was already added.");
         }
     }
-
 
     public void Remove(ICellHabitant entity)
     {
@@ -106,6 +104,7 @@ public class Level : MonoBehaviour, IInitializable
             var cell = GetCellInternal(position);
             cell?.Remove(entity.GetType());
             _entities.Remove(entity);
+            entity.OnDestroyEvent -= OnEntityDestroy;
         }
         else
         {
@@ -139,7 +138,6 @@ public class Level : MonoBehaviour, IInitializable
     {
         var entity = (ICellHabitant)mb;
         Remove(entity);
-        entity.OnDestroyEvent -= OnEntityDestroy;
     }
     #endregion
 }

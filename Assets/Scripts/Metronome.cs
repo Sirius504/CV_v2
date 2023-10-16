@@ -1,5 +1,4 @@
 using System.Collections.Generic;
-using System.Linq;
 using UnityEngine;
 
 public class Metronome : MonoBehaviour, IInitializable
@@ -12,17 +11,12 @@ public class Metronome : MonoBehaviour, IInitializable
     private HashSet<ITickable> _tickables;
 
     public int InitOrder => 1;
-    public void Init(IEnumerable<MonoBehaviour> monoBehaviours)
+    public void Init()
     {
         _beginningTime = Time.time;
         _currentTick = 0;
 
         _tickables = new HashSet<ITickable>();
-        foreach (var tickable in monoBehaviours.OfType<ITickable>())
-        {
-            _tickables.Add(tickable);
-            tickable.OnDestroyEvent += OnTickableDestroy;
-        }
     }
 
     public void UpdateManual()
@@ -31,6 +25,31 @@ public class Metronome : MonoBehaviour, IInitializable
         if (ticksPassed > _currentTick)
         {
             Tick();
+        }
+    }
+
+    public void Add(ITickable tickable)
+    {
+        if (_tickables.Add(tickable))
+        {
+            tickable.OnDestroyEvent += OnTickableDestroy;
+        }
+        else
+        {
+            Debug.LogWarning($"Trying to add tickable {((MonoBehaviour)tickable).name} but it was already added.");
+        }
+    }
+
+    public void Remove(ITickable tickable)
+    {
+        if (_tickables.Contains(tickable))
+        {
+            _tickables.Remove(tickable);
+            tickable.OnDestroyEvent -= OnTickableDestroy;
+        }
+        else
+        {
+            throw new KeyNotFoundException($"Can't remove tickable; tickable {((MonoBehaviour)tickable).gameObject.name} was not found.");
         }
     }
 
@@ -45,8 +64,6 @@ public class Metronome : MonoBehaviour, IInitializable
 
     private void OnTickableDestroy(MonoBehaviour mb)
     {
-        var tickable = (ITickable)mb;
-        _tickables.Remove(tickable);
-        tickable.OnDestroyEvent -= OnTickableDestroy;
+        Remove((ITickable)mb);
     }
 }

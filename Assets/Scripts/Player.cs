@@ -1,12 +1,15 @@
-using System;
 using UnityEngine;
 
-public class Player : MonoBehaviour, ICellHabitant
+public class Player : MyMono, ICellHabitant
 {
-    [SerializeField] private Level _level;
+    private Level _level;
+
     [SerializeField] private int _damage;
 
-    public event Action<MonoBehaviour> OnDestroyEvent;
+    public void Init(Level level)
+    {
+        _level = level;
+    }
 
     public void UpdateManual()
     {
@@ -39,10 +42,5 @@ public class Player : MonoBehaviour, ICellHabitant
             var health = enemy.GetComponent<Health>();
             health.TakeDamage(_damage);
         }
-    }
-
-    private void OnDestroy()
-    {
-        OnDestroyEvent?.Invoke(this);
     }
 }
