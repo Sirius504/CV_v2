@@ -10,7 +10,7 @@ public class Metronome : MonoBehaviour, IInitializable
 
     private HashSet<ITickable> _tickables;
 
-    public int InitOrder => 1;
+    public InitOrder InitOrder => InitOrder.System;
     public void Init()
     {
         _beginningTime = Time.time;

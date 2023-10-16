@@ -1,5 +1,4 @@
 using System.Collections.Generic;
-using System.Linq;
 using UnityEngine;
 
 public class Level : MonoBehaviour, IInitializable
@@ -8,11 +7,12 @@ public class Level : MonoBehaviour, IInitializable
     [SerializeField] private Grid _grid;
 
     public Vector2Int Size => _gridSize;
+    public IReadOnlyCollection<ICellHabitant> Entities => _entities.Keys;
 
     private CellInfo[,] _cells;
     private Dictionary<ICellHabitant, Vector2Int> _entities;
 
-    public int InitOrder => 1;
+    public InitOrder InitOrder => InitOrder.System;
     public void Init()
     {
         _cells = new CellInfo[_gridSize.x, _gridSize.y];
@@ -79,6 +79,7 @@ public class Level : MonoBehaviour, IInitializable
     {
         var mb = (MonoBehaviour)entity;
         var cellPosition = WorldToCell(mb.transform.position);
+        cellPosition.Clamp(Vector2Int.zero, _gridSize - Vector2Int.one);
         Add(entity, cellPosition);
         mb.transform.position = CellToWorld(cellPosition);
     }

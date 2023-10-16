@@ -1,11 +1,13 @@
 ﻿using System;
 using UnityEngine;
 
-public class MyMono : MonoBehaviour
+public class MyMono : MonoBehaviour, IInitializable
 {
     public event Action<MonoBehaviour> OnDestroyEvent;
 
-    private void Awake()
+    public InitOrder InitOrder => InitOrder.Entity;
+
+    public void Init()
     {
         Injector.Instance.RequestResolve(this);
     }

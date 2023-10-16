@@ -9,6 +9,11 @@ public class Enemy : MyMono, ICellHabitant, ITickable
         _level = level;
     }
 
+    private void Update()
+    {
+        transform.position = _level.CellToWorld(this);
+    }
+
     public void OnTick(uint tick)
     {
         var adjacent = _level.GetAdjacentCells(this)
@@ -17,6 +22,5 @@ public class Enemy : MyMono, ICellHabitant, ITickable
             .ToList();
         var target = adjacent[UnityEngine.Random.Range(0, adjacent.Count)];
         _level.Move(this, target);
-        transform.position = _level.CellToWorld(this);
     }
 }

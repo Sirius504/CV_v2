@@ -1,7 +1,7 @@
 ﻿using System.Collections.Generic;
 using UnityEngine;
 
-public class Injector : SingletonBehaviour<Injector>
+public class Injector : SingletonBehaviour<Injector>, IInitializable
 {
     [SerializeField] private Level _level;
     [SerializeField] private Metronome _metronome;
@@ -9,9 +9,9 @@ public class Injector : SingletonBehaviour<Injector>
     private HashSet<MyMono> _resolveRequests;
     private bool _resolveAllowed = false;
 
-    protected override void Awake()
-    {
-        base.Awake();
+    public InitOrder InitOrder => InitOrder.System;
+    public void Init()
+    {        
         _level = _level != null ? _level : FindObjectOfType<Level>();
 
         _resolveRequests = new HashSet<MyMono>();
