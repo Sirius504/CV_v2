@@ -1,4 +1,5 @@
 using System.Collections.Generic;
+using System.Linq;
 using UnityEngine;
 
 public class Level : MonoBehaviour, IInitializable
@@ -12,7 +13,7 @@ public class Level : MonoBehaviour, IInitializable
     private Dictionary<ICellHabitant, Vector2Int> _entities;
 
     public int InitOrder => 1;
-    public void Init()
+    public void Init(IEnumerable<MonoBehaviour> monoBehaviours)
     {
         _cells = new CellInfo[_gridSize.x, _gridSize.y];
         for (var i = 0; i < _gridSize.x; i++)
@@ -22,6 +23,16 @@ public class Level : MonoBehaviour, IInitializable
             }
 
         _entities = new Dictionary<ICellHabitant, Vector2Int>(64);
+
+        // cell habitants
+        foreach (var cellHabitant in monoBehaviours.OfType<ICellHabitant>())
+        {
+            var mb = (MonoBehaviour)cellHabitant;
+            var cellPosition = WorldToCell(mb.transform.position);
+            Add(cellHabitant, cellPosition);
+            mb.transform.position = CellToWorld(cellPosition);
+            cellHabitant.OnDestroyEvent += OnEntityDestroy;
+        }
     }
 
     #region Cells related methods
@@ -122,6 +133,13 @@ public class Level : MonoBehaviour, IInitializable
     public Vector2Int GetEntityPosition(ICellHabitant entity)
     {
         return _entities[entity];
+    }
+
+    private void OnEntityDestroy(MonoBehaviour mb)
+    {
+        var entity = (ICellHabitant)mb;
+        Remove(entity);
+        entity.OnDestroyEvent -= OnEntityDestroy;
     }
     #endregion
 }

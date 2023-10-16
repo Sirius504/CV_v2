@@ -4,7 +4,6 @@ using UnityEngine;
 public class Health : MonoBehaviour
 {
     [SerializeField] private int _maxHealth;
-    [SerializeField] private Level _level;
     public int Amount { get; private set; }
     public int MaxHealth => _maxHealth;
 
@@ -14,7 +13,6 @@ public class Health : MonoBehaviour
     {
         Amount = _maxHealth;
         _entity = GetComponent<ICellHabitant>();
-        _level = _level != null ? _level : FindObjectOfType<Level>();
     }
 
     public void TakeDamage(int damage)
@@ -22,7 +20,6 @@ public class Health : MonoBehaviour
         Amount = Mathf.Max(0, Amount - damage);
         if (Amount == 0)
         {
-            _level.Remove(_entity);
             Destroy(gameObject);
         }
     }

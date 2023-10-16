@@ -1,9 +1,12 @@
+using System;
 using UnityEngine;
 
 public class Player : MonoBehaviour, ICellHabitant
 {
     [SerializeField] private Level _level;
     [SerializeField] private int _damage;
+
+    public event Action<MonoBehaviour> OnDestroyEvent;
 
     public void UpdateManual()
     {
@@ -36,5 +39,10 @@ public class Player : MonoBehaviour, ICellHabitant
             var health = enemy.GetComponent<Health>();
             health.TakeDamage(_damage);
         }
+    }
+
+    private void OnDestroy()
+    {
+        OnDestroyEvent?.Invoke(this);
     }
 }
