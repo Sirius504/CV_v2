@@ -1,4 +1,5 @@
 using System.Collections.Generic;
+using System.Linq;
 using UnityEngine;
 
 public class Level : MonoBehaviour, IInitializable
@@ -6,8 +7,10 @@ public class Level : MonoBehaviour, IInitializable
     [SerializeField] private Vector2Int _gridSize;
     [SerializeField] private Grid _grid;
 
+    public Astar Astar { get; private set; }
     public Vector2Int Size => _gridSize;
     public IReadOnlyCollection<ICellHabitant> Entities => _entities.Keys;
+    public IEnumerable<ICellInfo> Cells => _cells.Cast<ICellInfo>();
 
     private CellInfo[,] _cells;
     private Dictionary<ICellHabitant, Vector2Int> _entities;
@@ -23,6 +26,7 @@ public class Level : MonoBehaviour, IInitializable
             }
 
         _entities = new Dictionary<ICellHabitant, Vector2Int>(64);
+        Astar = new Astar(this);
     }
 
     #region Cells related methods

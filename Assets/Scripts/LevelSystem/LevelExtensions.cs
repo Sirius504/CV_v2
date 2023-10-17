@@ -1,4 +1,5 @@
-﻿using System.Collections.Generic;
+﻿using System;
+using System.Collections.Generic;
 using System.Linq;
 using UnityEngine;
 
@@ -36,5 +37,17 @@ public static class LevelExtensions
     public static IEnumerable<ICellInfo> GetAdjacentCells(this Level level, ICellHabitant entity)
     {
         return GetAdjacentCells(level, level.GetEntityPosition(entity));
+    }
+
+    public static bool TryGetRandomCell(this Level level, Func<ICellInfo, bool> predicate, out ICellInfo cell)
+    {
+        var fittingCells = level.Cells.Where(predicate).ToList();
+        if (fittingCells.Any())
+        {
+            cell = fittingCells[UnityEngine.Random.Range(0, fittingCells.Count)];
+            return true;
+        }
+        cell = default;
+        return false;
     }
 }

@@ -1,6 +1,6 @@
 using UnityEngine;
 
-public class Player : MyMono, ICellHabitant
+public class Player : MyMono, ICellHabitant, IEnemyTarget
 {
     private Level _level;
 
