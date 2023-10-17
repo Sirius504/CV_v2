@@ -5,9 +5,9 @@ using UnityEngine;
 public interface ICellInfo
 {
     public Vector2Int Position { get; }
-    public IReadOnlyDictionary<Type, ICellHabitant> Contents { get; }
+    public IReadOnlyCollection<ICellHabitant> Contents { get; }
 
     public bool IsEmpty();
-    public bool Has(Type type);
-    public bool TryGet<T>(Type type, out T value) where T : ICellHabitant;
+    public bool Has<T>();
+    public bool TryGet<T>(out T value) where T : ICellHabitant;
 }

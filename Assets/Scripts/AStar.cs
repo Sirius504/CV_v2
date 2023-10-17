@@ -26,11 +26,6 @@ public class Astar
             this.position = position;
         }
 
-        public override int GetHashCode()
-        {
-            return position.GetHashCode();
-        }
-
         public bool IsAdjacent(Node another)
         {
             var absX = Mathf.Abs(position.x - another.position.x);
@@ -38,40 +33,50 @@ public class Astar
             return absX == 1 && absY == 0
                 || absX == 0 && absY == 1;
         }
+
+        public override int GetHashCode()
+        {
+            return position.GetHashCode();
+        }
+        
+        public override bool Equals(object other)
+        {
+            if (other is not Node) return false;
+
+            return Equals((Node)other);
+        }
+
+        public bool Equals(Node other)
+        {
+            return this.position == other.position;
+        }
     }
 
     private readonly Level _level;
     private readonly int cols;
     private readonly int rows;
+    private readonly HashSet<Node> checkedNodes;
+    private readonly HashSet<Node> uncheckedNodes;
 
     public Astar(Level level)
     {
         _level = level;
         cols = _level.Size.x;
         rows = _level.Size.y;
+
+        checkedNodes = new HashSet<Node>(cols * rows);
+        uncheckedNodes = new HashSet<Node>(cols * rows);
     }
 
-    public List<Vector2Int> FindPath(Func<ICellInfo, bool> predicate, Vector2Int start, Vector2Int end)
+    public List<Vector2Int> FindPath(Vector2Int start, Vector2Int end, Func<ICellInfo, bool> predicate)
     {
-        if (!_level.InBounds(start))
-        {
-            throw new ArgumentOutOfRangeException(nameof(start));
-        }
+        CheckArguments(start, end);
 
-        if (!_level.InBounds(end))
+        uncheckedNodes.Add(new Node(start.x, start.y)
         {
-            throw new ArgumentOutOfRangeException(nameof(end));
-        }
-
-        var checkedNodes = new HashSet<Node>();
-        var uncheckedNodes = new HashSet<Node>(cols * rows)
-        {
-            new Node(start.x, start.y)
-            {
-                f = 0,
-                g = 0
-            }
-        };
+            f = 0,
+            g = 0
+        });
 
         var endNode = new Node(end.x, end.y);
         Node current = null;
@@ -91,16 +96,32 @@ public class Astar
             }
             checkedNodes.Add(current);
             uncheckedNodes.Remove(current);
-
         }
         while (uncheckedNodes.Count > 0 && !current.IsAdjacent(endNode));
 
-        
-        if (!current.IsAdjacent(endNode))
+        uncheckedNodes.Clear();
+        checkedNodes.Clear();
+
+        return current.IsAdjacent(endNode)
+            ? CollectResult(end, current)
+            : null;
+    }
+
+    private void CheckArguments(Vector2Int start, Vector2Int end)
+    {
+        if (!_level.InBounds(start))
         {
-            return null;
+            throw new ArgumentOutOfRangeException(nameof(start));
         }
 
+        if (!_level.InBounds(end))
+        {
+            throw new ArgumentOutOfRangeException(nameof(end));
+        }
+    }
+
+    private static List<Vector2Int> CollectResult(Vector2Int end, Node current)
+    {
         var result = new List<Vector2Int>();
         do
         {
@@ -110,6 +131,7 @@ public class Astar
         while (current != null);
 
         result.Reverse();
+        result.Add(end);
 
         return result;
     }

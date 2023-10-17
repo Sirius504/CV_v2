@@ -1,18 +1,19 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.Linq;
 using UnityEngine;
 
 public class CellInfo : ICellInfo
 {
-    private readonly Dictionary<Type, ICellHabitant> _contents;
+    private readonly List<ICellHabitant> _contents;
 
     public Vector2Int Position { get; }
-    public IReadOnlyDictionary<Type, ICellHabitant> Contents => _contents;
+    public IReadOnlyCollection<ICellHabitant> Contents => _contents;
 
     public CellInfo(Vector2Int position)
     {
         Position = position;
-        _contents = new Dictionary<Type, ICellHabitant>();
+        _contents = new List<ICellHabitant>();
     }
 
     public bool IsEmpty()
@@ -20,26 +21,27 @@ public class CellInfo : ICellInfo
         return _contents.Count == 0;
     }
 
-    public bool Has(Type type)
+    public bool Has<T>()
     {
-        return _contents.ContainsKey(type);
+        return _contents.Any(entity => entity is T);
     }
 
-    public void Put(Type type, ICellHabitant value)
+    public void Put(ICellHabitant value)
     {
-        _contents.Add(type, value);
+        _contents.Add(value);
     }
 
-    public void Remove(Type type)
+    public void Remove(ICellHabitant entity)
     {
-        _contents.Remove(type);
+        _contents.Remove(entity);
     }
 
-    public bool TryGet<T>(Type type, out T value) where T : ICellHabitant
+    public bool TryGet<T>(out T value) where T : ICellHabitant
     {
-        if (_contents.TryGetValue(type, out var habitant))
+        var matchingEntity = _contents.FirstOrDefault(entity => entity is T);
+        if (matchingEntity != null)
         {
-            value = (T)habitant;
+            value = (T)matchingEntity;
             return true;
         }
         value = default;

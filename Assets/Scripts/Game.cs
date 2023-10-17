@@ -1,5 +1,6 @@
 using UnityEngine;
 using System.Linq;
+using System;
 
 public class Game : MonoBehaviour
 {
@@ -26,13 +27,26 @@ public class Game : MonoBehaviour
         {
             initializable.Init();
         }
+
+        _player.OnDestroyEvent += OnPlayerDestroy;
+    }
+
+    private void OnDestroy()
+    {
+        if (_player != null)
+            _player.OnDestroyEvent -= OnPlayerDestroy;
     }
 
     // Update is called once per frame
     void Update()
     {
-        _player.UpdateManual();
+        _player?.UpdateManual();
         _metronome.UpdateManual();
         _winLose.UpdateManual();
+    }
+    private void OnPlayerDestroy(MonoBehaviour player)
+    {
+        _player.OnDestroyEvent -= OnPlayerDestroy;
+        _player = null;
     }
 }

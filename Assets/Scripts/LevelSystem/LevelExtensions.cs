@@ -50,4 +50,22 @@ public static class LevelExtensions
         cell = default;
         return false;
     }
+
+    public static bool IsAdjacent(this Level level, ICellHabitant entity, ICellHabitant target)
+    {
+        return IsAdjacent(level, level.GetEntityPosition(entity), level.GetEntityPosition(target));
+    }
+
+    public static bool IsAdjacent(this Level level, ICellHabitant entity, Vector2Int target)
+    {
+        return IsAdjacent(level, level.GetEntityPosition(entity), target);
+    }
+
+    public static bool IsAdjacent(this Level level, Vector2Int position, Vector2Int target)
+    {
+        var absX = Mathf.Abs(target.x - position.x);
+        var absY = Mathf.Abs(target.y - position.y);
+        return absX == 1 && absY == 0
+            || absX == 0 && absY == 1;
+    }
 }

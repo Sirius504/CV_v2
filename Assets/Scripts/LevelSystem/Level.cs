@@ -93,7 +93,7 @@ public class Level : MonoBehaviour, IInitializable
         if (_entities.TryAdd(entity, position))
         {
             var cell = GetCellInternal(position);
-            cell.Put(entity.GetType(), entity);
+            cell.Put(entity);
             entity.OnDestroyEvent += OnEntityDestroy;
         }
         else
@@ -107,7 +107,7 @@ public class Level : MonoBehaviour, IInitializable
         if (_entities.TryGetValue(entity, out var position))
         {
             var cell = GetCellInternal(position);
-            cell?.Remove(entity.GetType());
+            cell?.Remove(entity);
             _entities.Remove(entity);
             entity.OnDestroyEvent -= OnEntityDestroy;
         }
@@ -122,10 +122,10 @@ public class Level : MonoBehaviour, IInitializable
         if (_entities.TryGetValue(entity, out var position))
         {
             var cell = GetCellInternal(position);
-            cell?.Remove(entity.GetType());
+            cell?.Remove(entity);
 
             var newCell = GetCellInternal(newPosition);
-            newCell.Put(entity.GetType(), entity);
+            newCell.Put(entity);
             _entities[entity] = newPosition;
         }
         else

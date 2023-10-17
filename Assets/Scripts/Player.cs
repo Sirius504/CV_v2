@@ -37,9 +37,9 @@ public class Player : MyMono, ICellHabitant, IEnemyTarget
             _level.Move(this, targetPosition);
             transform.position = _level.CellToWorld(this);
         }
-        else if (targetCell.TryGet(typeof(Enemy), out Enemy enemy))
+        else if (targetCell.TryGet(out Enemy target))
         {
-            var health = enemy.GetComponent<Health>();
+            var health = target.GetComponent<Health>();
             health.TakeDamage(_damage);
         }
     }
