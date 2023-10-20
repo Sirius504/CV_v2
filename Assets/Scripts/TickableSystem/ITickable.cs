@@ -1,9 +1,7 @@
 ﻿using System;
 using UnityEngine;
 
-public interface ITickable
+public interface ITickable : IDestroyable
 {
     public void OnTick(uint tick);
-
-    public event Action<MonoBehaviour> OnDestroyEvent;
 }

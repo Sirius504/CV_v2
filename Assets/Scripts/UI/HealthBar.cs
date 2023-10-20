@@ -2,7 +2,7 @@ using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.UI;
 
-public class HealthBar : MonoBehaviour
+public class HealthBar : MonoEntity, IUpdatable
 {
     [SerializeField] private Health _health;
     [SerializeField] private Image _healthPrefab;
@@ -17,7 +17,8 @@ public class HealthBar : MonoBehaviour
         _healthPrefab.gameObject.SetActive(false);
     }
 
-    void Update()
+    public UpdateOrder UpdateOrder => UpdateOrder.UI;
+    public void UpdateManual()
     {
         ManageCount();
         for (var i = 0; i < images.Count; i++)

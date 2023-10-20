@@ -1,8 +1,9 @@
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using UnityEngine;
 
-public class Enemy : MyMono, ICellHabitant, ITickable
+public class Enemy : MonoEntity, ICellHabitant, ITickable, IInjectable<Level>
 {
     [SerializeField] private int _damage;
 
@@ -11,14 +12,11 @@ public class Enemy : MyMono, ICellHabitant, ITickable
     private IEnemyTarget _target;
     private List<Vector2Int> _currentPath;
 
-    public void Init(Level level)
+    public event Action<Vector2Int> OnMove;
+
+    public void Inject(Level level)
     {
         _level = level;
-    }
-
-    private void Update()
-    {
-        transform.position = _level.CellToWorld(this);
     }
 
     public void OnTick(uint tick)
@@ -56,6 +54,7 @@ public class Enemy : MyMono, ICellHabitant, ITickable
         }
 
         _level.Move(this, target);
+        OnMove?.Invoke(target);
         _currentPath.RemoveAt(0);
     }
 
@@ -87,7 +86,7 @@ public class Enemy : MyMono, ICellHabitant, ITickable
         var availableTargets = _level.Entities.OfType<IEnemyTarget>().ToList();
         if (availableTargets.Count > 0)
         {
-            var newTarget = availableTargets[Random.Range(0, availableTargets.Count)];
+            var newTarget = availableTargets[UnityEngine.Random.Range(0, availableTargets.Count)];
             return newTarget;
         }
 

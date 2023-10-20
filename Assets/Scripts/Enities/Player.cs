@@ -1,12 +1,15 @@
+using System;
 using UnityEngine;
 
-public class Player : MyMono, ICellHabitant, IEnemyTarget
+public class Player : MonoEntity, ICellHabitant, IEnemyTarget, IUpdatable, IInjectable<Level>
 {
     private Level _level;
 
     [SerializeField] private int _damage;
 
-    public void Init(Level level)
+    public UpdateOrder UpdateOrder => UpdateOrder.Player;
+
+    public void Inject(Level level)
     {
         _level = level;
     }

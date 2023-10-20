@@ -1,0 +1,7 @@
+﻿using System;
+using UnityEngine;
+
+public interface IDestroyable
+{
+    public event Action<MonoBehaviour> OnDestroyEvent;
+}

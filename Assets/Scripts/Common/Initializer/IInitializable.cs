@@ -1,8 +1,12 @@
 ﻿public enum InitOrder
 {
-    System = 0,
-    Entity = 1,
-    UI = 2
+    Injector = 0,
+    Initializer = 1,
+    Updater = 2,
+    System = 3,
+    Entity = 4,
+    UI = 5,
+    Animation = 6
 }
 
 public interface IInitializable

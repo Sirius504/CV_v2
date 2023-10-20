@@ -10,7 +10,7 @@ public enum GameState
     Lose
 }
 
-public class WinLoseConditions : MonoBehaviour, IInitializable
+public class WinLoseConditions : MonoEntity, IInitializable, IUpdatable
 {
     [SerializeField] private Level _level;
 
@@ -27,6 +27,7 @@ public class WinLoseConditions : MonoBehaviour, IInitializable
     public event Action<GameState> OnGameStateChange;
     public InitOrder InitOrder => InitOrder.System;
 
+    public UpdateOrder UpdateOrder => UpdateOrder.System;
 
     public void Init()
     {

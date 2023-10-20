@@ -1,52 +1,46 @@
 using UnityEngine;
 using System.Linq;
-using System;
+using System.Collections.Generic;
 
-public class Game : MonoBehaviour
+public class Game : SingletonBehaviour<Game>
 {
-    [SerializeField] private Player _player;
-    [SerializeField] private Level _level;
-    [SerializeField] private Metronome _metronome;
-    [SerializeField] private WinLoseConditions _winLose;
-
+    private HashSet<ISystem> _systems;
+    private List<MonoBehaviour> _creationQueue;
+    private List<MonoBehaviour> CreationQueue => _creationQueue ??= new List<MonoBehaviour>();
+    private HashSet<ISystem> Systems => _systems ??= new HashSet<ISystem>();
 
     private void Start()
     {
-        var monoBehaviours = FindObjectsByType<MonoBehaviour>(FindObjectsInactive.Include, FindObjectsSortMode.None);
-        var initializables = monoBehaviours.OfType<IInitializable>().OrderBy(i => i.InitOrder);
+        ResolveAll();
+    }
 
-        // initializables
-        foreach (var initializable in initializables.Where(i => i.InitOrder <= InitOrder.Entity))
+    private void Update()
+    {
+        ResolveAll();
+    }
+
+    public void NotifyCreation(MonoBehaviour mb)
+    {
+        CreationQueue.Add(mb);
+    }
+
+    private void ResolveAll()
+    {
+        if (CreationQueue.Count == 0)
         {
-            initializable.Init();
+            return;
         }
 
-        Injector.Instance.AllowResolve();
-
-        foreach (var initializable in initializables.Where(i => i.InitOrder > InitOrder.Entity))
+        foreach (var system in CreationQueue.OfType<ISystem>())
         {
-            initializable.Init();
+            Systems.Add(system);
         }
 
-        _player.OnDestroyEvent += OnPlayerDestroy;
-    }
+        foreach (var system in Systems.OrderBy(sys => sys.StartOrder))
+        {
+            system.RegisterMany(CreationQueue);
+        }
 
-    private void OnDestroy()
-    {
-        if (_player != null)
-            _player.OnDestroyEvent -= OnPlayerDestroy;
-    }
-
-    // Update is called once per frame
-    void Update()
-    {
-        _player?.UpdateManual();
-        _metronome.UpdateManual();
-        _winLose.UpdateManual();
-    }
-    private void OnPlayerDestroy(MonoBehaviour player)
-    {
-        _player.OnDestroyEvent -= OnPlayerDestroy;
-        _player = null;
+        CreationQueue.Clear();
     }
 }

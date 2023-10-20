@@ -1,12 +1,22 @@
 using TMPro;
 using UnityEngine;
 
-public class ResultScreen : MonoBehaviour, IInitializable
+public class ResultScreen : MonoEntity, IInitializable
 {
     [SerializeField] private WinLoseConditions _winLose;
     [SerializeField] private TextMeshProUGUI _resultText;
 
     public InitOrder InitOrder => InitOrder.UI;
+    private bool awakened;
+
+    [ForceAwake]
+    protected override void Awake()
+    {
+        if (awakened)
+            return;
+       base.Awake();
+        awakened = true;
+    }
 
     public void Init()
     {
@@ -14,8 +24,9 @@ public class ResultScreen : MonoBehaviour, IInitializable
         OnGameStateChange(_winLose.GameState);
     }
 
-    private void OnDestroy()
+    protected override void OnDestroy()
     {
+        base.OnDestroy();
         _winLose.OnGameStateChange -= OnGameStateChange;
     }
 

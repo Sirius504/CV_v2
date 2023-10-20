@@ -1,9 +1,3 @@
-﻿using System;
-using UnityEngine;
-
-public interface ICellHabitant
+﻿public interface ICellHabitant : IDestroyable
 {
-    public event Action<MonoBehaviour> OnDestroyEvent;
-
-    public void Init(Level level);
 }

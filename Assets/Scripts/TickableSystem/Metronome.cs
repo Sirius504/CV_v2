@@ -1,7 +1,7 @@
 using System.Collections.Generic;
 using UnityEngine;
 
-public class Metronome : MonoBehaviour, IInitializable
+public class Metronome : SystemBase<Metronome, ITickable>, IUpdatable, IInitializable
 {
     [SerializeField] private float _tickDuration = 1f;
 
@@ -11,6 +11,7 @@ public class Metronome : MonoBehaviour, IInitializable
     private HashSet<ITickable> _tickables;
 
     public InitOrder InitOrder => InitOrder.System;
+    public float TickDuration => _tickDuration;
     public void Init()
     {
         _beginningTime = Time.time;
@@ -19,6 +20,7 @@ public class Metronome : MonoBehaviour, IInitializable
         _tickables = new HashSet<ITickable>();
     }
 
+    public UpdateOrder UpdateOrder => UpdateOrder.Metronome;
     public void UpdateManual()
     {
         var ticksPassed = Mathf.FloorToInt((Time.time - _beginningTime) / _tickDuration);
@@ -28,7 +30,15 @@ public class Metronome : MonoBehaviour, IInitializable
         }
     }
 
-    public void Add(ITickable tickable)
+    protected override void RegisterMany(IEnumerable<ITickable> tickables)
+    {
+        foreach(var tickable in tickables)
+        {
+            Register(tickable);
+        }
+    }
+
+    private void Register(ITickable tickable)
     {
         if (_tickables.Add(tickable))
         {

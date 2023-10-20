@@ -2,7 +2,7 @@ using System.Collections.Generic;
 using System.Linq;
 using UnityEngine;
 
-public class Level : MonoBehaviour, IInitializable
+public class Level : SystemBase<Level, ICellHabitant>, IInitializable
 {
     [SerializeField] private Vector2Int _gridSize;
     [SerializeField] private Grid _grid;
@@ -63,7 +63,9 @@ public class Level : MonoBehaviour, IInitializable
 
     public Vector2Int WorldToCell(Vector3 position)
     {
-        return (Vector2Int)_grid.WorldToCell(position);
+        var cellSpace = (Vector2Int)_grid.WorldToCell(position);
+        cellSpace.Clamp(Vector2Int.zero, Size);
+        return cellSpace;
     }
 
     public Vector3 CellToWorld(Vector2Int position)
@@ -78,8 +80,16 @@ public class Level : MonoBehaviour, IInitializable
     #endregion
 
     #region Entities related methods
-    
-    public void Add(ICellHabitant entity)
+
+    protected override void RegisterMany(IEnumerable<ICellHabitant> habitants)
+    {
+        foreach(var habitant in habitants)
+        {
+            Register(habitant);
+        }
+    }
+
+    private void Register(ICellHabitant entity)
     {
         var mb = (MonoBehaviour)entity;
         var cellPosition = WorldToCell(mb.transform.position);
@@ -88,7 +98,7 @@ public class Level : MonoBehaviour, IInitializable
         mb.transform.position = CellToWorld(cellPosition);
     }
 
-    public void Add(ICellHabitant entity, Vector2Int position)
+    private void Add(ICellHabitant entity, Vector2Int position)
     {
         if (_entities.TryAdd(entity, position))
         {
