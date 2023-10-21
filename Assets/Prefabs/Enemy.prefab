@@ -73,8 +73,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 2033d8511bc6d064894d89058c0ab66b, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  _enemy: {fileID: 1963617460376162128}
-  _animationSpeedTickPercent: 0.2
+  _animationType: 1
+  _animationTime: 0.2
 --- !u!1 &3982374726042670569
 GameObject:
   m_ObjectHideFlags: 0

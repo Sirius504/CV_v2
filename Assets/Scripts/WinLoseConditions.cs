@@ -20,6 +20,8 @@ public class WinLoseConditions : MonoEntity, IInitializable, IUpdatable
         get => _gameState;
         private set
         {
+            if (value == _gameState)
+                return;
             _gameState = value;
             OnGameStateChange?.Invoke(_gameState);
         }
@@ -36,11 +38,6 @@ public class WinLoseConditions : MonoEntity, IInitializable, IUpdatable
 
     public void UpdateManual()
     {
-        if (GameState != GameState.Playing)
-        {
-            return;
-        }
-
         var entities = _level.Entities;
         if (!entities.OfType<Enemy>().Any())
         {
@@ -54,6 +51,7 @@ public class WinLoseConditions : MonoEntity, IInitializable, IUpdatable
             GameState = GameState.Lose;
             return;
         }
+        GameState = GameState.Playing;
     }
 
     public void Restart()

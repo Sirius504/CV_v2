@@ -1,19 +1,26 @@
 ﻿using System;
 using UnityEngine;
 
-public class Movement : MonoEntity, IInjectable<Metronome, Level>, IUpdatable, IInitializable
+public enum AnimationType
 {
-    [SerializeField] private Enemy _enemy;
+    Flat,
+    TickPercent
+}
+
+[RequireComponent(typeof(ICellHabitant))]
+public class Movement : MonoEntity, IInjectable<Metronome, Level>, IUpdatable
+{
+    private ICellHabitant _entity;
+    [SerializeField] private AnimationType _animationType;
     [Range(0f, 1f)]
-    [SerializeField] private float _animationSpeedTickPercent = 0.2f;
+    [SerializeField] private float _animationTime = 0.2f;
 
     private Metronome _metronome;
     private Level _level;
 
     private float _movementStartTime;
 
-    private Vector2Int _oldPosition;
-
+    private Vector2Int _cellPosition;
     private Vector3 _targetWorldPosition;
     private Vector3 _startWorldPosition;
 
@@ -25,33 +32,32 @@ public class Movement : MonoEntity, IInjectable<Metronome, Level>, IUpdatable, I
     {
         _metronome = metronome;
         _level = level;
-    }
-
-    public void Init()
-    {
-        _enemy.OnMove += OnMove;
-        _oldPosition = _level.WorldToCell(transform.position);
-        _targetWorldPosition = _startWorldPosition = _level.CellToWorld(_oldPosition);
-        transform.position = _startWorldPosition;
+        _entity = GetComponent<ICellHabitant>();
     }
 
     private void OnMove(Vector2Int newPosition)
     {
-        _oldPosition = _level.WorldToCell(transform.position);
-        _startWorldPosition = _level.CellToWorld(_oldPosition);
-        _targetWorldPosition = _level.CellToWorld(newPosition);
-        _movementStartTime = Time.time;
+        
     }
 
     public void UpdateManual()
     {
-        if (_targetWorldPosition == transform.position)
+        var newCellPosition = _level.GetEntityPosition(_entity);
+        if (_cellPosition != newCellPosition)
         {
-            return;
+            _movementStartTime = Time.time;
+            _startWorldPosition = _level.CellToWorld(_cellPosition);
+            _targetWorldPosition = _level.CellToWorld(newCellPosition);
+            _cellPosition = newCellPosition;
         }
 
-        var animationLength = _metronome.TickDuration * _animationSpeedTickPercent;
-        var lerpFactor = (Time.time - _movementStartTime) / animationLength;
+        var animationTime = _animationType switch
+        {
+            AnimationType.Flat => _animationTime,
+            AnimationType.TickPercent => _animationTime * _metronome.TickDuration,
+            _ => throw new NotImplementedException()
+        };
+        var lerpFactor = Mathf.Clamp01((Time.time - _movementStartTime) / animationTime);
         transform.position = Vector3.Lerp(_startWorldPosition, _targetWorldPosition, Easing(lerpFactor));
     }
 
