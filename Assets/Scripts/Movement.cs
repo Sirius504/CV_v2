@@ -35,11 +35,6 @@ public class Movement : MonoEntity, IInjectable<Metronome, Level>, IUpdatable
         _entity = GetComponent<ICellHabitant>();
     }
 
-    private void OnMove(Vector2Int newPosition)
-    {
-        
-    }
-
     public void UpdateManual()
     {
         var newCellPosition = _level.GetEntityPosition(_entity);

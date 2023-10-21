@@ -39,16 +39,17 @@ public class WinLoseConditions : MonoEntity, IInitializable, IUpdatable
     public void UpdateManual()
     {
         var entities = _level.Entities;
-        if (!entities.OfType<Enemy>().Any())
-        {
-            GameState = GameState.Win;
-            return;
-        }
+
 
         if (!entities.OfType<Dog>().Any()
             || !entities.OfType<Player>().Any())
         {
             GameState = GameState.Lose;
+            return;
+        }
+        if (!entities.OfType<Enemy>().Any())
+        {
+            GameState = GameState.Win;
             return;
         }
         GameState = GameState.Playing;
