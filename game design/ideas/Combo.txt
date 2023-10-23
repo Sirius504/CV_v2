@@ -1,0 +1,4 @@
+Combo
+
+If player manages to do 3 attacks during one turn, third attack
+deals double damage

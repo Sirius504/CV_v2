@@ -1,0 +1,6 @@
+Next Turn
+
+Visual (arrow), that will telegrapth the player, what's enemy going to do on it's next turn.
+
+Attack - red arrow
+Move - grey arrow

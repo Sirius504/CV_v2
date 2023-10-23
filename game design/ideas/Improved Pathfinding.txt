@@ -1,0 +1,3 @@
+Improved Pathfinding
+
+Pathfinding, that takes into consideration already computeted paths of other entities.

@@ -1,0 +1,3 @@
+Shield
+
+Shield, that allows enemy to be attacked only once per turn.

@@ -1,0 +1,6 @@
+- rename cells to tiles
+
+- create three "one solution" levels
+	- create first level
+	- create second level
+	- create third level
