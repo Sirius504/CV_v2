@@ -25,8 +25,7 @@ public class Movement : MonoEntity, IInjectable<Metronome, Level>, IUpdatable
     private Vector3 _startWorldPosition;
 
     public UpdateOrder UpdateOrder => UpdateOrder.Animation;
-
-    public InitOrder InitOrder => InitOrder.Animation;
+        
 
     public void Inject(Metronome metronome, Level level)
     {

@@ -3,7 +3,7 @@ using System.Collections.Generic;
 using System.Linq;
 using UnityEngine;
 
-public class Enemy : MonoEntity, ICellHabitant, ITickable, IInjectable<Level>
+public class Enemy : MonoEntity, ICellHabitant, ITickable, IInjectable<Level>, IActionTelegraph
 {
     [SerializeField] private int _damage;
 
@@ -11,6 +11,8 @@ public class Enemy : MonoEntity, ICellHabitant, ITickable, IInjectable<Level>
 
     private IEnemyTarget _target;
     private List<Vector2Int> _currentPath;
+
+    public ActionInfo? ActionInfo { get; private set; } = null;
 
     public event Action<Vector2Int> OnMove;
 
@@ -30,6 +32,7 @@ public class Enemy : MonoEntity, ICellHabitant, ITickable, IInjectable<Level>
         if (_target == null)
         {
             // no valid target exists
+            ActionInfo = null;
             return;
         }
 
@@ -39,10 +42,11 @@ public class Enemy : MonoEntity, ICellHabitant, ITickable, IInjectable<Level>
         {
             _currentPath = _level.Astar.FindPath(_level.GetEntityPosition(this), targetPosition, cell => cell.IsEmpty());
         }
-                
+
         if (_currentPath == null)
         {
             // valid path to target doesn't exist
+            ActionInfo = null;
             return;
         }
 
@@ -56,6 +60,8 @@ public class Enemy : MonoEntity, ICellHabitant, ITickable, IInjectable<Level>
         _level.Move(this, target);
         OnMove?.Invoke(target);
         _currentPath.RemoveAt(0);
+        var actionType = _level.GetCell(_currentPath[1]).Has<IEnemyTarget>() ? Action.Attack : Action.Movement;
+        ActionInfo = new ActionInfo(_currentPath[1], _level.GetEntityPosition(this), actionType);
     }
 
     private void Attack(Vector2Int targetPosition)

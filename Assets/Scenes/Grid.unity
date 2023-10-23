@@ -861,6 +861,68 @@ CanvasRenderer:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 721945429}
   m_CullTransparentMesh: 1
+--- !u!1 &769000222
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 769000224}
+  - component: {fileID: 769000223}
+  - component: {fileID: 769000225}
+  m_Layer: 0
+  m_Name: TurnInfo
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!114 &769000223
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 769000222}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: baf9f416a34a5fa4c980979a54709e9c, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  _horizontalPrefab: {fileID: 6215351126526780704, guid: e7a375e0f1d3f1e47a9edf8324edcb0e, type: 3}
+  _verticalPrefab: {fileID: 8570482661527639063, guid: e8b29917a6e5905439723c42a4aef9f0, type: 3}
+--- !u!4 &769000224
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 769000222}
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: 0, y: 0, z: 0}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_ConstrainProportionsScale: 0
+  m_Children: []
+  m_Father: {fileID: 0}
+  m_RootOrder: 6
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!114 &769000225
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 769000222}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 2ea548dfbdc3adb43a329c585415be69, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  _arrowColors:
+    Attack: {r: 1, g: 0.21226418, b: 0.21226418, a: 1}
+    Move: {r: 0.7169812, g: 0.7169812, b: 0.7169812, a: 1}
 --- !u!1 &789780536
 GameObject:
   m_ObjectHideFlags: 0
@@ -1178,6 +1240,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   _level: {fileID: 144303777}
   _metronome: {fileID: 958982337}
+  _grid: {fileID: 144303775}
 --- !u!114 &958982337
 MonoBehaviour:
   m_ObjectHideFlags: 0

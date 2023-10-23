@@ -8,7 +8,7 @@ public abstract class SystemBase<TSystem, TEntity> : SingletonBehaviour<TSystem>
 {
     public virtual SystemsStartOrder StartOrder => SystemsStartOrder.Default;
 
-    public void RegisterMany(IEnumerable<MonoBehaviour> monoBehaviours)
+    public void Register(IEnumerable<MonoBehaviour> monoBehaviours)
     {
         RegisterMany(monoBehaviours.OfType<TEntity>());
     }

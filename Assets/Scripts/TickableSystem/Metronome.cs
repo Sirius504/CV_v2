@@ -72,7 +72,7 @@ public class Metronome : SystemBase<Metronome, ITickable>, IUpdatable, IInitiali
         }
     }
 
-    private void OnTickableDestroy(MonoBehaviour mb)
+    private void OnTickableDestroy(IDestroyable mb)
     {
         Remove((ITickable)mb);
     }

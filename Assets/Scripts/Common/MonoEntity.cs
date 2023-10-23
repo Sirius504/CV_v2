@@ -3,7 +3,7 @@ using UnityEngine;
 
 public abstract class MonoEntity : MonoBehaviour, IDestroyable
 {
-    public event Action<MonoBehaviour> OnDestroyEvent;
+    public event Action<IDestroyable> OnDestroyEvent;
 
     protected virtual void Awake()
     {

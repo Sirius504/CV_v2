@@ -7,11 +7,13 @@ public class Injector : SystemBase<Injector, IInjectable>, IInitializable
 {
     [SerializeField] private Level _level;
     [SerializeField] private Metronome _metronome;
+    [SerializeField] private Grid _grid;
 
     private Dictionary<Type, object> _dependencies;
     private Dictionary<Type, object> Dependencies => _dependencies ??= (_dependencies = new Dictionary<Type, object>()  {
             { typeof(Level), _level },
-            { typeof(Metronome), _metronome }
+            { typeof(Metronome), _metronome },
+            {typeof(Grid), _grid },
         });
 
     public InitOrder InitOrder => InitOrder.Injector;

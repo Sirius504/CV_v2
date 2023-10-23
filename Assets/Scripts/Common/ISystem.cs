@@ -14,5 +14,5 @@ public enum SystemsStartOrder
 public interface ISystem
 {
     public SystemsStartOrder StartOrder { get; }
-    public void RegisterMany(IEnumerable<MonoBehaviour> entities);
+    public void Register(IEnumerable<MonoBehaviour> entities);
 }

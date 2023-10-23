@@ -3,5 +3,5 @@ using UnityEngine;
 
 public interface IDestroyable
 {
-    public event Action<MonoBehaviour> OnDestroyEvent;
+    public event Action<IDestroyable> OnDestroyEvent;
 }

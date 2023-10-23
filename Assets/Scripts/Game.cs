@@ -4,10 +4,11 @@ using System.Collections.Generic;
 
 public class Game : SingletonBehaviour<Game>
 {
-    private HashSet<ISystem> _systems;
-    private List<MonoBehaviour> _creationQueue;
-    private List<MonoBehaviour> CreationQueue => _creationQueue ??= new List<MonoBehaviour>();
-    private HashSet<ISystem> Systems => _systems ??= new HashSet<ISystem>();
+    private readonly HashSet<ISystem> _systems = new();
+    private readonly HashSet<ISystem> _passedSystems = new();
+
+    private readonly List<(int generation, MonoBehaviour entity)> _creationQueue = new();
+    private int _generation = 0;
 
     private void Start()
     {
@@ -19,28 +20,38 @@ public class Game : SingletonBehaviour<Game>
         ResolveAll();
     }
 
-    public void NotifyCreation(MonoBehaviour mb)
+    public void NotifyCreation(MonoBehaviour entity)
     {
-        CreationQueue.Add(mb);
+        _creationQueue.Add((_generation, entity));
     }
 
     private void ResolveAll()
     {
-        if (CreationQueue.Count == 0)
+        if (_creationQueue.Count == 0)
         {
             return;
         }
 
-        foreach (var system in CreationQueue.OfType<ISystem>())
+        foreach (var system in _creationQueue.Select(tuple => tuple.entity).OfType<ISystem>())
         {
-            Systems.Add(system);
+            _systems.Add(system);
+        }
+                
+        foreach (var system in _systems.OrderBy(sys => sys.StartOrder))
+        {
+            // during registration in some systems, new entities might be created. they will be assigned a new generation
+            _generation++;
+            system.Register(_creationQueue.Select(tuple => tuple.entity));
+            _passedSystems.Add(system);
+
+            foreach (var passedSystem in _passedSystems.OrderBy(sys => sys.StartOrder))
+            {
+                passedSystem.Register(_creationQueue.Where(tuple => tuple.generation == _generation).Select(tuple => tuple.entity));
+            }
         }
 
-        foreach (var system in Systems.OrderBy(sys => sys.StartOrder))
-        {
-            system.RegisterMany(CreationQueue);
-        }
-
-        CreationQueue.Clear();
+        _creationQueue.Clear();
+        _passedSystems.Clear();
+        _generation = 0;
     }
 }

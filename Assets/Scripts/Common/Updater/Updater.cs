@@ -2,18 +2,14 @@
 using System.Linq;
 using UnityEngine;
 
-public class Updater : SystemBase<Updater, IUpdatable>, IInitializable
+public class Updater : SystemBase<Updater, IUpdatable>
 {
-    private HashSet<IUpdatable> _updatables;
+    private readonly HashSet<IUpdatable> _updatables = new();
 
     public InitOrder InitOrder => InitOrder.Updater;
 
     public override SystemsStartOrder StartOrder => SystemsStartOrder.Updater;
 
-    public void Init()
-    {
-        _updatables = new HashSet<IUpdatable>();
-    }
 
     protected override void RegisterMany(IEnumerable<IUpdatable> updatables)
     {
@@ -48,8 +44,9 @@ public class Updater : SystemBase<Updater, IUpdatable>, IInitializable
         }
     }
 
-    private void OnEntityDestroy(MonoBehaviour updatable)
+    private void OnEntityDestroy(IDestroyable updatable)
     {
+        updatable.OnDestroyEvent -= OnEntityDestroy;
         _updatables.Remove((IUpdatable)updatable);
     }
 }

@@ -81,6 +81,14 @@ public class Level : SystemBase<Level, ICellHabitant>, IInitializable
 
     #region Entities related methods
 
+    private void OnDestroy()
+    {
+        foreach (var entity in _entities.Keys)
+        {
+            entity.OnDestroyEvent -= OnEntityDestroy;
+        }
+    }
+
     protected override void RegisterMany(IEnumerable<ICellHabitant> habitants)
     {
         foreach(var habitant in habitants)
@@ -149,9 +157,10 @@ public class Level : SystemBase<Level, ICellHabitant>, IInitializable
         return _entities[entity];
     }
 
-    private void OnEntityDestroy(MonoBehaviour mb)
+    private void OnEntityDestroy(IDestroyable destroyable)
     {
-        var entity = (ICellHabitant)mb;
+        destroyable.OnDestroyEvent -= OnEntityDestroy;
+        var entity = (ICellHabitant)destroyable;
         Remove(entity);
     }
     #endregion
