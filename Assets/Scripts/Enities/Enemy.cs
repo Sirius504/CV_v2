@@ -3,7 +3,7 @@ using System.Collections.Generic;
 using System.Linq;
 using UnityEngine;
 
-public class Enemy : MonoEntity, ICellHabitant, ITickable, IInjectable<Level>, IActionTelegraph
+public class Enemy : MonoEntity, ICellHabitant, ITickable, IInjectable<Level>, IActionTelegraph, IUpdatable
 {
     [SerializeField] private int _damage;
 
@@ -14,14 +14,15 @@ public class Enemy : MonoEntity, ICellHabitant, ITickable, IInjectable<Level>, I
 
     public ActionInfo? ActionInfo { get; private set; } = null;
 
+    public UpdateOrder UpdateOrder => UpdateOrder.System;
+
     public event Action<Vector2Int> OnMove;
 
     public void Inject(Level level)
     {
         _level = level;
     }
-
-    public void OnTick(uint tick)
+    public void UpdateManual()
     {
         if (_target == null || !_level.Entities.Contains(_target))
         {
@@ -50,6 +51,19 @@ public class Enemy : MonoEntity, ICellHabitant, ITickable, IInjectable<Level>, I
             return;
         }
 
+        var actionType = _level.GetCell(_currentPath[1]).Has<IEnemyTarget>() ? Action.Attack : Action.Movement;
+        ActionInfo = new ActionInfo(_currentPath[1], _level.GetEntityPosition(this), actionType);
+    }
+
+    public void OnTick(uint tick)
+    {
+        if (_target == null || _currentPath == null)
+        {
+            // target or valid path to target don't exist
+            return;
+        }
+
+        var targetPosition = _level.GetEntityPosition(_target);
         var target = _currentPath[1];
         if (targetPosition == target)
         {
@@ -60,8 +74,6 @@ public class Enemy : MonoEntity, ICellHabitant, ITickable, IInjectable<Level>, I
         _level.Move(this, target);
         OnMove?.Invoke(target);
         _currentPath.RemoveAt(0);
-        var actionType = _level.GetCell(_currentPath[1]).Has<IEnemyTarget>() ? Action.Attack : Action.Movement;
-        ActionInfo = new ActionInfo(_currentPath[1], _level.GetEntityPosition(this), actionType);
     }
 
     private void Attack(Vector2Int targetPosition)
@@ -98,4 +110,5 @@ public class Enemy : MonoEntity, ICellHabitant, ITickable, IInjectable<Level>, I
 
         return null;
     }
+
 }

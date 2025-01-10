@@ -1,3 +1,4 @@
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using UnityEngine;
@@ -83,9 +84,16 @@ public class Level : SystemBase<Level, ICellHabitant>, IInitializable
 
     private void OnDestroy()
     {
-        foreach (var entity in _entities.Keys)
+        try
         {
-            entity.OnDestroyEvent -= OnEntityDestroy;
+            foreach (var entity in _entities.Keys)
+            {
+                entity.OnDestroyEvent -= OnEntityDestroy;
+            }
+        }
+        catch (Exception e)
+        {
+            throw e;
         }
     }
 

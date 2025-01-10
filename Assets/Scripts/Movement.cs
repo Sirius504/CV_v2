@@ -20,7 +20,7 @@ public class Movement : MonoEntity, IInjectable<Metronome, Level>, IUpdatable
 
     private float _movementStartTime;
 
-    private Vector2Int _cellPosition;
+    private Vector2Int? _cellPosition;
     private Vector3 _targetWorldPosition;
     private Vector3 _startWorldPosition;
 
@@ -40,7 +40,7 @@ public class Movement : MonoEntity, IInjectable<Metronome, Level>, IUpdatable
         if (_cellPosition != newCellPosition)
         {
             _movementStartTime = Time.time;
-            _startWorldPosition = _level.CellToWorld(_cellPosition);
+            _startWorldPosition = _level.CellToWorld(_cellPosition ?? newCellPosition);
             _targetWorldPosition = _level.CellToWorld(newCellPosition);
             _cellPosition = newCellPosition;
         }

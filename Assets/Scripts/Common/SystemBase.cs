@@ -10,7 +10,9 @@ public abstract class SystemBase<TSystem, TEntity> : SingletonBehaviour<TSystem>
 
     public void Register(IEnumerable<MonoBehaviour> monoBehaviours)
     {
-        RegisterMany(monoBehaviours.OfType<TEntity>());
+        var validEntities = monoBehaviours.OfType<TEntity>();
+        if (!validEntities.Any()) return;
+        RegisterMany(validEntities);
     }
 
     protected override void Awake()

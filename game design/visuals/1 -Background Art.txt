@@ -1,3 +1,7 @@
 Background Art
 
-Self-explanatory
+1. block out
+- foreground
+- background
+- building
+- road

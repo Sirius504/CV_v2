@@ -40,13 +40,15 @@ public class Game : SingletonBehaviour<Game>
         foreach (var system in _systems.OrderBy(sys => sys.StartOrder))
         {
             // during registration in some systems, new entities might be created. they will be assigned a new generation
-            _generation++;
+            _generation++;           
             system.Register(_creationQueue.Select(tuple => tuple.entity));
             _passedSystems.Add(system);
 
             foreach (var passedSystem in _passedSystems.OrderBy(sys => sys.StartOrder))
             {
-                passedSystem.Register(_creationQueue.Where(tuple => tuple.generation == _generation).Select(tuple => tuple.entity));
+                passedSystem.Register(_creationQueue
+                    .Where(tuple => tuple.generation == _generation)
+                    .Select(tuple => tuple.entity));
             }
         }
 

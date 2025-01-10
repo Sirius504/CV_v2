@@ -17,10 +17,10 @@ public class Player : MonoEntity, ICellHabitant, IEnemyTarget, IUpdatable, IInje
     public void UpdateManual()
     {
         var input = new Vector2Int(0, 0);
-        input = Input.GetKeyDown(KeyCode.W) ? Vector2Int.up : input;
-        input = Input.GetKeyDown(KeyCode.S) ? Vector2Int.down : input;
-        input = Input.GetKeyDown(KeyCode.A) ? Vector2Int.left : input;
-        input = Input.GetKeyDown(KeyCode.D) ? Vector2Int.right : input;
+        input = Input.GetKeyDown(KeyCode.W) || Input.GetKeyDown(KeyCode.UpArrow) ? Vector2Int.up : input;
+        input = Input.GetKeyDown(KeyCode.S) || Input.GetKeyDown(KeyCode.DownArrow) ? Vector2Int.down : input;
+        input = Input.GetKeyDown(KeyCode.A) || Input.GetKeyDown(KeyCode.LeftArrow) ? Vector2Int.left : input;
+        input = Input.GetKeyDown(KeyCode.D) || Input.GetKeyDown(KeyCode.RightArrow) ? Vector2Int.right : input;
 
         if (input == Vector2Int.zero)
         {

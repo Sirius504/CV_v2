@@ -5,18 +5,10 @@ public class ResultScreen : MonoEntity, IInitializable
 {
     [SerializeField] private WinLoseConditions _winLose;
     [SerializeField] private TextMeshProUGUI _resultText;
+    [SerializeField] private Canvas _canvas;
 
     public InitOrder InitOrder => InitOrder.UI;
-    private bool awakened;
 
-    [ForceAwake]
-    protected override void Awake()
-    {
-        if (awakened)
-            return;
-       base.Awake();
-        awakened = true;
-    }
 
     public void Init()
     {
@@ -32,7 +24,7 @@ public class ResultScreen : MonoEntity, IInitializable
 
     private void OnGameStateChange(GameState newState)
     {
-        gameObject.SetActive(newState != GameState.Playing);
+        _canvas.enabled = newState != GameState.Playing;
         _resultText.text = newState switch
         {
             GameState.Playing => "",

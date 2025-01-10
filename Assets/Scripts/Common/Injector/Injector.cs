@@ -13,7 +13,7 @@ public class Injector : SystemBase<Injector, IInjectable>, IInitializable
     private Dictionary<Type, object> Dependencies => _dependencies ??= (_dependencies = new Dictionary<Type, object>()  {
             { typeof(Level), _level },
             { typeof(Metronome), _metronome },
-            {typeof(Grid), _grid },
+            { typeof(Grid), _grid },
         });
 
     public InitOrder InitOrder => InitOrder.Injector;
