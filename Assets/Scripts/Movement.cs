@@ -11,10 +11,6 @@ public enum AnimationType
 public class Movement : MonoEntity, IInjectable<Metronome, Level>, IUpdatable
 {
     private ICellHabitant _entity;
-    [SerializeField] private AnimationType _animationType;
-    [Range(0f, 1f)]
-    [SerializeField] private float _animationTime = 0.2f;
-
     private Metronome _metronome;
     private Level _level;
 
@@ -24,6 +20,11 @@ public class Movement : MonoEntity, IInjectable<Metronome, Level>, IUpdatable
     private Vector3 _targetWorldPosition;
     private Vector3 _startWorldPosition;
 
+    [SerializeField] private AnimationType _animationType;
+    [Range(0f, 1f)]
+    [SerializeField] private float _animationTime = 0.2f;
+
+    public event Action<float, float> OnMovementStart;
     public UpdateOrder UpdateOrder => UpdateOrder.Animation;
         
 
@@ -43,7 +44,11 @@ public class Movement : MonoEntity, IInjectable<Metronome, Level>, IUpdatable
             _startWorldPosition = _level.CellToWorld(_cellPosition ?? newCellPosition);
             _targetWorldPosition = _level.CellToWorld(newCellPosition);
             _cellPosition = newCellPosition;
+            OnMovementStart?.Invoke(_movementStartTime, _animationTime);
         }
+
+        if (transform.position == _targetWorldPosition)
+            return;
 
         var animationTime = _animationType switch
         {

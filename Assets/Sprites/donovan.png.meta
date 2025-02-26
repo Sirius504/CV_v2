@@ -1,5 +1,5 @@
 fileFormatVersion: 2
-guid: 49666e1a8bd4a3e4faa2bc07f91f8ba8
+guid: 8db5db37f719b634082582f4ebf8de3c
 TextureImporter:
   internalIDToNameTable: []
   externalObjects: {}
@@ -129,11 +129,11 @@ TextureImporter:
     serializedVersion: 2
     sprites:
     - serializedVersion: 2
-      name: galcia_0
+      name: donovan_0
       rect:
         serializedVersion: 2
         x: 12
-        y: 180
+        y: 119
         width: 47
         height: 70
       alignment: 7
@@ -143,18 +143,18 @@ TextureImporter:
       physicsShape: []
       tessellationDetail: 0
       bones: []
-      spriteID: ecd25aa74bd7da64bad2845962d185c3
-      internalID: -1742962149
+      spriteID: 0e4a4844131058743a78c505ac610e90
+      internalID: 595145452
       vertices: []
       indices: 
       edges: []
       weights: []
     - serializedVersion: 2
-      name: galcia_1
+      name: donovan_1
       rect:
         serializedVersion: 2
         x: 72
-        y: 180
+        y: 120
         width: 39
         height: 71
       alignment: 7
@@ -164,270 +164,186 @@ TextureImporter:
       physicsShape: []
       tessellationDetail: 0
       bones: []
-      spriteID: e76660b43d7b14d4a9aa55961f4a96fe
-      internalID: 728791646
+      spriteID: 25eec049e3b355d40b0803c10757532a
+      internalID: -2058158764
       vertices: []
       indices: 
       edges: []
       weights: []
     - serializedVersion: 2
-      name: galcia_2
+      name: donovan_2
       rect:
         serializedVersion: 2
         x: 132
-        y: 180
+        y: 120
         width: 39
         height: 72
-      alignment: 0
-      pivot: {x: 0.5, y: 0.5}
+      alignment: 7
+      pivot: {x: 0.5, y: 0}
       border: {x: 0, y: 0, z: 0, w: 0}
       outline: []
       physicsShape: []
       tessellationDetail: 0
       bones: []
-      spriteID: e229cd2b51bb8d747b6645ff7e8c2db9
-      internalID: 521271287
+      spriteID: 9e28598d94f49cb449c040d909d16c7d
+      internalID: 192909832
       vertices: []
       indices: 
       edges: []
       weights: []
     - serializedVersion: 2
-      name: galcia_3
+      name: donovan_3
       rect:
         serializedVersion: 2
-        x: 204
-        y: 180
-        width: 40
+        x: 216
+        y: 120
+        width: 38
         height: 62
-      alignment: 0
-      pivot: {x: 0.5, y: 0.5}
+      alignment: 7
+      pivot: {x: 0.5, y: 0}
       border: {x: 0, y: 0, z: 0, w: 0}
       outline: []
       physicsShape: []
       tessellationDetail: 0
       bones: []
-      spriteID: f4a978f14cd54b64aabe7b631c90275e
-      internalID: 865057724
+      spriteID: 643091200b943084483bf2797bae7e49
+      internalID: 1668227725
       vertices: []
       indices: 
       edges: []
       weights: []
     - serializedVersion: 2
-      name: galcia_4
+      name: donovan_4
       rect:
         serializedVersion: 2
-        x: 264
-        y: 180
-        width: 43
-        height: 62
-      alignment: 0
-      pivot: {x: 0.5, y: 0.5}
-      border: {x: 0, y: 0, z: 0, w: 0}
-      outline: []
-      physicsShape: []
-      tessellationDetail: 0
-      bones: []
-      spriteID: f9b0f342a720cea4883b6b3972da124a
-      internalID: 1980419230
-      vertices: []
-      indices: 
-      edges: []
-      weights: []
-    - serializedVersion: 2
-      name: galcia_5
-      rect:
-        serializedVersion: 2
-        x: 386
-        y: 146
-        width: 56
-        height: 104
-      alignment: 0
-      pivot: {x: 0.5, y: 0.5}
-      border: {x: 0, y: 0, z: 0, w: 0}
-      outline: []
-      physicsShape: []
-      tessellationDetail: 0
-      bones: []
-      spriteID: a65965284ade0b1439b70f48427eec71
-      internalID: -141859747
-      vertices: []
-      indices: 
-      edges: []
-      weights: []
-    - serializedVersion: 2
-      name: galcia_6
-      rect:
-        serializedVersion: 2
-        x: 12
-        y: 96
-        width: 46
+        x: 288
+        y: 120
+        width: 44
         height: 63
-      alignment: 0
-      pivot: {x: 0.5, y: 0.5}
+      alignment: 7
+      pivot: {x: 0.5, y: 0}
       border: {x: 0, y: 0, z: 0, w: 0}
       outline: []
       physicsShape: []
       tessellationDetail: 0
       bones: []
-      spriteID: 93a5efc4c1684c74a8ca9b2268ddcc16
-      internalID: 295467621
+      spriteID: 0a6a67752cec2c84881de44217186bc6
+      internalID: 1434796859
       vertices: []
       indices: 
       edges: []
       weights: []
     - serializedVersion: 2
-      name: galcia_7
+      name: donovan_5
       rect:
         serializedVersion: 2
-        x: 72
-        y: 96
-        width: 55
+        x: 348
+        y: 120
+        width: 53
         height: 63
-      alignment: 0
-      pivot: {x: 0.5, y: 0.5}
+      alignment: 7
+      pivot: {x: 0.5, y: 0}
       border: {x: 0, y: 0, z: 0, w: 0}
       outline: []
       physicsShape: []
       tessellationDetail: 0
       bones: []
-      spriteID: 067ddda3e6d849c468c8b7778a0dd9fc
-      internalID: -322969000
+      spriteID: 950b738ca00d19c43b8715945df40524
+      internalID: 1166642917
       vertices: []
       indices: 
       edges: []
       weights: []
     - serializedVersion: 2
-      name: galcia_8
+      name: donovan_6
       rect:
         serializedVersion: 2
-        x: 144
-        y: 96
+        x: 420
+        y: 120
         width: 79
         height: 21
-      alignment: 0
-      pivot: {x: 0.5, y: 0.5}
+      alignment: 7
+      pivot: {x: 0.5, y: 0}
       border: {x: 0, y: 0, z: 0, w: 0}
       outline: []
       physicsShape: []
       tessellationDetail: 0
       bones: []
-      spriteID: a73be66383a212248bbdb3a1d4b91179
-      internalID: 1088992447
+      spriteID: ff4a1edcc6b34984091c02e6d7873409
+      internalID: 223278170
       vertices: []
       indices: 
       edges: []
       weights: []
     - serializedVersion: 2
-      name: galcia_9
+      name: donovan_7
       rect:
         serializedVersion: 2
-        x: 240
-        y: 96
-        width: 70
+        x: 516
+        y: 120
+        width: 71
         height: 31
-      alignment: 0
-      pivot: {x: 0.5, y: 0.5}
+      alignment: 7
+      pivot: {x: 0.5, y: 0}
       border: {x: 0, y: 0, z: 0, w: 0}
       outline: []
       physicsShape: []
       tessellationDetail: 0
       bones: []
-      spriteID: 0db3ff21bc885644d9285e1b21716a20
-      internalID: -1555816824
+      spriteID: 71785c4f177ff55458d0d26b79de528f
+      internalID: 1498726844
       vertices: []
       indices: 
       edges: []
       weights: []
     - serializedVersion: 2
-      name: galcia_10
+      name: donovan_8
       rect:
         serializedVersion: 2
-        x: 324
-        y: 96
-        width: 40
+        x: 600
+        y: 120
+        width: 39
         height: 43
-      alignment: 0
-      pivot: {x: 0.5, y: 0.5}
+      alignment: 7
+      pivot: {x: 0.5, y: 0}
       border: {x: 0, y: 0, z: 0, w: 0}
       outline: []
       physicsShape: []
       tessellationDetail: 0
       bones: []
-      spriteID: b99ea5a50f9301646a4d68c0a7220644
-      internalID: 2050873083
+      spriteID: 8f366cc7a021b544da7e24b4aa9111d5
+      internalID: 74096945
       vertices: []
       indices: 
       edges: []
       weights: []
     - serializedVersion: 2
-      name: galcia_11
+      name: donovan_9
+      rect:
+        serializedVersion: 2
+        x: 684
+        y: 104
+        width: 56
+        height: 88
+      alignment: 7
+      pivot: {x: 0.5, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: d20cc8a088b20cb4d8654f1e1560b4b4
+      internalID: 2064668945
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: donovan_10
       rect:
         serializedVersion: 2
         x: 12
-        y: 12
-        width: 40
-        height: 65
-      alignment: 0
-      pivot: {x: 0.5, y: 0.5}
-      border: {x: 0, y: 0, z: 0, w: 0}
-      outline: []
-      physicsShape: []
-      tessellationDetail: 0
-      bones: []
-      spriteID: dbe73ed986edc6c4484e7ecf3e266d4f
-      internalID: 1082281990
-      vertices: []
-      indices: 
-      edges: []
-      weights: []
-    - serializedVersion: 2
-      name: galcia_12
-      rect:
-        serializedVersion: 2
-        x: 72
-        y: 12
-        width: 32
-        height: 66
-      alignment: 0
-      pivot: {x: 0.5, y: 0.5}
-      border: {x: 0, y: 0, z: 0, w: 0}
-      outline: []
-      physicsShape: []
-      tessellationDetail: 0
-      bones: []
-      spriteID: 0d589d12e0ae89c49803228305ea250b
-      internalID: -1905319533
-      vertices: []
-      indices: 
-      edges: []
-      weights: []
-    - serializedVersion: 2
-      name: galcia_13
-      rect:
-        serializedVersion: 2
-        x: 120
-        y: 12
-        width: 32
-        height: 67
-      alignment: 0
-      pivot: {x: 0.5, y: 0.5}
-      border: {x: 0, y: 0, z: 0, w: 0}
-      outline: []
-      physicsShape: []
-      tessellationDetail: 0
-      bones: []
-      spriteID: 6520ee40e915a4b4b8614137d9f9246b
-      internalID: 1117353682
-      vertices: []
-      indices: 
-      edges: []
-      weights: []
-    - serializedVersion: 2
-      name: galcia_14
-      rect:
-        serializedVersion: 2
-        x: 192
-        y: 12
+        y: 11
         width: 69
         height: 70
       alignment: 7
@@ -437,113 +353,239 @@ TextureImporter:
       physicsShape: []
       tessellationDetail: 0
       bones: []
-      spriteID: d30d322fadc39cc4392a2018213d8a65
-      internalID: 2137168374
+      spriteID: 1a1b291a386fd2843a04a59d8a31a7e1
+      internalID: 1016382809
       vertices: []
       indices: 
       edges: []
       weights: []
     - serializedVersion: 2
-      name: galcia_15
+      name: donovan_11
       rect:
         serializedVersion: 2
-        x: 300
+        x: 120
+        y: 12
+        width: 64
+        height: 74
+      alignment: 7
+      pivot: {x: 0.5, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 8a78ae99fd7088844b4561d89f671be9
+      internalID: 2081637290
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: donovan_12
+      rect:
+        serializedVersion: 2
+        x: 204
+        y: 12
+        width: 37
+        height: 88
+      alignment: 7
+      pivot: {x: 0.5, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 731835ed007251744968e9c797e4a814
+      internalID: -1145346842
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: donovan_13
+      rect:
+        serializedVersion: 2
+        x: 288
+        y: 12
+        width: 35
+        height: 77
+      alignment: 7
+      pivot: {x: 0.5, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 5ae630c3e34a6c34a99d04ba0116d324
+      internalID: 2005292325
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: donovan_14
+      rect:
+        serializedVersion: 2
+        x: 336
+        y: 11
+        width: 45
+        height: 65
+      alignment: 7
+      pivot: {x: 0.5, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 4f9fab91bf3c93847b9bf2408bbb699e
+      internalID: -1484214932
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: donovan_15
+      rect:
+        serializedVersion: 2
+        x: 420
+        y: 12
+        width: 34
+        height: 77
+      alignment: 7
+      pivot: {x: 0.5, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: dbd93afe669807742b0d78af1d80ba17
+      internalID: 161980188
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: donovan_16
+      rect:
+        serializedVersion: 2
+        x: 468
+        y: 12
+        width: 40
+        height: 66
+      alignment: 7
+      pivot: {x: 0.5, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: a2505aa507dd6904aa2bf191a5cf51df
+      internalID: -812393766
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: donovan_17
+      rect:
+        serializedVersion: 2
+        x: 600
         y: 12
         width: 8
         height: 8
-      alignment: 0
-      pivot: {x: 0.5, y: 0.5}
+      alignment: 7
+      pivot: {x: 0.5, y: 0}
       border: {x: 0, y: 0, z: 0, w: 0}
       outline: []
       physicsShape: []
       tessellationDetail: 0
       bones: []
-      spriteID: 700b08cd1fb9bc348b1baf24c9a865bc
-      internalID: -421360818
+      spriteID: 1038735f5e7e20e4e857cb84073c47d9
+      internalID: 555651966
       vertices: []
       indices: 
       edges: []
       weights: []
     - serializedVersion: 2
-      name: galcia_16
+      name: donovan_18
       rect:
         serializedVersion: 2
-        x: 310
+        x: 610
         y: 12
         width: 4
         height: 8
-      alignment: 0
-      pivot: {x: 0.5, y: 0.5}
+      alignment: 7
+      pivot: {x: 0.5, y: 0}
       border: {x: 0, y: 0, z: 0, w: 0}
       outline: []
       physicsShape: []
       tessellationDetail: 0
       bones: []
-      spriteID: 422b7d15a5c48ee43bf7e3e4338a461d
-      internalID: -733960078
+      spriteID: 47dac5a501977c94b89d98227c11656f
+      internalID: -1581351580
       vertices: []
       indices: 
       edges: []
       weights: []
     - serializedVersion: 2
-      name: galcia_17
+      name: donovan_19
       rect:
         serializedVersion: 2
-        x: 316
+        x: 616
         y: 12
         width: 32
         height: 8
-      alignment: 0
-      pivot: {x: 0.5, y: 0.5}
+      alignment: 7
+      pivot: {x: 0.5, y: 0}
       border: {x: 0, y: 0, z: 0, w: 0}
       outline: []
       physicsShape: []
       tessellationDetail: 0
       bones: []
-      spriteID: 6aa0ffd96956646489701ad02c0d4044
-      internalID: 1036600770
+      spriteID: 20bd054530ff5af4d9c15e34ba154318
+      internalID: 1611874003
       vertices: []
       indices: 
       edges: []
       weights: []
     - serializedVersion: 2
-      name: galcia_18
+      name: donovan_20
       rect:
         serializedVersion: 2
-        x: 356
+        x: 656
         y: 12
         width: 16
         height: 8
-      alignment: 0
-      pivot: {x: 0.5, y: 0.5}
+      alignment: 7
+      pivot: {x: 0.5, y: 0}
       border: {x: 0, y: 0, z: 0, w: 0}
       outline: []
       physicsShape: []
       tessellationDetail: 0
       bones: []
-      spriteID: c8843206b272ec54d9d01c95ff4c029c
-      internalID: 198903073
+      spriteID: dbea343343d4d3f4fabd870669b202ed
+      internalID: 727399864
       vertices: []
       indices: 
       edges: []
       weights: []
     - serializedVersion: 2
-      name: galcia_19
+      name: donovan_21
       rect:
         serializedVersion: 2
-        x: 380
+        x: 680
         y: 12
         width: 64
         height: 8
-      alignment: 0
-      pivot: {x: 0.5, y: 0.5}
+      alignment: 7
+      pivot: {x: 0.5, y: 0}
       border: {x: 0, y: 0, z: 0, w: 0}
       outline: []
       physicsShape: []
       tessellationDetail: 0
       bones: []
-      spriteID: 53b82ca5da7fdd346ba531e75ac93ffd
-      internalID: -581713865
+      spriteID: 3639f5f2d41089c4bafd2497299e5714
+      internalID: -882772025
       vertices: []
       indices: 
       edges: []
@@ -559,26 +601,28 @@ TextureImporter:
     weights: []
     secondaryTextures: []
     nameFileIdTable:
-      galcia_0: -1742962149
-      galcia_1: 728791646
-      galcia_10: 2050873083
-      galcia_11: 1082281990
-      galcia_12: -1905319533
-      galcia_13: 1117353682
-      galcia_14: 2137168374
-      galcia_15: -421360818
-      galcia_16: -733960078
-      galcia_17: 1036600770
-      galcia_18: 198903073
-      galcia_19: -581713865
-      galcia_2: 521271287
-      galcia_3: 865057724
-      galcia_4: 1980419230
-      galcia_5: -141859747
-      galcia_6: 295467621
-      galcia_7: -322969000
-      galcia_8: 1088992447
-      galcia_9: -1555816824
+      donovan_0: 595145452
+      donovan_1: -2058158764
+      donovan_10: 1016382809
+      donovan_11: 2081637290
+      donovan_12: -1145346842
+      donovan_13: 2005292325
+      donovan_14: -1484214932
+      donovan_15: 161980188
+      donovan_16: -812393766
+      donovan_17: 555651966
+      donovan_18: -1581351580
+      donovan_19: 1611874003
+      donovan_2: 192909832
+      donovan_20: 727399864
+      donovan_21: -882772025
+      donovan_3: 1668227725
+      donovan_4: 1434796859
+      donovan_5: 1166642917
+      donovan_6: 223278170
+      donovan_7: 1498726844
+      donovan_8: 74096945
+      donovan_9: 2064668945
   spritePackingTag: 
   pSDRemoveMatte: 0
   pSDShowRemoveMatteOption: 0

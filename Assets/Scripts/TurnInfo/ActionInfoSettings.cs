@@ -1,5 +1,6 @@
 ﻿using System;
 using UnityEngine;
+using Action = ActionBehaviour.Action;
 
 public class ActionInfoSettings : SingletonBehaviour<ActionInfoSettings>
 {

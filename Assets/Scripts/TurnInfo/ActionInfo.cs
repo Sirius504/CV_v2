@@ -1,48 +1,51 @@
 ﻿using System;
 using UnityEngine;
 
-public enum Action
+namespace ActionBehaviour
 {
-    Movement,
-    Attack
-}
-
-public enum ActionDirection
-{
-    Horizontal,
-    Vertical
-}
-
-public struct ActionInfo
-{
-    private readonly Action _action;
-    private readonly Vector2Int _from;
-    private readonly Vector2Int _to;
-
-    public Action Action => _action;
-    public Vector2Int From => _from;
-    public Vector2Int To => _to;
-    public ActionDirection Direction { get; private set; }
-
-    public ActionInfo(Vector2Int to, Vector2Int from, Action action)
+    public enum Action
     {
-        _from = from;
-        _to = to;
-        _action = action;
-        Direction = GetDirection(to, from);
+        Movement,
+        Attack
     }
 
-    private static ActionDirection GetDirection(Vector2Int from, Vector2Int to)
+    public enum ActionDirection
     {
-        var direction = to - from;
-        if (direction.x == 0)
+        Horizontal,
+        Vertical
+    }
+
+    public struct ActionInfo
+    {
+        private readonly Action _action;
+        private readonly Vector2Int _from;
+        private readonly Vector2Int _to;
+
+        public Action Action => _action;
+        public Vector2Int From => _from;
+        public Vector2Int To => _to;
+        public ActionDirection Direction { get; private set; }
+
+        public ActionInfo(Vector2Int to, Vector2Int from, Action action)
         {
-            return ActionDirection.Vertical;
+            _from = from;
+            _to = to;
+            _action = action;
+            Direction = GetDirection(to, from);
         }
-        if (direction.y == 0)
+
+        private static ActionDirection GetDirection(Vector2Int from, Vector2Int to)
         {
-            return ActionDirection.Horizontal;
+            var direction = to - from;
+            if (direction.x == 0)
+            {
+                return ActionDirection.Vertical;
+            }
+            if (direction.y == 0)
+            {
+                return ActionDirection.Horizontal;
+            }
+            throw new NotImplementedException();
         }
-        throw new NotImplementedException();
     }
 }

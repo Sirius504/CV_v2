@@ -1,9 +1,10 @@
+using ActionBehaviour;
 using System;
 using System.Collections.Generic;
 using System.Linq;
 using UnityEngine;
 
-public class Enemy : MonoEntity, ICellHabitant, ITickable, IInjectable<Level>, IActionTelegraph, IUpdatable
+public class Enemy : MonoEntity, ICellHabitant, ITickable, IInjectable<Level>, IActionTelegraph, IUpdatable, IActioning
 {
     [SerializeField] private int _damage;
 
@@ -16,7 +17,7 @@ public class Enemy : MonoEntity, ICellHabitant, ITickable, IInjectable<Level>, I
 
     public UpdateOrder UpdateOrder => UpdateOrder.System;
 
-    public event Action<Vector2Int> OnMove;
+    public event System.Action<ActionInfo> OnAction;
 
     public void Inject(Level level)
     {
@@ -51,7 +52,9 @@ public class Enemy : MonoEntity, ICellHabitant, ITickable, IInjectable<Level>, I
             return;
         }
 
-        var actionType = _level.GetCell(_currentPath[1]).Has<IEnemyTarget>() ? Action.Attack : Action.Movement;
+        var actionType = _level.GetCell(_currentPath[1]).Has<IEnemyTarget>() 
+            ? ActionBehaviour.Action.Attack
+            : ActionBehaviour.Action.Movement;
         ActionInfo = new ActionInfo(_currentPath[1], _level.GetEntityPosition(this), actionType);
     }
 
@@ -65,15 +68,17 @@ public class Enemy : MonoEntity, ICellHabitant, ITickable, IInjectable<Level>, I
 
         var targetPosition = _level.GetEntityPosition(_target);
         var target = _currentPath[1];
+        var currentPosition = _level.GetEntityPosition(this);
         if (targetPosition == target)
         {
             Attack(targetPosition);
+            OnAction?.Invoke(new ActionInfo(target, currentPosition, ActionBehaviour.Action.Attack));
             return;
         }
 
         _level.Move(this, target);
-        OnMove?.Invoke(target);
         _currentPath.RemoveAt(0);
+        OnAction?.Invoke(new ActionInfo(target, currentPosition, ActionBehaviour.Action.Movement));
     }
 
     private void Attack(Vector2Int targetPosition)

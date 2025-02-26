@@ -1,11 +1,14 @@
+using ActionBehaviour;
 using System;
 using UnityEngine;
 
-public class Player : MonoEntity, ICellHabitant, IEnemyTarget, IUpdatable, IInjectable<Level>
+public class Player : MonoEntity, ICellHabitant, IEnemyTarget, IUpdatable, IInjectable<Level>, IActioning
 {
     private Level _level;
 
     [SerializeField] private int _damage;
+
+    public event Action<ActionInfo> OnAction;
 
     public UpdateOrder UpdateOrder => UpdateOrder.Player;
 
@@ -14,7 +17,7 @@ public class Player : MonoEntity, ICellHabitant, IEnemyTarget, IUpdatable, IInje
         _level = level;
     }
 
-    public void UpdateManual()
+    private Vector2Int ReadInput()
     {
         var input = new Vector2Int(0, 0);
         input = Input.GetKeyDown(KeyCode.W) || Input.GetKeyDown(KeyCode.UpArrow) ? Vector2Int.up : input;
@@ -22,6 +25,12 @@ public class Player : MonoEntity, ICellHabitant, IEnemyTarget, IUpdatable, IInje
         input = Input.GetKeyDown(KeyCode.A) || Input.GetKeyDown(KeyCode.LeftArrow) ? Vector2Int.left : input;
         input = Input.GetKeyDown(KeyCode.D) || Input.GetKeyDown(KeyCode.RightArrow) ? Vector2Int.right : input;
 
+        return input;
+    }
+
+    public void UpdateManual()
+    {
+        var input = ReadInput();
         if (input == Vector2Int.zero)
         {
             return;
@@ -38,12 +47,13 @@ public class Player : MonoEntity, ICellHabitant, IEnemyTarget, IUpdatable, IInje
         if (targetCell.IsEmpty())
         {
             _level.Move(this, targetPosition);
-            transform.position = _level.CellToWorld(this);
+            OnAction?.Invoke(new ActionInfo(targetPosition, currentPosition, ActionBehaviour.Action.Movement));
         }
         else if (targetCell.TryGet(out Enemy target))
         {
             var health = target.GetComponent<Health>();
             health.TakeDamage(_damage);
+            OnAction?.Invoke(new ActionInfo(targetPosition, currentPosition, ActionBehaviour.Action.Attack));
         }
     }
 }
