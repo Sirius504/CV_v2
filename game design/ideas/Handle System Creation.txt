@@ -1,2 +1,0 @@
-During enitities registration in system, new system might be instantiated.
-Right now, that system will not recieve any registrations.
