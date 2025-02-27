@@ -3,7 +3,7 @@ using System.Linq;
 
 public class Initializer : SystemBase<Initializer, IInitializable>
 {
-    public override SystemsStartOrder StartOrder => SystemsStartOrder.Initializer;
+    public override SystemsStartOrder ResolutionOrder => SystemsStartOrder.Initializer;
     public InitOrder InitOrder => InitOrder.Initializer;
 
 

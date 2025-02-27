@@ -18,7 +18,7 @@ public class Injector : SystemBase<Injector, IInjectable>, IInitializable
 
     public InitOrder InitOrder => InitOrder.Injector;
 
-    public override SystemsStartOrder StartOrder => SystemsStartOrder.Injector;
+    public override SystemsStartOrder ResolutionOrder => SystemsStartOrder.Injector;
 
     public void Init()
     {

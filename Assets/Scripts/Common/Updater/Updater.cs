@@ -8,7 +8,7 @@ public class Updater : SystemBase<Updater, IUpdatable>
 
     public InitOrder InitOrder => InitOrder.Updater;
 
-    public override SystemsStartOrder StartOrder => SystemsStartOrder.Updater;
+    public override SystemsStartOrder ResolutionOrder => SystemsStartOrder.Updater;
 
 
     protected override void RegisterMany(IEnumerable<IUpdatable> updatables)

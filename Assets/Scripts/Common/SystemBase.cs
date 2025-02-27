@@ -6,7 +6,7 @@ public abstract class SystemBase<TSystem, TEntity> : SingletonBehaviour<TSystem>
     where TSystem : SingletonBehaviour<TSystem>, ISystem
     where TEntity : class
 {
-    public virtual SystemsStartOrder StartOrder => SystemsStartOrder.Default;
+    public virtual SystemsStartOrder ResolutionOrder => SystemsStartOrder.Default;
 
     public void Register(IEnumerable<MonoBehaviour> monoBehaviours)
     {

@@ -13,6 +13,6 @@ public enum SystemsStartOrder
 
 public interface ISystem
 {
-    public SystemsStartOrder StartOrder { get; }
+    public SystemsStartOrder ResolutionOrder { get; }
     public void Register(IEnumerable<MonoBehaviour> entities);
 }
