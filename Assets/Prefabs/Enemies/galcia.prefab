@@ -12,8 +12,10 @@ GameObject:
   - component: {fileID: 3982374725751084185}
   - component: {fileID: 1963617460376162128}
   - component: {fileID: 7947045458872878129}
+  - component: {fileID: 6016247024917962046}
+  - component: {fileID: 2119606021790054102}
   m_Layer: 0
-  m_Name: Enemy
+  m_Name: galcia
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -75,6 +77,118 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   _animationType: 1
   _animationTime: 0.2
+--- !u!114 &6016247024917962046
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 3982374725751084184}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: fce68dca7b0b92e498dad11cc2abb51a, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  _attackSound: {fileID: 8300000, guid: a44f542ce5a51334b84ad3cc319956f3, type: 3}
+  _movementSound: {fileID: 0}
+  _pitchDeviation: 0.4
+  _volumeDeviation: 0.2
+--- !u!82 &2119606021790054102
+AudioSource:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 3982374725751084184}
+  m_Enabled: 1
+  serializedVersion: 4
+  OutputAudioMixerGroup: {fileID: 0}
+  m_audioClip: {fileID: 0}
+  m_PlayOnAwake: 1
+  m_Volume: 1
+  m_Pitch: 1
+  Loop: 0
+  Mute: 0
+  Spatialize: 0
+  SpatializePostEffects: 0
+  Priority: 128
+  DopplerLevel: 1
+  MinDistance: 1
+  MaxDistance: 500
+  Pan2D: 0
+  rolloffMode: 0
+  BypassEffects: 0
+  BypassListenerEffects: 0
+  BypassReverbZones: 0
+  rolloffCustomCurve:
+    serializedVersion: 2
+    m_Curve:
+    - serializedVersion: 3
+      time: 0
+      value: 1
+      inSlope: 0
+      outSlope: 0
+      tangentMode: 0
+      weightedMode: 0
+      inWeight: 0.33333334
+      outWeight: 0.33333334
+    - serializedVersion: 3
+      time: 1
+      value: 0
+      inSlope: 0
+      outSlope: 0
+      tangentMode: 0
+      weightedMode: 0
+      inWeight: 0.33333334
+      outWeight: 0.33333334
+    m_PreInfinity: 2
+    m_PostInfinity: 2
+    m_RotationOrder: 4
+  panLevelCustomCurve:
+    serializedVersion: 2
+    m_Curve:
+    - serializedVersion: 3
+      time: 0
+      value: 0
+      inSlope: 0
+      outSlope: 0
+      tangentMode: 0
+      weightedMode: 0
+      inWeight: 0.33333334
+      outWeight: 0.33333334
+    m_PreInfinity: 2
+    m_PostInfinity: 2
+    m_RotationOrder: 4
+  spreadCustomCurve:
+    serializedVersion: 2
+    m_Curve:
+    - serializedVersion: 3
+      time: 0
+      value: 0
+      inSlope: 0
+      outSlope: 0
+      tangentMode: 0
+      weightedMode: 0
+      inWeight: 0.33333334
+      outWeight: 0.33333334
+    m_PreInfinity: 2
+    m_PostInfinity: 2
+    m_RotationOrder: 4
+  reverbZoneMixCustomCurve:
+    serializedVersion: 2
+    m_Curve:
+    - serializedVersion: 3
+      time: 0
+      value: 1
+      inSlope: 0
+      outSlope: 0
+      tangentMode: 0
+      weightedMode: 0
+      inWeight: 0.33333334
+      outWeight: 0.33333334
+    m_PreInfinity: 2
+    m_PostInfinity: 2
+    m_RotationOrder: 4
 --- !u!1 &3982374726042670569
 GameObject:
   m_ObjectHideFlags: 0
@@ -172,7 +286,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: b0e0b3e5db3e4344480d99bcc21856d2, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  _attackSprite: {fileID: 2137168374, guid: 49666e1a8bd4a3e4faa2bc07f91f8ba8, type: 3}
   _idleSprite: {fileID: -1742962149, guid: 49666e1a8bd4a3e4faa2bc07f91f8ba8, type: 3}
-  _attackAnimationDuration: 0.1
   _defaultOrientation: {x: -1, y: 1}
+  _processorList: {fileID: 11400000, guid: e0e3b28714d05cb47b076a7c11931f2d, type: 2}

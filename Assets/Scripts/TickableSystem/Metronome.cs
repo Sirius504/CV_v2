@@ -12,6 +12,7 @@ public class Metronome : SystemBase<Metronome, ITickable>, IUpdatable, IInitiali
 
     public InitOrder InitOrder => InitOrder.System;
     public float TickDuration => _tickDuration;
+    public float BeginningTime => _beginningTime;
     public void Init()
     {
         _beginningTime = Time.time;

@@ -17,7 +17,7 @@ public class Enemy : MonoEntity, ICellHabitant, ITickable, IInjectable<Level>, I
 
     public UpdateOrder UpdateOrder => UpdateOrder.System;
 
-    public event System.Action<ActionInfo> OnAction;
+    public event Action<ActionInfo> OnAction;
 
     public void Inject(Level level)
     {
