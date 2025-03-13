@@ -1,3 +1,0 @@
-Difficult Terrain
-
-Tile, that takes multiple movements to pass (for player end enemy)

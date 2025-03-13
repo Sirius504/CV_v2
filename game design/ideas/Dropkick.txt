@@ -1,3 +1,0 @@
-Dropkick
-
-Action, that makes Player move to lower rows, while dealing increased damage.

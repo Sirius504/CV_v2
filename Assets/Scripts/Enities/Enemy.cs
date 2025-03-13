@@ -1,119 +1,78 @@
 using ActionBehaviour;
 using System;
-using System.Collections.Generic;
-using System.Linq;
 using UnityEngine;
 
-public class Enemy : MonoEntity, ICellHabitant, ITickable, IInjectable<Level>, IActionTelegraph, IUpdatable, IActioning
+public class Enemy : MonoEntity, ICellHabitant,
+    ITickable,
+    IInjectable<Level>,
+    IActionTelegraph,
+    IUpdatable,
+    IActioning,
+    IAttacker,
+    IAttackable,
+    IInitializable
 {
     [SerializeField] private int _damage;
+    [SerializeField] private SpriteProcessorsList _processorList;
 
     private Level _level;
 
-    private IEnemyTarget _target;
-    private List<Vector2Int> _currentPath;
+    private Plotter _plotter;
+    private Health _health;
+    private Node _behaviourTree;
 
     public ActionInfo? ActionInfo { get; private set; } = null;
 
-    public UpdateOrder UpdateOrder => UpdateOrder.System;
+    public UpdateOrder UpdateOrder => UpdateOrder.Entity;
+
+    public int Damage => _damage;
+
+    public InitOrder InitOrder => InitOrder.Entity;
 
     public event Action<ActionInfo> OnAction;
 
     public void Inject(Level level)
     {
         _level = level;
+        _health = GetComponent<Health>();
+        _plotter = GetComponent<Plotter>();
     }
+
+    public void Init()
+    {
+        _behaviourTree = new Selector("selector");
+        _behaviourTree.AddChild(new Attack("attack", _level, _plotter, this));
+        _behaviourTree.AddChild(new Move("move", this, _level, _plotter));
+    }
+
     public void UpdateManual()
     {
-        if (_target == null || !_level.Entities.Contains(_target))
-        {
-            _target = SelectTarget();
-            _currentPath = null;
-        }
-
-        if (_target == null)
-        {
-            // no valid target exists
-            ActionInfo = null;
-            return;
-        }
-
-        var targetPosition = _level.GetEntityPosition(_target);
-
-        if (!ValidPath(_currentPath, _target))
-        {
-            _currentPath = _level.Astar.FindPath(_level.GetEntityPosition(this), targetPosition, cell => cell.IsEmpty());
-        }
-
-        if (_currentPath == null)
+        var targetPositionNullable = _plotter.Peek();
+        if (!targetPositionNullable.HasValue)
         {
             // valid path to target doesn't exist
             ActionInfo = null;
             return;
         }
 
-        var actionType = _level.GetCell(_currentPath[1]).Has<IEnemyTarget>() 
+        var targetPosition = targetPositionNullable.Value;
+        var actionType = _level.GetCell(targetPosition).Has<IEnemyTarget>()
             ? ActionBehaviour.Action.Attack
             : ActionBehaviour.Action.Movement;
-        ActionInfo = new ActionInfo(_currentPath[1], _level.GetEntityPosition(this), actionType);
+        ActionInfo = new ActionInfo(targetPosition, _level.GetEntityPosition(this), actionType);
     }
 
     public void OnTick(uint tick)
     {
-        if (_target == null || _currentPath == null)
+        if (_behaviourTree.Process(out var actionInfo))
         {
-            // target or valid path to target don't exist
-            return;
+            OnAction?.Invoke(actionInfo);
         }
-
-        var targetPosition = _level.GetEntityPosition(_target);
-        var target = _currentPath[1];
-        var currentPosition = _level.GetEntityPosition(this);
-        if (targetPosition == target)
-        {
-            Attack(targetPosition);
-            OnAction?.Invoke(new ActionInfo(target, currentPosition, ActionBehaviour.Action.Attack));
-            return;
-        }
-
-        _level.Move(this, target);
-        _currentPath.RemoveAt(0);
-        OnAction?.Invoke(new ActionInfo(target, currentPosition, ActionBehaviour.Action.Movement));
+        _behaviourTree.Reset();
     }
 
-    private void Attack(Vector2Int targetPosition)
+    public void ReceiveAttack(IAttacker attacker)
     {
-        var targetCell = _level.GetCell(targetPosition);
-        if (targetCell.TryGet(out IEnemyTarget targetEntity))
-        {
-            var health = ((MonoBehaviour)targetEntity).GetComponent<Health>();
-            health.TakeDamage(_damage);
-        }
+        _health.TakeDamage(attacker.Damage);
     }
-
-    private bool ValidPath(List<Vector2Int> currentPath, IEnemyTarget _target)
-    {
-        var notNull = currentPath != null;
-        var targetNotMoved = notNull && _level.GetEntityPosition(_target) == currentPath[^1];
-        var pathIsClear = targetNotMoved && currentPath.All(cell => _level.GetCell(cell).IsEmpty());
-        var atTheStartOfPath = pathIsClear && _level.GetEntityPosition(this) == _currentPath[0];
-
-        return notNull
-            && targetNotMoved
-            && pathIsClear
-            && atTheStartOfPath;
-    }
-
-    private IEnemyTarget SelectTarget()
-    {
-        var availableTargets = _level.Entities.OfType<IEnemyTarget>().ToList();
-        if (availableTargets.Count > 0)
-        {
-            var newTarget = availableTargets[UnityEngine.Random.Range(0, availableTargets.Count)];
-            return newTarget;
-        }
-
-        return null;
-    }
-
 }

@@ -30,6 +30,8 @@ public class Level : SystemBase<Level, ICellHabitant>, IInitializable
         Astar = new Astar(this);
     }
 
+    public double Distance(Vector2Int from, Vector2Int to) => Astar.ManhattanDistance(from, to);
+
     #region Cells related methods
     public ICellInfo GetCell(Vector2Int index)
     {
@@ -162,7 +164,11 @@ public class Level : SystemBase<Level, ICellHabitant>, IInitializable
 
     public Vector2Int GetEntityPosition(ICellHabitant entity)
     {
-        return _entities[entity];
+        if (!_entities.TryGetValue(entity, out var position))
+        {
+            Debug.LogError("Can't get entity position; entity was not found.");
+        }
+        return position;
     }
 
     private void OnEntityDestroy(IDestroyable destroyable)

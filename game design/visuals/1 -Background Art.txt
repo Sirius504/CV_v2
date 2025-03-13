@@ -1,7 +1,0 @@
-Background Art
-
-1. block out
-- foreground
-- background
-- building
-- road

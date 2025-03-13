@@ -14,9 +14,9 @@ GameObject:
   - component: {fileID: 7947045458872878129}
   - component: {fileID: 6016247024917962046}
   - component: {fileID: 2119606021790054102}
-  - component: {fileID: 2549181122782817208}
+  - component: {fileID: 5565090869756094909}
   m_Layer: 0
-  m_Name: galcia
+  m_Name: raven
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -190,7 +190,7 @@ AudioSource:
     m_PreInfinity: 2
     m_PostInfinity: 2
     m_RotationOrder: 4
---- !u!114 &2549181122782817208
+--- !u!114 &5565090869756094909
 MonoBehaviour:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
@@ -276,7 +276,7 @@ SpriteRenderer:
   m_SortingLayerID: 0
   m_SortingLayer: 0
   m_SortingOrder: 0
-  m_Sprite: {fileID: -1742962149, guid: 49666e1a8bd4a3e4faa2bc07f91f8ba8, type: 3}
+  m_Sprite: {fileID: -1962953595, guid: 0c7a3f54a21c30144984c1ac97a741f5, type: 3}
   m_Color: {r: 1, g: 1, b: 1, a: 1}
   m_FlipX: 0
   m_FlipY: 0
@@ -299,6 +299,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: b0e0b3e5db3e4344480d99bcc21856d2, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  _idleSprite: {fileID: -1742962149, guid: 49666e1a8bd4a3e4faa2bc07f91f8ba8, type: 3}
+  _idleSprite: {fileID: -1962953595, guid: 0c7a3f54a21c30144984c1ac97a741f5, type: 3}
   _defaultOrientation: {x: -1, y: 1}
-  _processorList: {fileID: 11400000, guid: e0e3b28714d05cb47b076a7c11931f2d, type: 2}
+  _processorList: {fileID: 11400000, guid: 5484de895af68834a9c9d0094a991159, type: 2}

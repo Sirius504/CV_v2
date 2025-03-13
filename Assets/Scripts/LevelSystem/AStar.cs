@@ -90,8 +90,8 @@ public class Astar
             {
                 next.parent = current;
 
-                next.g = current.g + Manhattan(next, current);
-                next.f = next.g + Manhattan(next, endNode);
+                next.g = current.g + ManhattanDistance(next.position, current.position);
+                next.f = next.g + ManhattanDistance(next.position, endNode.position);
                 uncheckedNodes.Add(next);
             }
             checkedNodes.Add(current);
@@ -157,8 +157,8 @@ public class Astar
             .ToArray();
     }
 
-    private double Manhattan(Node start, Node end)
+    public double ManhattanDistance(Vector2Int start, Vector2Int end)
     {
-        return Math.Abs(start.position.x - end.position.x) + Math.Abs(start.position.y - end.position.y);
+        return Math.Abs(start.x - end.x) + Math.Abs(start.y - end.y);
     }
 }

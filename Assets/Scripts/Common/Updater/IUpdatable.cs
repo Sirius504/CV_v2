@@ -1,13 +1,14 @@
 ﻿public enum UpdateOrder
 {
     Injector = 0,
-    Initializer = 1,
-    Player = 2,
-    Metronome = 3,
-    System = 4,
-    Entity = 5,
-    Animation = 6,
-    UI = 7
+    Initializer = Injector + 1,
+    Player = Initializer + 1,
+    Metronome = Player + 1,
+    System = Metronome + 1,
+    AI = System + 1,
+    Entity = AI + 1,
+    Animation = Entity + 1,
+    UI = Animation + 1
 }
 
 

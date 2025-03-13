@@ -1,7 +1,0 @@
-Push Action
-
-Instead of just attacking, player can choose to push enemy away instead.
-If a tile enemy is being pushed into is empty, enemy takes no damage.
-If enemy is pushed into a wall, he takes one damage, but doesn't change position.
-If enemy is pushed into another enemy, they both take one damage, but
-don't change positions.

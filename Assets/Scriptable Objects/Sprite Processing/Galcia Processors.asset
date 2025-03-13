@@ -13,5 +13,5 @@ MonoBehaviour:
   m_Name: Galcia Processors
   m_EditorClassIdentifier: 
   _processors:
-  - key: 1
+  - key: 2
     value: {fileID: 11400000, guid: c272586cfb51aff4ab144685f1b6497b, type: 2}

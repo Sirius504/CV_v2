@@ -1,0 +1,20 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: a3c33b470ac1c744184725e03083ac34, type: 3}
+  m_Name: Raven Attack
+  m_EditorClassIdentifier: 
+  attackSprites:
+  - {fileID: 1030814809, guid: 0c7a3f54a21c30144984c1ac97a741f5, type: 3}
+  - {fileID: 289005518, guid: 0c7a3f54a21c30144984c1ac97a741f5, type: 3}
+  - {fileID: 82510067, guid: 0c7a3f54a21c30144984c1ac97a741f5, type: 3}
+  - {fileID: -2064372252, guid: 0c7a3f54a21c30144984c1ac97a741f5, type: 3}
+  _duration: 0.1

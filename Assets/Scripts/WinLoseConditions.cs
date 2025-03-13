@@ -13,6 +13,7 @@ public enum GameState
 public class WinLoseConditions : MonoEntity, IInitializable, IUpdatable
 {
     [SerializeField] private Level _level;
+    [SerializeField] private Timer _roundTimer;
 
     private GameState _gameState;
     public GameState GameState
@@ -26,6 +27,7 @@ public class WinLoseConditions : MonoEntity, IInitializable, IUpdatable
             OnGameStateChange?.Invoke(_gameState);
         }
     }
+
     public event Action<GameState> OnGameStateChange;
     public InitOrder InitOrder => InitOrder.System;
 
@@ -34,6 +36,7 @@ public class WinLoseConditions : MonoEntity, IInitializable, IUpdatable
     public void Init()
     {
         GameState = GameState.Playing;
+        _roundTimer.TimerStart();
     }
 
     public void UpdateManual()
@@ -47,7 +50,8 @@ public class WinLoseConditions : MonoEntity, IInitializable, IUpdatable
             GameState = GameState.Lose;
             return;
         }
-        if (!entities.OfType<Enemy>().Any())
+
+        if (!_roundTimer.IsRunning && !entities.OfType<Enemy>().Any())
         {
             GameState = GameState.Win;
             return;

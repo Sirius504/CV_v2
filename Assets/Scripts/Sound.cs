@@ -43,7 +43,7 @@ public class Sound : MonoBehaviour
         };
 
         _source.pitch = _basePitch + Random.Range(-1, 1) * _pitchDeviation;
-        _source.volume = _basePitch + Random.Range(-1, 1) * _volumeDeviation;
+        _source.volume = _baseVolume + Random.Range(-1, 1) * _volumeDeviation;
         _source.Play();
     }
 }

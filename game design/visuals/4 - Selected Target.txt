@@ -1,3 +1,0 @@
-Selected Target
-
-Visual, that telegraphs to player, what target is enemy moving to/attacking.

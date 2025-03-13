@@ -1,3 +1,0 @@
-Obstacle
-
-Impassable tile.

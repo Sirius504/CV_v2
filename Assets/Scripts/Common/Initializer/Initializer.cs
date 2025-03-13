@@ -9,10 +9,6 @@ public class Initializer : SystemBase<Initializer, IInitializable>
 
     protected override void RegisterMany(IEnumerable<IInitializable> initializables)
     {
-        if (!initializables.Any())
-        {
-            return;
-        }
         foreach (var request in initializables.OrderBy(req => req.InitOrder))
         {
             request.Init();

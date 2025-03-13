@@ -2,11 +2,13 @@ using ActionBehaviour;
 using System;
 using UnityEngine;
 
-public class Player : MonoEntity, ICellHabitant, IEnemyTarget, IUpdatable, IInjectable<Level>, IActioning
+public class Player : MonoEntity, ICellHabitant, IEnemyTarget, IUpdatable, IInjectable<Level>, IActioning, IAttackable, IAttacker
 {
     private Level _level;
+    private Health _health;
 
     [SerializeField] private int _damage;
+    public int Damage => _damage;
 
     public event Action<ActionInfo> OnAction;
 
@@ -15,6 +17,7 @@ public class Player : MonoEntity, ICellHabitant, IEnemyTarget, IUpdatable, IInje
     public void Inject(Level level)
     {
         _level = level;
+        _health = GetComponent<Health>();
     }
 
     private Vector2Int ReadInput()
@@ -49,11 +52,15 @@ public class Player : MonoEntity, ICellHabitant, IEnemyTarget, IUpdatable, IInje
             _level.Move(this, targetPosition);
             OnAction?.Invoke(new ActionInfo(targetPosition, currentPosition, ActionBehaviour.Action.Movement));
         }
-        else if (targetCell.TryGet(out Enemy target))
+        else if (targetCell.TryGet(out IAttackable target) && target is not IEnemyTarget)
         {
-            var health = target.GetComponent<Health>();
-            health.TakeDamage(_damage);
+            target.ReceiveAttack(this);
             OnAction?.Invoke(new ActionInfo(targetPosition, currentPosition, ActionBehaviour.Action.Attack));
         }
+    }
+
+    public void ReceiveAttack(IAttacker attacker)
+    {
+        _health.TakeDamage(attacker.Damage);
     }
 }

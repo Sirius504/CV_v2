@@ -1,2 +1,0 @@
-Buff, that doesn't let you attack enemies, but also makes you invulnerable
-so enemies have to go around you.

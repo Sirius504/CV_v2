@@ -5,8 +5,9 @@ namespace ActionBehaviour
 {
     public enum Action
     {
+        Default,
         Movement,
-        Attack
+        Attack,
     }
 
     public enum ActionDirection

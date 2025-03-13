@@ -1,4 +1,0 @@
-Ranged Enemy
-
-Enemy that attacks his target from any range. Takes multiple turns to lock in
-on his target. Lock in can be interrupted if enemy takes damage or displaced. 

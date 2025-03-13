@@ -1,4 +1,0 @@
-Action Override
-
-If player passes by enemy, it forgoes it's current action for next turn,
-and buffers attack on player's tile instead.
