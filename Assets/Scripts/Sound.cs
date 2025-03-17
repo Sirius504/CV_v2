@@ -4,8 +4,8 @@ using UnityEngine;
 public class Sound : MonoBehaviour
 {
     private AudioSource _source;
-    private IActioning _target;
-    private IDestroyable _destroyable;
+    private EventBinding<MovementEvent> movementBinding;
+    private EventBinding<AttackEvent> attackBinding;
 
     private float _basePitch;
     private float _baseVolume;
@@ -19,31 +19,43 @@ public class Sound : MonoBehaviour
     private void Start()
     {
         _source = GetComponent<AudioSource>();
-        _target = GetComponentInParent<IActioning>();
-        _destroyable = GetComponentInParent<IDestroyable>();
-        _target.OnAction += OnTargetAction;
-        _destroyable.OnDestroyEvent += OnTargetDestroyed;
         _basePitch = _source.pitch;
         _baseVolume = _source.volume;
+
+        var entity = GetComponentInParent<ICellHabitant>();
+        bool movementPredicate(MovementEvent @event) => @event.entity == entity;
+        movementBinding = new EventBinding<MovementEvent>(OnMovement, movementPredicate);
+        EventBus<MovementEvent>.Register(movementBinding);
+
+        var attacker = GetComponentInParent<IAttacker>();
+        bool attackPredicate(AttackEvent @event) => @event.attacker == attacker;
+        attackBinding = new EventBinding<AttackEvent>(OnAttack, attackPredicate);
+        EventBus<AttackEvent>.Register(attackBinding);
     }
 
-    private void OnTargetDestroyed(IDestroyable dest)
+    private void OnMovement()
     {
-        _target.OnAction -= OnTargetAction;
-        dest.OnDestroyEvent -= OnTargetDestroyed;
+        RandomizePitchAndVolume();
+        _source.clip = _movementSound;
+        _source.Play();
     }
 
-    private void OnTargetAction(ActionInfo actionInfo)
+    private void OnAttack()
     {
-        _source.clip = actionInfo.Action switch
-        {
-            Action.Movement => _movementSound,
-            Action.Attack => _attackSound,
-            _ => throw new System.NotImplementedException()
-        };
+        RandomizePitchAndVolume();
+        _source.clip = _attackSound;
+        _source.Play();
+    }
 
+    private void RandomizePitchAndVolume()
+    {
         _source.pitch = _basePitch + Random.Range(-1, 1) * _pitchDeviation;
         _source.volume = _baseVolume + Random.Range(-1, 1) * _volumeDeviation;
-        _source.Play();
+    }
+
+    private void OnDestroy()
+    {
+        EventBus<MovementEvent>.Deregister(movementBinding);
+        EventBus<AttackEvent>.Deregister(attackBinding);
     }
 }

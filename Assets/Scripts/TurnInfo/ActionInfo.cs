@@ -8,6 +8,7 @@ namespace ActionBehaviour
         Default,
         Movement,
         Attack,
+        Block,
     }
 
     public enum ActionDirection

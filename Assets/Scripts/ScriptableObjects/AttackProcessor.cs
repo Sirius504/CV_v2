@@ -9,7 +9,7 @@ public class AttackProcessor : SpriteActionProcessor
 
     public override float Duration => _duration;
  
-    public override void ProcessAction(SpriteRenderer spriteRenderer, ActionInfo actionInfo)
+    public override void ProcessAction(SpriteRenderer spriteRenderer, IEvent attackEvent)
     {
         var _sprite = attackSprites[Random.Range(0, attackSprites.Length)];
         spriteRenderer.sprite = _sprite;

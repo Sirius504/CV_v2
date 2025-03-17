@@ -14,13 +14,11 @@ public class Move : Node
         this.plotter = plotter;
     }
 
-    public override bool Process(out ActionInfo actionInfo)
+    public override bool Process()
     {
         var tile = plotter.Peek();
-        actionInfo = default;
         if (tile == null)
             return false;
-        actionInfo = new ActionInfo(tile.Value, level.GetEntityPosition(owner), Action.Movement);
         level.Move(owner, tile.Value);
         return true;
     }

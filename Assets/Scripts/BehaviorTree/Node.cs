@@ -1,5 +1,6 @@
 using ActionBehaviour;
 using System.Collections.Generic;
+using UnityEngine;
 
 public class Sequence : Node
 {
@@ -7,12 +8,11 @@ public class Sequence : Node
     {
     }
 
-    public override bool Process(out ActionInfo actionInfo)
+    public override bool Process()
     {
-        actionInfo = default;
         while (currentChild < Children.Count)
         {
-            if (!Children[currentChild].Process(out actionInfo))
+            if (!Children[currentChild].Process())
             {                
                 return false;
             }
@@ -20,6 +20,7 @@ public class Sequence : Node
             currentChild++;
         }
 
+        currentChild = 0;
         return true;
     }
 }
@@ -30,18 +31,18 @@ public class Selector : Node
     {
     }
 
-    public override bool Process(out ActionInfo actionInfo)
+    public override bool Process()
     {
-        actionInfo = default;
         while (currentChild < Children.Count)
         {
-            if (Children[currentChild].Process(out actionInfo))
+            if (Children[currentChild].Process())
             {
                 return true;
             }
             currentChild++;
         }
 
+        currentChild = 0;
         return false;
     }
 }
@@ -52,6 +53,7 @@ public abstract class Node {
 
     public readonly List<Node> Children = new();
     protected int currentChild;
+    protected Dictionary<string, object> State;
 
     public Node(string name)
     {
@@ -60,7 +62,12 @@ public abstract class Node {
 
     public void AddChild(Node child) => Children.Add(child);
 
-    public virtual bool Process(out ActionInfo actionInfo) => Children[currentChild].Process(out actionInfo);
+    public virtual bool Process()
+    {
+        var result = Children[currentChild].Process();
+        currentChild = 0;
+        return result;
+    }
 
     public virtual void Reset()
     {

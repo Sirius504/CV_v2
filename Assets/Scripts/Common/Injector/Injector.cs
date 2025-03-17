@@ -48,14 +48,22 @@ public class Injector : SystemBase<Injector, IInjectable>, IInitializable
 
     private void Resolve(IInjectable injectable)
     {
-        var dependencies = injectable.GetType()
+        var injectableInterfaces = injectable.GetType()
             .GetInterfaces()
-            .First(type => typeof(IInjectable).IsAssignableFrom(type) && type.IsGenericType)
-            .GetGenericArguments()
-            .Select(type => Dependencies[type]).ToArray();
+            .Where(type => typeof(IInjectable).IsAssignableFrom(type));
 
+        var genericInjectable = injectableInterfaces.FirstOrDefault(type => typeof(IInjectable).IsAssignableFrom(type) && type.IsGenericType);
 
         var injectMethod = injectable.GetType().GetMethod("Inject");
+        object[] dependencies = null;
+
+        if (genericInjectable != null)
+        {
+            dependencies = genericInjectable
+                .GetGenericArguments()
+                .Select(type => Dependencies[type]).ToArray();
+        }
+
         injectMethod.Invoke(injectable, dependencies);
     }
 }

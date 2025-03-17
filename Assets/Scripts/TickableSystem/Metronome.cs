@@ -1,6 +1,14 @@
 using System;
 using System.Collections.Generic;
+using System.Linq;
 using UnityEngine;
+
+public enum OrderInTick
+{
+    TickStart,
+    TickMiddle,
+    TickEnd
+}
 
 public class Metronome : SystemBase<Metronome, ITickable>, IUpdatable, IInitializable
 {
@@ -91,7 +99,7 @@ public class Metronome : SystemBase<Metronome, ITickable>, IUpdatable, IInitiali
     {
         _currentTick++;
         _generation++;
-        foreach(var tickable in _tickables)
+        foreach(var tickable in _tickables.OrderBy(tickable => tickable.OrderInTick))
         {
             tickable.OnTick(_currentTick);
         }
@@ -100,7 +108,7 @@ public class Metronome : SystemBase<Metronome, ITickable>, IUpdatable, IInitiali
         {
             var currentGeneration = _tickBornTickables[_generation - 1];
             _generation++;
-            foreach (var tickable in currentGeneration)
+            foreach (var tickable in currentGeneration.OrderBy(tickable => tickable.OrderInTick))
             {
                 Add(tickable);
 

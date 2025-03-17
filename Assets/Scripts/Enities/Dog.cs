@@ -1,13 +1,5 @@
-public class Dog : MonoEntity, ICellHabitant, IEnemyTarget, IAttackable
-{
-    private Health _health;
-    private void Start()
-    {
-        _health = GetComponent<Health>();
-    }
+using System;
 
-    public void ReceiveAttack(IAttacker attacker)
-    {
-        _health.TakeDamage(attacker.Damage);
-    }
+public class Dog : MonoEntity, ICellHabitant, IEnemyTarget
+{
 }

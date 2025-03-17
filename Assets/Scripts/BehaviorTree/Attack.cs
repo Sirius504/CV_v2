@@ -13,9 +13,8 @@ public class Attack : Node
         _owner = owner;
     }
 
-    public override bool Process(out ActionInfo actionInfo)
+    public override bool Process()
     {
-        actionInfo = default;
         if (_plotter.Peek() == null)
         {
             return false;
@@ -25,8 +24,9 @@ public class Attack : Node
         var nextTile = _level.GetCell(nextPosition);
         if (nextTile.TryGet<IAttackable>(out var attackable))
         {
-            actionInfo = new ActionInfo(nextPosition, _level.GetEntityPosition(_owner), Action.Attack);
             attackable.ReceiveAttack(_owner);
+            var @event = new AttackEvent(_owner, attackable);
+            EventBus<AttackEvent>.Raise(@event);
             return true;
         }
 

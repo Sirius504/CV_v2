@@ -110,6 +110,11 @@ public class Level : SystemBase<Level, ICellHabitant>, IInitializable
     private void Register(ICellHabitant entity)
     {
         var mb = (MonoBehaviour)entity;
+        if (entity is IChildCellHabitant child)
+        {
+            mb = (MonoBehaviour)child.Parent;
+        }
+
         var cellPosition = WorldToCell(mb.transform.position);
         cellPosition.Clamp(Vector2Int.zero, _gridSize - Vector2Int.one);
         Add(entity, cellPosition);
@@ -150,9 +155,25 @@ public class Level : SystemBase<Level, ICellHabitant>, IInitializable
         if (_entities.TryGetValue(entity, out var position))
         {
             var cell = GetCellInternal(position);
+            if (cell == null)
+            {
+                Debug.LogError("Can't get cell for entity; wrong position.");
+                return;
+            }
+
+            var children = cell.Contents.Where(cont => cont is IChildCellHabitant child && child.Parent == entity).ToList();
+            foreach(var child in children)
+            {
+                cell?.Remove(child);
+            }
             cell?.Remove(entity);
 
             var newCell = GetCellInternal(newPosition);
+            foreach (var child in children)
+            {
+                newCell.Put(child);
+                _entities[child] = newPosition;
+            }
             newCell.Put(entity);
             _entities[entity] = newPosition;
         }
@@ -160,6 +181,11 @@ public class Level : SystemBase<Level, ICellHabitant>, IInitializable
         {
             Debug.LogError("Can't move entity; entity was not found.");
         }
+    }
+
+    public void Move(IChildCellHabitant _, Vector2Int __)
+    {
+        throw new Exception("Moving IChildCellHabitant is forbidden. Move ICellHabitant instead.");
     }
 
     public Vector2Int GetEntityPosition(ICellHabitant entity)

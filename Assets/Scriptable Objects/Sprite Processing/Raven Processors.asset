@@ -15,3 +15,5 @@ MonoBehaviour:
   _processors:
   - key: 2
     value: {fileID: 11400000, guid: 086c1204dad0513469fe8ede7916fe28, type: 2}
+  - key: 3
+    value: {fileID: 11400000, guid: 7337e88f790c1a3418542c646561eec1, type: 2}

@@ -1,5 +1,9 @@
 ﻿public interface IInjectable
 {
+    public void Inject()
+    {
+
+    }
 }
 
 public interface IInjectable<T> : IInjectable
