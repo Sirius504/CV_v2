@@ -1,7 +1,7 @@
 using UnityEngine;
 
 [RequireComponent(typeof(SpriteRenderer))]
-public class SpriteController : MonoEntity, IInitializable, IUpdatable, IInjectable<Level>
+public class SpriteController : MonoEntity, IInitializable, IUpdatable, IInjectable<Level>, ITickable
 {
     private SpriteRenderer _spriteRenderer;
     private SpriteActionProcessor _activeProcessor;
@@ -9,6 +9,7 @@ public class SpriteController : MonoEntity, IInitializable, IUpdatable, IInjecta
 
     private EventBinding<AttackEvent> attackBinding;
     private EventBinding<BlockingEvent> blockingBinding;
+    private EventBinding<MovementEvent> movementBinding;
     private float _animationEndTime;
 
     [SerializeField] private Sprite _idleSprite;
@@ -37,6 +38,10 @@ public class SpriteController : MonoEntity, IInitializable, IUpdatable, IInjecta
         bool blockingEventPredicate(BlockingEvent @event) => @event.entity == entity;
         blockingBinding = new EventBinding<BlockingEvent>(OnBlock, blockingEventPredicate);
         EventBus<BlockingEvent>.Register(blockingBinding);
+
+        bool movementEventPredicate(MovementEvent @event) => @event.entity == entity;
+        movementBinding = new EventBinding<MovementEvent>(OnMove, movementEventPredicate);
+        EventBus<MovementEvent>.Register(movementBinding);
     }
 
     private void UpdateDirection(Vector2Int from, Vector2Int to)
@@ -46,6 +51,11 @@ public class SpriteController : MonoEntity, IInitializable, IUpdatable, IInjecta
         var newScale = _spriteRenderer.transform.localScale;
         newScale.x = Mathf.Sign(direction) * _defaultOrientation.x * Mathf.Abs(newScale.x);
         _spriteRenderer.transform.localScale = newScale;
+    }
+
+    private void OnMove(MovementEvent @event)
+    {
+        UpdateDirection(@event.from, @event.to);
     }
 
     private void OnBlock(BlockingEvent @event)
@@ -96,6 +106,11 @@ public class SpriteController : MonoEntity, IInitializable, IUpdatable, IInjecta
         base.OnDestroy();
         EventBus<AttackEvent>.Deregister(attackBinding);
         EventBus<BlockingEvent>.Deregister(blockingBinding);
+    }
+
+    public void OnTick(uint tick)
+    {
+        _activeProcessor?.OnTick(tick);
     }
 }
  

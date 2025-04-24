@@ -13,4 +13,10 @@ public class BlockProcessor : SpriteActionProcessor
     {
         spriteRenderer.sprite = blockSprite;
     }
+
+    public override void OnTick(uint tick)
+    {
+        base.OnTick(tick);
+        
+    }
 }

@@ -14,7 +14,7 @@ public class Level : SystemBase<Level, ICellHabitant>, IInitializable
     public IEnumerable<ICellInfo> Cells => _cells.Cast<ICellInfo>();
 
     private CellInfo[,] _cells;
-    private Dictionary<ICellHabitant, Vector2Int> _entities;
+    private Dictionary<ICellHabitant, Vector2Int> _entities = new();
 
     public InitOrder InitOrder => InitOrder.System;
     public void Init()
