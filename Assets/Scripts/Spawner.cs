@@ -1,17 +1,19 @@
 using System.Linq;
 using UnityEngine;
 
-public class Spawner : MonoEntity, IInjectable<Level>, ITickable
+public class Spawner : MonoEntity, IInjectable<Level, LevelGrid>, ITickable
 {
     private Level _level;
+    private LevelGrid _levelGrid;
     [SerializeField] private int _spawnPeriod = 3;
     [SerializeField] private Enemy[] _enemies;
     [SerializeField] private bool _enabled = true;
     [SerializeField] private Timer _roundTimer;
 
-    public void Inject(Level level)
+    public void Inject(Level level, LevelGrid levelGrid)
     {
         _level = level;
+        _levelGrid = levelGrid;
         _roundTimer.OnElapsed += () => _enabled = false;
     }
 
@@ -28,7 +30,7 @@ public class Spawner : MonoEntity, IInjectable<Level>, ITickable
     private bool IsEligibleCell(ICellInfo cell)
     {
         if (!cell.IsEmpty()) return false;
-        if (cell.Position.x != 0 && cell.Position.x != _level.Size.x - 1) return false;
+        if (cell.Position.x != 0 && cell.Position.x != _levelGrid.Size.x - 1) return false;
         return true;
     }
 
@@ -42,7 +44,7 @@ public class Spawner : MonoEntity, IInjectable<Level>, ITickable
 
             var cell = eligibleCells.ElementAt(Random.Range(0, eligibleCells.Count()));
             var prefab = _enemies[Random.Range(0, _enemies.Length)];
-            Instantiate(prefab, _level.CellToWorld(cell.Position), Quaternion.identity);
+            Instantiate(prefab, _levelGrid.CellToWorld(cell.Position), Quaternion.identity);
         }
     }
 }

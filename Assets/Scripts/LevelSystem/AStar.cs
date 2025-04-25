@@ -1,5 +1,6 @@
 ﻿/*
 Unity C# Port of Andrea Giammarchi's JavaScript A* algorithm (http://devpro.it/javascript_id_137.html)
+Modified by Sirius504
 */
 
 using System;
@@ -52,13 +53,13 @@ public class Astar
         }
     }
 
-    private readonly Level _level;
+    private readonly LevelGrid _level;
     private readonly int cols;
     private readonly int rows;
     private readonly HashSet<Node> checkedNodes;
     private readonly HashSet<Node> uncheckedNodes;
 
-    public Astar(Level level)
+    public Astar(LevelGrid level)
     {
         _level = level;
         cols = _level.Size.x;
@@ -68,7 +69,7 @@ public class Astar
         uncheckedNodes = new HashSet<Node>(cols * rows);
     }
 
-    public List<Vector2Int> FindPath(Vector2Int start, Vector2Int end, Func<ICellInfo, bool> predicate)
+    public List<Vector2Int> FindPath(Vector2Int start, Vector2Int end, Func<Vector2Int, bool> passableCellPredicate)
     {
         CheckArguments(start, end);
 
@@ -84,7 +85,7 @@ public class Astar
         do
         {
             current = uncheckedNodes.Aggregate((minWeightNode, nextNode) => nextNode.f < minWeightNode.f ? nextNode : minWeightNode);
-            var successorsToCheck = Successors(current, predicate).Where(node => !checkedNodes.Contains(node));
+            var successorsToCheck = Successors(current, passableCellPredicate).Where(node => !checkedNodes.Contains(node));
 
             foreach (var next in successorsToCheck)
             {
@@ -136,7 +137,7 @@ public class Astar
         return result;
     }
 
-    private Node[] Successors(Node node, Func<ICellInfo, bool> obstaclePredicate)
+    private Node[] Successors(Node node, Func<Vector2Int, bool> obstaclePredicate)
     {
         var position = node.position;
         var adjacent = new Vector2Int[]
@@ -149,7 +150,7 @@ public class Astar
 
         var clarified = adjacent
             .Where(node => _level.InBounds(node)
-            && obstaclePredicate.Invoke(_level.GetCell(node)))
+            && obstaclePredicate.Invoke(node))
             .ToList();
 
         return clarified

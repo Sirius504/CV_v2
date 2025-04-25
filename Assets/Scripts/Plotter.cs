@@ -1,11 +1,14 @@
 using System.Collections.Generic;
 using UnityEngine;
 using System.Linq;
+using VContainer;
 
 // responsible for target selection and part recalculation
 [RequireComponent(typeof(ICellHabitant))]
 public class Plotter : MonoEntity, IInjectable<Level>, IUpdatable
 {
+    [Inject]
+    private Astar _astar;
     private ICellHabitant _target;
     private List<Vector2Int> _currentPath;
     private Level _level;
@@ -80,7 +83,7 @@ public class Plotter : MonoEntity, IInjectable<Level>, IUpdatable
         }
         var ourPosition = _level.GetEntityPosition(_owner);
         var targetPosition = _level.GetEntityPosition(_target);
-        _currentPath = _level.Astar.FindPath(ourPosition, targetPosition, cell => cell.IsEmpty());      
+        _currentPath = _astar.FindPath(ourPosition, targetPosition, cellPosition => _level.GetCell(cellPosition).IsEmpty());      
     }
 
     private bool ValidPath(List<Vector2Int> currentPath, ICellHabitant _target)

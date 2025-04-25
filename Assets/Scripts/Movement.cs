@@ -8,11 +8,12 @@ public enum AnimationType
 }
 
 [RequireComponent(typeof(ICellHabitant))]
-public class Movement : MonoEntity, IInjectable<Metronome, Level>, IUpdatable
+public class Movement : MonoEntity, IInjectable<Metronome, Level, LevelGrid>, IUpdatable
 {
     private ICellHabitant _entity;
     private Metronome _metronome;
     private Level _level;
+    private LevelGrid _levelGrid;
 
     private float _movementStartTime;
 
@@ -28,10 +29,11 @@ public class Movement : MonoEntity, IInjectable<Metronome, Level>, IUpdatable
     public UpdateOrder UpdateOrder => UpdateOrder.Animation;
         
 
-    public void Inject(Metronome metronome, Level level)
+    public void Inject(Metronome metronome, Level level, LevelGrid levelGrid)
     {
         _metronome = metronome;
         _level = level;
+        _levelGrid = levelGrid;
         _entity = GetComponent<ICellHabitant>();
     }
 
@@ -41,8 +43,8 @@ public class Movement : MonoEntity, IInjectable<Metronome, Level>, IUpdatable
         if (_cellPosition != newCellPosition)
         {
             _movementStartTime = Time.time;
-            _startWorldPosition = _level.CellToWorld(_cellPosition ?? newCellPosition);
-            _targetWorldPosition = _level.CellToWorld(newCellPosition);
+            _startWorldPosition = _levelGrid.CellToWorld(_cellPosition ?? newCellPosition);
+            _targetWorldPosition = _levelGrid.CellToWorld(newCellPosition);
             _cellPosition = newCellPosition;
             OnMovementStart?.Invoke(_movementStartTime, _animationTime);
         }
