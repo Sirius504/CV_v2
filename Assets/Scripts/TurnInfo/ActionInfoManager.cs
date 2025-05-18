@@ -3,9 +3,9 @@ using System;
 using System.Collections.Generic;
 using System.Linq;
 using UnityEngine;
+using VContainer;
 
-
-public class ActionInfoManager : SystemBase<ActionInfoManager, IActionTelegraph>, IInjectable<Grid>, IUpdatable
+public class ActionInfoManager : SystemBase<ActionInfoManager, IActionTelegraph>,  IUpdatable
 {
     // for each tile we spawn TurnInfo either to the right or down or both, like that
     //
@@ -15,6 +15,7 @@ public class ActionInfoManager : SystemBase<ActionInfoManager, IActionTelegraph>
     //
     [SerializeField] private ActionInfoView _horizontalPrefab;
     [SerializeField] private ActionInfoView _verticalPrefab;
+    [Inject]
     private Grid _grid;
 
     private readonly HashSet<IActionTelegraph> _entities = new();
@@ -23,11 +24,6 @@ public class ActionInfoManager : SystemBase<ActionInfoManager, IActionTelegraph>
     public InitOrder InitOrder => InitOrder.System;
 
     public UpdateOrder UpdateOrder => UpdateOrder.System;
-
-    public void Inject(Grid grid)
-    {
-        _grid = grid;
-    }
 
     private void OnDestroy()
     {

@@ -1,10 +1,12 @@
 using UnityEngine;
+using VContainer;
 
 [RequireComponent(typeof(SpriteRenderer))]
-public class SpriteController : MonoEntity, IInitializable, IUpdatable, IInjectable<Level>, ITickable
+public class SpriteController : MonoEntity, IInitializable, IUpdatable, ITickable
 {
     private SpriteRenderer _spriteRenderer;
     private SpriteActionProcessor _activeProcessor;
+    [Inject]
     private Level _level;
 
     private EventBinding<AttackEvent> attackBinding;
@@ -19,10 +21,6 @@ public class SpriteController : MonoEntity, IInitializable, IUpdatable, IInjecta
     public UpdateOrder UpdateOrder => UpdateOrder.Animation;
     public InitOrder InitOrder => InitOrder.Animation;
 
-    public void Inject(Level level)
-    {
-        _level = level;
-    }
 
     public void Init()
     {

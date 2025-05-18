@@ -1,21 +1,18 @@
 using ActionBehaviour;
 using System;
 using UnityEngine;
+using VContainer;
 
-public class Player : MonoEntity, ICellHabitant, IEnemyTarget, IUpdatable, IInjectable<Level, LevelGrid>, IAttacker
+public class Player : MonoEntity, ICellHabitant, IEnemyTarget, IUpdatable, IAttacker
 {
+    [Inject]
     private Level _level;
+    [Inject]
     private LevelGrid _levelGrid;
     [SerializeField] private int _damage;
     public int Damage => _damage;
 
     public UpdateOrder UpdateOrder => UpdateOrder.Player;
-
-    public void Inject(Level level, LevelGrid levelGrid)
-    {
-        _level = level;
-        _levelGrid = levelGrid;
-    }
 
     private Vector2Int ReadInput()
     {

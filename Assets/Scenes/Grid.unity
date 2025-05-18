@@ -178,7 +178,7 @@ Camera:
   far clip plane: 1000
   field of view: 60
   orthographic: 1
-  orthographic size: 3.75
+  orthographic size: 3.5595238
   m_Depth: -1
   m_CullingMask:
     serializedVersion: 2
@@ -289,7 +289,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 0
+  m_IsActive: 1
 --- !u!114 &104005418
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -337,7 +337,7 @@ Canvas:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 104005417}
-  m_Enabled: 1
+  m_Enabled: 0
   serializedVersion: 3
   m_RenderMode: 0
   m_Camera: {fileID: 0}
@@ -1113,50 +1113,6 @@ PrefabInstance:
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 856c12db3d5457a4381c35d545ca8461, type: 3}
---- !u!1 &479285763
-GameObject:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  serializedVersion: 6
-  m_Component:
-  - component: {fileID: 479285765}
-  - component: {fileID: 479285764}
-  m_Layer: 0
-  m_Name: testGrid
-  m_TagString: Untagged
-  m_Icon: {fileID: 0}
-  m_NavMeshLayer: 0
-  m_StaticEditorFlags: 0
-  m_IsActive: 1
---- !u!156049354 &479285764
-Grid:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 479285763}
-  m_Enabled: 1
-  m_CellSize: {x: 1, y: 3.06, z: 1}
-  m_CellGap: {x: 0, y: 0, z: 0}
-  m_CellLayout: 0
-  m_CellSwizzle: 0
---- !u!4 &479285765
-Transform:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 479285763}
-  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 0, y: 0, z: 0}
-  m_LocalScale: {x: 1, y: 1, z: 1}
-  m_ConstrainProportionsScale: 0
-  m_Children: []
-  m_Father: {fileID: 0}
-  m_RootOrder: 9
-  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1 &534208771
 GameObject:
   m_ObjectHideFlags: 0
@@ -1206,7 +1162,12 @@ MonoBehaviour:
   autoRun: 1
   autoInjectGameObjects:
   - {fileID: 144303774}
+  - {fileID: 769000222}
+  - {fileID: 1277144059}
   _levelGrid: {fileID: 144303779}
+  _level: {fileID: 144303777}
+  _grid: {fileID: 144303775}
+  _metronome: {fileID: 958982337}
 --- !u!4 &553122887 stripped
 Transform:
   m_CorrespondingSourceObject: {fileID: 2782509382523036808, guid: 3f5045f70cf77864a8663ecb5e0ab943, type: 3}
@@ -1364,7 +1325,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 0
+  m_IsActive: 1
 --- !u!114 &769000223
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -1632,7 +1593,6 @@ GameObject:
   m_Component:
   - component: {fileID: 958982334}
   - component: {fileID: 958982335}
-  - component: {fileID: 958982336}
   - component: {fileID: 958982337}
   - component: {fileID: 958982338}
   - component: {fileID: 958982340}
@@ -1674,22 +1634,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 70eb29c7b1a73cf4c8f69619006bdb94, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
---- !u!114 &958982336
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 958982333}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: c8643ee0be4966146af2e49c1f6483b3, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  _level: {fileID: 144303777}
-  _metronome: {fileID: 958982337}
-  _grid: {fileID: 144303775}
-  _levelGrid: {fileID: 144303779}
 --- !u!114 &958982337
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -1791,9 +1735,9 @@ AudioSource:
   m_Enabled: 1
   serializedVersion: 4
   OutputAudioMixerGroup: {fileID: 0}
-  m_audioClip: {fileID: 0}
+  m_audioClip: {fileID: 8300000, guid: a8871c7d3ce32e64d8b22420c0003110, type: 3}
   m_PlayOnAwake: 1
-  m_Volume: 0.301
+  m_Volume: 0.807
   m_Pitch: 1
   Loop: 0
   Mute: 0
@@ -1997,7 +1941,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 0
+  m_IsActive: 1
 --- !u!114 &1277144060
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -2591,7 +2535,7 @@ MonoBehaviour:
   m_OnCullStateChanged:
     m_PersistentCalls:
       m_Calls: []
-  m_Sprite: {fileID: 21300000, guid: 0ae2b74b1edd14bb18dd7b65ae916a54, type: 3}
+  m_Sprite: {fileID: 21300000, guid: 33e9636a699f04c3ab383160b1904a2d, type: 3}
   m_Type: 3
   m_PreserveAspect: 0
   m_FillCenter: 1
@@ -2794,7 +2738,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 3550012510343106260, guid: a7f28231227ade345828037675143832, type: 3}
       propertyPath: m_IsActive
-      value: 0
+      value: 1
       objectReference: {fileID: 0}
     - target: {fileID: 3550012510343106263, guid: a7f28231227ade345828037675143832, type: 3}
       propertyPath: m_RootOrder

@@ -1,21 +1,30 @@
+using System;
 using System.Linq;
 using UnityEngine;
+using VContainer;
+using Random = UnityEngine.Random;
 
-public class Spawner : MonoEntity, IInjectable<Level, LevelGrid>, ITickable
+public class Spawner : MonoEntity, IInitializable, ITickable
 {
+    [Inject]
     private Level _level;
+    [Inject]
     private LevelGrid _levelGrid;
+
     [SerializeField] private int _spawnPeriod = 3;
     [SerializeField] private Enemy[] _enemies;
     [SerializeField] private bool _enabled = true;
     [SerializeField] private Timer _roundTimer;
+    private Action _timerElapsedHandler;
 
-    public void Inject(Level level, LevelGrid levelGrid)
+    public InitOrder InitOrder => InitOrder.System;
+
+    public void Init()
     {
-        _level = level;
-        _levelGrid = levelGrid;
-        _roundTimer.OnElapsed += () => _enabled = false;
+        _timerElapsedHandler = () => _enabled = false;
+        _roundTimer.OnElapsed += _timerElapsedHandler;
     }
+
 
     public void OnTick(uint tick)
     {
@@ -46,5 +55,11 @@ public class Spawner : MonoEntity, IInjectable<Level, LevelGrid>, ITickable
             var prefab = _enemies[Random.Range(0, _enemies.Length)];
             Instantiate(prefab, _levelGrid.CellToWorld(cell.Position), Quaternion.identity);
         }
+    }
+
+    protected override void OnDestroy()
+    {
+        base.OnDestroy();
+        _roundTimer.OnElapsed -= _timerElapsedHandler;
     }
 }

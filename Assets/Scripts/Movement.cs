@@ -1,5 +1,6 @@
 ﻿using System;
 using UnityEngine;
+using VContainer;
 
 public enum AnimationType
 {
@@ -8,11 +9,14 @@ public enum AnimationType
 }
 
 [RequireComponent(typeof(ICellHabitant))]
-public class Movement : MonoEntity, IInjectable<Metronome, Level, LevelGrid>, IUpdatable
+public class Movement : MonoEntity, IUpdatable, IInitializable
 {
     private ICellHabitant _entity;
+    [Inject]
     private Metronome _metronome;
+    [Inject]
     private Level _level;
+    [Inject]
     private LevelGrid _levelGrid;
 
     private float _movementStartTime;
@@ -27,13 +31,11 @@ public class Movement : MonoEntity, IInjectable<Metronome, Level, LevelGrid>, IU
 
     public event Action<float, float> OnMovementStart;
     public UpdateOrder UpdateOrder => UpdateOrder.Animation;
-        
 
-    public void Inject(Metronome metronome, Level level, LevelGrid levelGrid)
+    public InitOrder InitOrder => InitOrder.Entity;
+
+    public void Init()
     {
-        _metronome = metronome;
-        _level = level;
-        _levelGrid = levelGrid;
         _entity = GetComponent<ICellHabitant>();
     }
 

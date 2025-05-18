@@ -1,11 +1,10 @@
 using ActionBehaviour;
 using Assets.Scripts.BehaviorTree;
-using System;
 using UnityEngine;
+using VContainer;
 
 public class Enemy : MonoEntity, ICellHabitant,
     ITickable,
-    IInjectable<Level>,
     IActionTelegraph,
     IUpdatable,
     IAttacker,
@@ -13,6 +12,7 @@ public class Enemy : MonoEntity, ICellHabitant,
 {
     [SerializeField] private int _damage;
 
+    [Inject]
     private Level _level;
 
     private Plotter _plotter;
@@ -27,14 +27,9 @@ public class Enemy : MonoEntity, ICellHabitant,
     public InitOrder InitOrder => InitOrder.Entity;
 
 
-    public void Inject(Level level)
-    {
-        _level = level;
-        _plotter = GetComponent<Plotter>();
-    }
-
     public void Init()
     {
+        _plotter = GetComponent<Plotter>();
         _behaviourTree = new Selector("Galcia");
         if (GetComponent<BlockingAttackable>() != null)
             _behaviourTree.AddChild(new Blocking("blocking", this));
@@ -54,8 +49,8 @@ public class Enemy : MonoEntity, ICellHabitant,
 
         var targetPosition = targetPositionNullable.Value;
         var actionType = _level.GetCell(targetPosition).Has<IEnemyTarget>()
-            ? ActionBehaviour.Action.Attack
-            : ActionBehaviour.Action.Movement;
+            ? Action.Attack
+            : Action.Movement;
         ActionInfo = new ActionInfo(targetPosition, _level.GetEntityPosition(this), actionType);
     }
 

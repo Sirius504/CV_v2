@@ -1,10 +1,12 @@
 using System;
 using UnityEngine;
+using VContainer;
 
 [RequireComponent(typeof(Health))]
 [RequireComponent(typeof(ICellHabitant))]
-public class SimpleAttackable : MonoEntity, IAttackable, IInjectable<Level>, IChildCellHabitant
+public class SimpleAttackable : MonoEntity, IAttackable, IInitializable, IChildCellHabitant
 {
+    [Inject]
     protected Level _level;
     protected Health _health;
     protected ICellHabitant _parent;
@@ -16,9 +18,8 @@ public class SimpleAttackable : MonoEntity, IAttackable, IInjectable<Level>, ICh
     public event Action OnAttacked;
 
 
-    public void Inject(Level level)
+    public void Init()
     {
-        _level = level;
         _health = GetComponent<Health>();
         _parent = GetComponent<ICellHabitant>();
     }

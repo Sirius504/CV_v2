@@ -3,18 +3,21 @@ using UnityEngine;
 using System.Linq;
 using VContainer;
 
-// responsible for target selection and part recalculation
+// responsible for target selection and path recalculation
 [RequireComponent(typeof(ICellHabitant))]
-public class Plotter : MonoEntity, IInjectable<Level>, IUpdatable
+public class Plotter : MonoEntity, IInitializable, IUpdatable
 {
     [Inject]
     private Astar _astar;
+    [Inject]
+    private Level _level;
     private ICellHabitant _target;
     private List<Vector2Int> _currentPath;
-    private Level _level;
     private ICellHabitant _owner;
 
     public UpdateOrder UpdateOrder => UpdateOrder.AI;
+
+    public InitOrder InitOrder => InitOrder.Entity;
 
     public Vector2Int? Peek()
     {
@@ -28,18 +31,17 @@ public class Plotter : MonoEntity, IInjectable<Level>, IUpdatable
     }
 
 
+    public void Init()
+    {
+        _owner = GetComponent<ICellHabitant>();
+    }
+
+
     // recalculate on
     //  - after tick
     //  - on level change
     //  - on target becoming untargetable
     //  - on entity added/removed from level
-
-    public void Inject(Level level)
-    {
-        _level = level;
-        _owner = GetComponent<ICellHabitant>();
-    }
-
 
     private ICellHabitant FindTarget()
     {

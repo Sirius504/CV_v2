@@ -1,18 +1,16 @@
 using UnityEngine;
 using UnityEngine.UI;
+using VContainer;
 
-public class MetronomeUI : MonoEntity, IInjectable<Metronome>, IUpdatable
+public class MetronomeUI : MonoEntity, IUpdatable
 {
     [SerializeField] private Image _image;
 
+    [Inject]
     private Metronome _metronome;
 
     public UpdateOrder UpdateOrder => UpdateOrder.UI;
 
-    public void Inject(Metronome metronome)
-    {
-        _metronome = metronome;
-    }
 
     public void UpdateManual()
     {
