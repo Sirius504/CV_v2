@@ -36,3 +36,11 @@ jobs:
         with:
           name: Build
           path: build
+
+      - uses: yeslayla/butler-publish-itchio-action@master
+        env:
+          BUTLER_CREDENTIALS: ${{ secrets.BUTLER_CREDENTIALS }}
+          CHANNEL: webgl
+          ITCH_GAME: fighting-grid-test
+          ITCH_USER: sirius504
+          PACKAGE: build
