@@ -40,6 +40,8 @@ public class Game : SingletonBehaviour<Game>
         if (newSystems.Any() && _firstResolvePassed)
         {
             Debug.LogWarning($"Systems were added after initial resolution; untested behaviour");
+            var allSystemsString = string.Join(", ", newSystems.Select(system => ((MonoBehaviour)system).name));
+            Debug.LogWarning($"Systems list: {allSystemsString}");
         }
 
         foreach (var system in newSystems)
