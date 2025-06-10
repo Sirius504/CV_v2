@@ -61,6 +61,6 @@ public class WinLoseConditions : MonoEntity, IInitializable, IUpdatable
 
     public void Restart()
     {
-        SceneManager.LoadScene(0);
+        SceneManager.LoadScene(0, LoadSceneMode.Single);
     }
 }
