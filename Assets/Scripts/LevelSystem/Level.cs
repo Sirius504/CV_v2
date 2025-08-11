@@ -93,6 +93,7 @@ public class Level : SystemBase<Level, ICellHabitant>, IInitializable
             mb = (MonoBehaviour)child.Parent;
         }
 
+        Debug.LogWarning($"Level grid ID: {_grid.GetInstanceID()}");
         var cellPosition = _grid.WorldToCell(mb.transform.position);
         cellPosition.Clamp(Vector2Int.zero, _grid.Size - Vector2Int.one);
         Add(entity, cellPosition);

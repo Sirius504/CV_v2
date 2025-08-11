@@ -6,6 +6,11 @@ public class LevelGrid : MonoBehaviour
     [SerializeField] private Grid _grid;
     public Vector2Int Size => _gridSize;
 
+    private void Awake()
+    {
+        _grid = GetComponent<Grid>();
+    }
+
     public Vector2Int WorldToCell(Vector3 position)
     {
         Debug.LogWarning($"Unity Grid Instance ID: {_grid.GetInstanceID()}");
