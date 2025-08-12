@@ -8,9 +8,9 @@ public class Game : SingletonBehaviour<Game>
     private readonly HashSet<ISystem> _passedSystems = new();
 
     private readonly List<(int generation, MonoBehaviour entity)> _creationQueue = new();
-    private readonly List<MonoEntity> _entities = new();
     private int _generation = 0;
     private bool _firstResolvePassed = false;
+
 
     private void Start()
     {

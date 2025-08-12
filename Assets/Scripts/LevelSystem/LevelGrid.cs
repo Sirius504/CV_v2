@@ -6,9 +6,13 @@ public class LevelGrid : MonoBehaviour
     [SerializeField] private Grid _grid;
     public Vector2Int Size => _gridSize;
 
+    private void Awake()
+    {
+        _grid = GetComponent<Grid>();
+    }
+
     public Vector2Int WorldToCell(Vector3 position)
     {
-        Debug.LogWarning($"Unity Grid: {_grid}; is null: {_grid.gameObject == null}");
         var cellSpace = (Vector2Int)_grid.WorldToCell(position);
         cellSpace.Clamp(Vector2Int.zero, Size);
         return cellSpace;

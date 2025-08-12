@@ -15,7 +15,7 @@ MonoBehaviour:
   actionType: 1
   actionName: FileOperation
   note: 
-  actionEnabled: 1
+  actionEnabled: 0
   configureEditor: 0
   filter:
     condition: 0
@@ -89,6 +89,8 @@ MonoBehaviour:
         releaseScenes:
         - fileGUID: 7d6f53f2ddc934e48a9ec81c9b825304
           sceneActive: 1
+        - fileGUID: d7ce1f984638f9f42821b84e4b27b5f3
+          sceneActive: 0
   _platformList:
     platforms:
     - {fileID: -6250143465493552523}
@@ -157,7 +159,7 @@ MonoBehaviour:
   actionType: 1
   actionName: UploadItch
   note: 
-  actionEnabled: 0
+  actionEnabled: 1
   configureEditor: 0
   filter:
     condition: 0
@@ -166,7 +168,7 @@ MonoBehaviour:
   nameOfItchUser: sirius504
   nameOfItchGame: fighting-grid-test
   useGeneratedBuildVersion: 1
-  channelName: $PLATFORM-$ARCHITECTURE
+  channelName: webgl
   showUploadProgress: 1
   itchChannelOverride: 
 --- !u!114 &5558105242632521854
@@ -184,7 +186,7 @@ MonoBehaviour:
   actionType: 1
   actionName: FolderOperation
   note: 
-  actionEnabled: 1
+  actionEnabled: 0
   configureEditor: 0
   filter:
     condition: 0
@@ -207,7 +209,7 @@ MonoBehaviour:
   actionType: 1
   actionName: FileOperation
   note: 
-  actionEnabled: 1
+  actionEnabled: 0
   configureEditor: 0
   filter:
     condition: 0
@@ -231,7 +233,7 @@ MonoBehaviour:
   actionType: 1
   actionName: FolderOperation
   note: 
-  actionEnabled: 1
+  actionEnabled: 0
   configureEditor: 0
   filter:
     condition: 0

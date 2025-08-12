@@ -6,7 +6,17 @@ public abstract class SingletonBehaviour<T> : MonoBehaviour where T : SingletonB
 
     protected new virtual bool DontDestroyOnLoad => false;
 
-    public static T Instance => instance ??= CreateSingletonInstance();
+    public static T Instance
+    {
+        get
+        {
+            if (instance == null)
+            {
+                instance = CreateSingletonInstance();
+            }
+            return instance;
+        }
+    }
 
     protected virtual void Awake()
     {
