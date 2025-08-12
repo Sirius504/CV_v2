@@ -26,8 +26,6 @@ public abstract class SingletonBehaviour<T> : MonoBehaviour where T : SingletonB
         {
             GameObject.DontDestroyOnLoad(instance);
         }
-
-        Debug.Log($"Singleton Awake: {gameObject.name} - {GetType()} - {GetInstanceID()}");
     }
 
 #if UNITY_EDITOR

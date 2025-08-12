@@ -7,7 +7,6 @@ public abstract class MonoEntity : MonoBehaviour, IDestroyable
 
     protected virtual void Awake()
     {
-        Debug.Log($"Entity Awake: {gameObject.name} - {GetType()} - {GetInstanceID()}");
         Game.Instance.NotifyCreation(this);
     }
 

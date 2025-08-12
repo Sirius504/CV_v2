@@ -13,7 +13,6 @@ public class LevelGrid : MonoBehaviour
 
     public Vector2Int WorldToCell(Vector3 position)
     {
-        Debug.LogWarning($"Unity Grid Instance ID: {_grid.GetInstanceID()}");
         var cellSpace = (Vector2Int)_grid.WorldToCell(position);
         cellSpace.Clamp(Vector2Int.zero, Size);
         return cellSpace;

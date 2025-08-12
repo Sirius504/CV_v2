@@ -25,7 +25,6 @@ public class Game : SingletonBehaviour<Game>
 
     public void NotifyCreation(MonoBehaviour entity)
     {
-        Debug.Log($"Game Instance: {Instance.GetInstanceID()}");
         _creationQueue.Add((_generation, entity));
         if (_firstResolvePassed) ResolveAll();
     }
