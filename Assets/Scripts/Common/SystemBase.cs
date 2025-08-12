@@ -2,8 +2,8 @@
 using System.Linq;
 using UnityEngine;
 
-public abstract class SystemBase<TSystem, TEntity> : SingletonBehaviour<TSystem>, ISystem
-    where TSystem : SingletonBehaviour<TSystem>, ISystem
+public abstract class SystemBase<TSystem, TEntity> : MonoBehaviour, ISystem
+    where TSystem : ISystem
     where TEntity : class
 {
     public virtual SystemsStartOrder ResolutionOrder => SystemsStartOrder.Default;
@@ -15,9 +15,8 @@ public abstract class SystemBase<TSystem, TEntity> : SingletonBehaviour<TSystem>
         RegisterMany(validEntities);
     }
 
-    protected override void Awake()
+    protected virtual void Awake()
     {
-        Debug.Log($"System Awake: {gameObject.name} - {GetType()} - {GetInstanceID()}");
         Game.Instance.NotifyCreation(this);
     }
 
