@@ -17,6 +17,7 @@ public abstract class SystemBase<TSystem, TEntity> : SingletonBehaviour<TSystem>
 
     protected override void Awake()
     {
+        Debug.Log($"System Awake: {gameObject.name} - {GetType()} - {GetInstanceID()}");
         Game.Instance.NotifyCreation(this);
     }
 
