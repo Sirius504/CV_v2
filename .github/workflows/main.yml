@@ -1,4 +1,4 @@
-name: Actions 😎
+name: Build and Upload to Itch 😎
 
 on: workflow_dispatch
 
