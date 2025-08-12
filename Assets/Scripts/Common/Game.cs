@@ -11,6 +11,7 @@ public class Game : SingletonBehaviour<Game>
     private int _generation = 0;
     private bool _firstResolvePassed = false;
 
+
     private void Start()
     {
         ResolveAll();
@@ -24,6 +25,7 @@ public class Game : SingletonBehaviour<Game>
 
     public void NotifyCreation(MonoBehaviour entity)
     {
+        Debug.Log($"Game Instance: {Instance.GetInstanceID()}");
         _creationQueue.Add((_generation, entity));
         if (_firstResolvePassed) ResolveAll();
     }

@@ -8,7 +8,4 @@ EditorBuildSettings:
   - enabled: 1
     path: Assets/Scenes/Grid.unity
     guid: 7d6f53f2ddc934e48a9ec81c9b825304
-  - enabled: 1
-    path: Assets/Scenes/GridTest.unity
-    guid: d7ce1f984638f9f42821b84e4b27b5f3
   m_configObjects: {}
