@@ -42,7 +42,7 @@ public abstract class SingletonBehaviour<T> : MonoBehaviour where T : SingletonB
 
     private static T CreateSingletonInstance()
     {
-        var existingObject = FindObjectOfType<T>();
+        var existingObject = FindFirstObjectByType<T>();
         if (existingObject != null)
             return existingObject;
         var gameObject = new GameObject(typeof(T).Name);
