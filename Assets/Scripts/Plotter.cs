@@ -62,7 +62,7 @@ public class Plotter : MonoEntity, IInitializable, IUpdatable
         return null;
     }
 
-    private void SelectNewTarget()
+    private void PlotToNewTarget()
     {
         if (_target != null)
         {
@@ -71,22 +71,18 @@ public class Plotter : MonoEntity, IInitializable, IUpdatable
         }
 
         _target = FindTarget();
-        if (_target == null) return;
-        _target.OnDestroyEvent += OnTargetDestroy;
-        RefreshPath();
-    }
-
-    private void RefreshPath()
-    {
         if (_target == null)
         {
             _currentPath = new();
             return;
         }
+        
+        _target.OnDestroyEvent += OnTargetDestroy;
         var ourPosition = _level.GetEntityPosition(_owner);
         var targetPosition = _level.GetEntityPosition(_target);
-        _currentPath = _astar.FindPath(ourPosition, targetPosition, cellPosition => _level.GetCell(cellPosition).IsEmpty());      
+        _currentPath = _astar.FindPath(ourPosition, targetPosition, cellPosition => _level.GetCell(cellPosition).IsEmpty());
     }
+
 
     private bool ValidPath(List<Vector2Int> currentPath, ICellHabitant _target)
     {
@@ -107,14 +103,13 @@ public class Plotter : MonoEntity, IInitializable, IUpdatable
 
     private void OnTargetDestroy(IDestroyable target)
     {
-        SelectNewTarget();    
+        PlotToNewTarget();    
     }
 
     public void UpdateManual()
     {
         if (ValidPath(_currentPath, _target)) return;
-        SelectNewTarget();
-        RefreshPath();
+        PlotToNewTarget();
     }
 
     protected override void OnDestroy()
