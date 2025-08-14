@@ -1,11 +1,22 @@
+using UnityEngine;
 using VContainer;
 using VContainer.Unity;
 
 public class EntityScope : LifetimeScope
-{   
+{
+    [SerializeField] private Plotter plotter;
+    [SerializeField] private Enemy enemy;
 
     protected override void Configure(IContainerBuilder builder)
     {
-        base.Configure(builder);
+        builder.Register<Attack>(Lifetime.Transient);
+        builder.Register<Move>(Lifetime.Transient);
+        builder.Register<Sequence>(Lifetime.Transient);
+        builder.Register<Selector>(Lifetime.Transient);
+        builder.Register<Blocking>(Lifetime.Transient);
+
+        builder.RegisterComponent(enemy.GetComponent<IAttackable>()).AsSelf();
+        builder.RegisterComponent(plotter).AsSelf();
+        builder.RegisterComponent(enemy).AsImplementedInterfaces();
     }
 }

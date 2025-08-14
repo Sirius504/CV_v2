@@ -1,5 +1,4 @@
 using ActionBehaviour;
-using Assets.Scripts.BehaviorTree;
 using UnityEngine;
 using VContainer;
 
@@ -12,9 +11,15 @@ public class Enemy : MonoEntity, ICellHabitant,
 {
     [SerializeField] private int _damage;
 
+    [SerializeField] private BaseBehaviourTreeSO _behaviourTreeAsset;
+
     [Inject]
     private Level _level;
 
+    [Inject]
+    private IObjectResolver _container;
+
+    [Inject]
     private Plotter _plotter;
     private Node _behaviourTree;
 
@@ -29,12 +34,7 @@ public class Enemy : MonoEntity, ICellHabitant,
 
     public void Init()
     {
-        _plotter = GetComponent<Plotter>();
-        _behaviourTree = new Selector("Galcia");
-        if (GetComponent<BlockingAttackable>() != null)
-            _behaviourTree.AddChild(new Blocking("blocking", this));
-        _behaviourTree.AddChild(new Attack("attack", _level, _plotter, this));
-        _behaviourTree.AddChild(new Move("move", this, _level, _plotter));
+        _behaviourTree = _behaviourTreeAsset.BuildTree(_container);
     }
 
     public void UpdateManual()

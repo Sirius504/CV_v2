@@ -4,10 +4,6 @@ using UnityEngine;
 
 public class Sequence : Node
 {
-    public Sequence(string name) : base(name)
-    {
-    }
-
     public override bool Process()
     {
         while (currentChild < Children.Count)
@@ -27,10 +23,6 @@ public class Sequence : Node
 
 public class Selector : Node
 {
-    public Selector(string name) : base(name)
-    {
-    }
-
     public override bool Process()
     {
         while (currentChild < Children.Count)
@@ -49,16 +41,9 @@ public class Selector : Node
 
 public abstract class Node { 
 
-    public readonly string Name;
-
     public readonly List<Node> Children = new();
     protected int currentChild;
     protected Dictionary<string, object> State;
-
-    public Node(string name)
-    {
-        Name = name;
-    }
 
     public void AddChild(Node child) => Children.Add(child);
 
