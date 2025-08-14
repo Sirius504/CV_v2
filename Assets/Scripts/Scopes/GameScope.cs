@@ -11,7 +11,6 @@ public class GameScope : LifetimeScope
 
     protected override void Configure(IContainerBuilder builder)
     {
-        base.Configure(builder);
         builder.RegisterComponent(_levelGrid);
         builder.RegisterComponent(_grid);
         builder.RegisterComponent(_level);

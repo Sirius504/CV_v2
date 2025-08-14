@@ -6,7 +6,7 @@ public class Attack : Node
     private readonly Plotter _plotter;
     private readonly IAttacker _owner;
 
-    public Attack(string name, Level level, Plotter plotter, IAttacker owner) : base(name)
+    public Attack(Level level, Plotter plotter, IAttacker owner)
     {
         _level = level;
         _plotter = plotter;
