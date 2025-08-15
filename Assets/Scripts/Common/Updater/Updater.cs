@@ -30,7 +30,8 @@ public class Updater : SystemBase<Updater, IUpdatable>
 
     public void Update()
     {
-        foreach(var updatable in _updatables.OrderBy(u => u.UpdateOrder))
+        var ordered = _updatables.OrderBy(u => u.UpdateOrder).ToList();
+        foreach (var updatable in ordered)
         {
             updatable.UpdateManual();
         }

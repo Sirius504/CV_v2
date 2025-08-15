@@ -15,8 +15,12 @@ public class EntityScope : LifetimeScope
         builder.Register<Sequence>(Lifetime.Transient);
         builder.Register<Selector>(Lifetime.Transient);
         builder.Register<Blocking>(Lifetime.Transient);
+        builder.Register<RangedAttack>(Lifetime.Transient);
 
-        builder.RegisterComponent(enemy.GetComponent<IAttackable>()).AsSelf();
+        var attacker = GetComponent<IAttacker>();
+        var attackable = GetComponent<IAttackable>();
+        builder.RegisterComponent(attacker).AsSelf();
+        builder.RegisterComponent(attackable).AsSelf();
         builder.RegisterComponent(plotter).AsSelf();
         builder.RegisterComponent(enemy).AsImplementedInterfaces();
         builder.RegisterComponent(cellEntity).AsImplementedInterfaces();

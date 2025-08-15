@@ -16,6 +16,8 @@ public class Plotter : CellComponent, IInitializable, IUpdatable
 
     public UpdateOrder UpdateOrder => UpdateOrder.AI;
 
+    public ICellEntity Target => _target;
+
 
     public Vector2Int? Peek()
     {
@@ -104,6 +106,7 @@ public class Plotter : CellComponent, IInitializable, IUpdatable
     {
         if (ValidPath(_currentPath, _target)) return;
         PlotToNewTarget();
+        Debug.Log(_target);
     }
 
     protected override void OnDestroy()

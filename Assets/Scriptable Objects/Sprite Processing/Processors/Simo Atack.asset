@@ -9,10 +9,9 @@ MonoBehaviour:
   m_GameObject: {fileID: 0}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 9cf4d8df1d704d5689f3c69bd70d1cb9, type: 3}
-  m_Name: VContainerSettings
+  m_Script: {fileID: 11500000, guid: a3c33b470ac1c744184725e03083ac34, type: 3}
+  m_Name: Simo Atack
   m_EditorClassIdentifier: 
-  RootLifetimeScope: {fileID: 0}
-  EnableDiagnostics: 1
-  DisableScriptModifier: 0
-  RemoveClonePostfix: 0
+  attackSprites:
+  - {fileID: -1312812876, guid: 41a1582d6a20219408714e7344b200af, type: 3}
+  _duration: 0.1

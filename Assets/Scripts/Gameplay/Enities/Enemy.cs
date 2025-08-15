@@ -6,11 +6,8 @@ public class Enemy : CellComponent,
     ITickable,
     IActionTelegraph,
     IUpdatable,
-    IAttacker,
     IInitializable
 {
-    [SerializeField] private int _damage;
-
     [SerializeField] private BaseBehaviourTreeSO _behaviourTreeAsset;
 
     [Inject]
@@ -26,8 +23,6 @@ public class Enemy : CellComponent,
     public ActionInfo? ActionInfo { get; private set; } = null;
 
     public UpdateOrder UpdateOrder => UpdateOrder.Entity;
-
-    public int Damage => _damage;
 
     public override InitOrder InitOrder => InitOrder.Entity;
 

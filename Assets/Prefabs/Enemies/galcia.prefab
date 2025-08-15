@@ -18,6 +18,7 @@ GameObject:
   - component: {fileID: 2549181122782817208}
   - component: {fileID: 3295978733390985959}
   - component: {fileID: 785715520944902414}
+  - component: {fileID: 5946858410718962961}
   m_Layer: 0
   m_Name: galcia
   m_TagString: Untagged
@@ -58,6 +59,7 @@ MonoBehaviour:
   - {fileID: 1963617460376162128}
   - {fileID: 7947045458872878129}
   - {fileID: 3295978733390985959}
+  - {fileID: 5946858410718962961}
 --- !u!114 &3982374725751084185
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -83,7 +85,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 73a0cd6c5b0c587409531c510a1d94cc, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  _damage: 1
   _behaviourTreeAsset: {fileID: 11400000, guid: c1b12f5349f47624fb5bce1885fec6c9, type: 2}
 --- !u!114 &7947045458872878129
 MonoBehaviour:
@@ -256,6 +257,19 @@ MonoBehaviour:
   plotter: {fileID: 2549181122782817208}
   enemy: {fileID: 1963617460376162128}
   cellEntity: {fileID: 656210971095534322}
+--- !u!114 &5946858410718962961
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 3982374725751084184}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 3807a282904e1144798593ed236d46d5, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  _damage: 1
 --- !u!1 &3982374726042670569
 GameObject:
   m_ObjectHideFlags: 0

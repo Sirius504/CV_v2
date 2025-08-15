@@ -1,7 +1,67 @@
 fileFormatVersion: 2
-guid: 49666e1a8bd4a3e4faa2bc07f91f8ba8
+guid: 41a1582d6a20219408714e7344b200af
 TextureImporter:
-  internalIDToNameTable: []
+  internalIDToNameTable:
+  - first:
+      213: 4591702080930144354
+    second: simo_0
+  - first:
+      213: 3273522472137244431
+    second: simo_1
+  - first:
+      213: 2954815084036705917
+    second: simo_2
+  - first:
+      213: 3820145629584836292
+    second: simo_3
+  - first:
+      213: 5218437428886130385
+    second: simo_4
+  - first:
+      213: 4626692147521348786
+    second: simo_5
+  - first:
+      213: -9071347116185059775
+    second: simo_6
+  - first:
+      213: -6984161742847921495
+    second: simo_7
+  - first:
+      213: -4940279298524854881
+    second: simo_8
+  - first:
+      213: 6316411566980078813
+    second: simo_9
+  - first:
+      213: 2378762259000243767
+    second: simo_10
+  - first:
+      213: -6296920161947452055
+    second: simo_11
+  - first:
+      213: -4982450899359932460
+    second: simo_12
+  - first:
+      213: -2994536977271602965
+    second: simo_13
+  - first:
+      213: 8001995837830933446
+    second: simo_14
+  - first:
+      213: 6745102669532982608
+    second: simo_15
+  - first:
+      213: 3803650081582138623
+    second: simo_16
+  - first:
+      213: 1676708999590575162
+    second: simo_17
+  - first:
+      213: -7722482753963562721
+    second: simo_18
+  - first:
+      213: 8270185846156597893
+    second: simo_19
   externalObjects: {}
   serializedVersion: 13
   mipmaps:
@@ -94,32 +154,6 @@ TextureImporter:
     androidETC2FallbackOverride: 0
     forceMaximumCompressionQuality_BC6H_BC7: 0
   - serializedVersion: 4
-    buildTarget: Server
-    maxTextureSize: 2048
-    resizeAlgorithm: 0
-    textureFormat: -1
-    textureCompression: 1
-    compressionQuality: 50
-    crunchedCompression: 0
-    allowsAlphaSplitting: 0
-    overridden: 0
-    ignorePlatformSupport: 0
-    androidETC2FallbackOverride: 0
-    forceMaximumCompressionQuality_BC6H_BC7: 0
-  - serializedVersion: 4
-    buildTarget: Android
-    maxTextureSize: 2048
-    resizeAlgorithm: 0
-    textureFormat: -1
-    textureCompression: 1
-    compressionQuality: 50
-    crunchedCompression: 0
-    allowsAlphaSplitting: 0
-    overridden: 0
-    ignorePlatformSupport: 0
-    androidETC2FallbackOverride: 0
-    forceMaximumCompressionQuality_BC6H_BC7: 0
-  - serializedVersion: 4
     buildTarget: WebGL
     maxTextureSize: 2048
     resizeAlgorithm: 0
@@ -136,7 +170,7 @@ TextureImporter:
     serializedVersion: 2
     sprites:
     - serializedVersion: 2
-      name: galcia_0
+      name: simo_0
       rect:
         serializedVersion: 2
         x: 12
@@ -151,14 +185,14 @@ TextureImporter:
       physicsShape: []
       tessellationDetail: 0
       bones: []
-      spriteID: ecd25aa74bd7da64bad2845962d185c3
-      internalID: -1742962149
+      spriteID: 95cbde50813933a478311afb230a96c5
+      internalID: -1721988780
       vertices: []
       indices: 
       edges: []
       weights: []
     - serializedVersion: 2
-      name: galcia_1
+      name: simo_1
       rect:
         serializedVersion: 2
         x: 72
@@ -173,278 +207,278 @@ TextureImporter:
       physicsShape: []
       tessellationDetail: 0
       bones: []
-      spriteID: e76660b43d7b14d4a9aa55961f4a96fe
-      internalID: 728791646
+      spriteID: e7d47abff4371a443bddbb629dc9090d
+      internalID: 181936439
       vertices: []
       indices: 
       edges: []
       weights: []
     - serializedVersion: 2
-      name: galcia_2
+      name: simo_2
       rect:
         serializedVersion: 2
         x: 132
         y: 180
         width: 39
         height: 72
-      alignment: 0
-      pivot: {x: 0.5, y: 0.5}
+      alignment: 7
+      pivot: {x: 0.5, y: 0}
       border: {x: 0, y: 0, z: 0, w: 0}
       customData: 
       outline: []
       physicsShape: []
       tessellationDetail: 0
       bones: []
-      spriteID: e229cd2b51bb8d747b6645ff7e8c2db9
-      internalID: 521271287
+      spriteID: eeee33af1581ff946badf05938308250
+      internalID: 2033101002
       vertices: []
       indices: 
       edges: []
       weights: []
     - serializedVersion: 2
-      name: galcia_3
+      name: simo_3
       rect:
         serializedVersion: 2
         x: 204
         y: 180
         width: 40
         height: 62
-      alignment: 0
-      pivot: {x: 0.5, y: 0.5}
+      alignment: 7
+      pivot: {x: 0.5, y: 0}
       border: {x: 0, y: 0, z: 0, w: 0}
       customData: 
       outline: []
       physicsShape: []
       tessellationDetail: 0
       bones: []
-      spriteID: f4a978f14cd54b64aabe7b631c90275e
-      internalID: 865057724
+      spriteID: 1adfbf97c4f1c0e4babbbce410481a4a
+      internalID: 840914575
       vertices: []
       indices: 
       edges: []
       weights: []
     - serializedVersion: 2
-      name: galcia_4
+      name: simo_4
       rect:
         serializedVersion: 2
         x: 264
         y: 180
         width: 43
         height: 62
-      alignment: 0
-      pivot: {x: 0.5, y: 0.5}
+      alignment: 7
+      pivot: {x: 0.5, y: 0}
       border: {x: 0, y: 0, z: 0, w: 0}
       customData: 
       outline: []
       physicsShape: []
       tessellationDetail: 0
       bones: []
-      spriteID: f9b0f342a720cea4883b6b3972da124a
-      internalID: 1980419230
+      spriteID: 3d328093035ffab438e8060c7b9ae6af
+      internalID: 671746767
       vertices: []
       indices: 
       edges: []
       weights: []
     - serializedVersion: 2
-      name: galcia_5
+      name: simo_5
       rect:
         serializedVersion: 2
         x: 386
         y: 146
         width: 56
         height: 104
-      alignment: 0
-      pivot: {x: 0.5, y: 0.5}
+      alignment: 7
+      pivot: {x: 0.5, y: 0}
       border: {x: 0, y: 0, z: 0, w: 0}
       customData: 
       outline: []
       physicsShape: []
       tessellationDetail: 0
       bones: []
-      spriteID: a65965284ade0b1439b70f48427eec71
-      internalID: -141859747
+      spriteID: 7f3ddd6a6af38394481e0dc75cd0da40
+      internalID: 1339363372
       vertices: []
       indices: 
       edges: []
       weights: []
     - serializedVersion: 2
-      name: galcia_6
+      name: simo_6
       rect:
         serializedVersion: 2
         x: 12
         y: 96
         width: 46
         height: 63
-      alignment: 0
-      pivot: {x: 0.5, y: 0.5}
+      alignment: 7
+      pivot: {x: 0.5, y: 0}
       border: {x: 0, y: 0, z: 0, w: 0}
       customData: 
       outline: []
       physicsShape: []
       tessellationDetail: 0
       bones: []
-      spriteID: 93a5efc4c1684c74a8ca9b2268ddcc16
-      internalID: 295467621
+      spriteID: 616d6f13d22ca864d94244ae55efb07e
+      internalID: 228720983
       vertices: []
       indices: 
       edges: []
       weights: []
     - serializedVersion: 2
-      name: galcia_7
+      name: simo_7
       rect:
         serializedVersion: 2
         x: 72
         y: 96
         width: 55
         height: 63
-      alignment: 0
-      pivot: {x: 0.5, y: 0.5}
+      alignment: 7
+      pivot: {x: 0.5, y: 0}
       border: {x: 0, y: 0, z: 0, w: 0}
       customData: 
       outline: []
       physicsShape: []
       tessellationDetail: 0
       bones: []
-      spriteID: 067ddda3e6d849c468c8b7778a0dd9fc
-      internalID: -322969000
+      spriteID: 75716cc4ba1a0fc42b9d5197e0090f1f
+      internalID: -443463356
       vertices: []
       indices: 
       edges: []
       weights: []
     - serializedVersion: 2
-      name: galcia_8
+      name: simo_8
       rect:
         serializedVersion: 2
         x: 144
         y: 96
         width: 79
         height: 21
-      alignment: 0
-      pivot: {x: 0.5, y: 0.5}
+      alignment: 7
+      pivot: {x: 0.5, y: 0}
       border: {x: 0, y: 0, z: 0, w: 0}
       customData: 
       outline: []
       physicsShape: []
       tessellationDetail: 0
       bones: []
-      spriteID: a73be66383a212248bbdb3a1d4b91179
-      internalID: 1088992447
+      spriteID: 70294a6134090ea459a3bf2da574a98d
+      internalID: -588250733
       vertices: []
       indices: 
       edges: []
       weights: []
     - serializedVersion: 2
-      name: galcia_9
+      name: simo_9
       rect:
         serializedVersion: 2
         x: 240
         y: 96
         width: 70
         height: 31
-      alignment: 0
-      pivot: {x: 0.5, y: 0.5}
+      alignment: 7
+      pivot: {x: 0.5, y: 0}
       border: {x: 0, y: 0, z: 0, w: 0}
       customData: 
       outline: []
       physicsShape: []
       tessellationDetail: 0
       bones: []
-      spriteID: 0db3ff21bc885644d9285e1b21716a20
-      internalID: -1555816824
+      spriteID: 8c52310dbf1f08943b122c7cd7272a26
+      internalID: 1877697225
       vertices: []
       indices: 
       edges: []
       weights: []
     - serializedVersion: 2
-      name: galcia_10
+      name: simo_10
       rect:
         serializedVersion: 2
         x: 324
         y: 96
         width: 40
         height: 43
-      alignment: 0
-      pivot: {x: 0.5, y: 0.5}
+      alignment: 7
+      pivot: {x: 0.5, y: 0}
       border: {x: 0, y: 0, z: 0, w: 0}
       customData: 
       outline: []
       physicsShape: []
       tessellationDetail: 0
       bones: []
-      spriteID: b99ea5a50f9301646a4d68c0a7220644
-      internalID: 2050873083
+      spriteID: c19f4aaccbfd121489b5586b2bb466d8
+      internalID: -321742374
       vertices: []
       indices: 
       edges: []
       weights: []
     - serializedVersion: 2
-      name: galcia_11
+      name: simo_11
       rect:
         serializedVersion: 2
         x: 12
         y: 12
         width: 40
         height: 65
-      alignment: 0
-      pivot: {x: 0.5, y: 0.5}
+      alignment: 7
+      pivot: {x: 0.5, y: 0}
       border: {x: 0, y: 0, z: 0, w: 0}
       customData: 
       outline: []
       physicsShape: []
       tessellationDetail: 0
       bones: []
-      spriteID: dbe73ed986edc6c4484e7ecf3e266d4f
-      internalID: 1082281990
+      spriteID: 2293c71e9bf1a5e468d52f25996e8346
+      internalID: -1312812876
       vertices: []
       indices: 
       edges: []
       weights: []
     - serializedVersion: 2
-      name: galcia_12
+      name: simo_12
       rect:
         serializedVersion: 2
         x: 72
         y: 12
         width: 32
         height: 66
-      alignment: 0
-      pivot: {x: 0.5, y: 0.5}
+      alignment: 7
+      pivot: {x: 0.5, y: 0}
       border: {x: 0, y: 0, z: 0, w: 0}
       customData: 
       outline: []
       physicsShape: []
       tessellationDetail: 0
       bones: []
-      spriteID: 0d589d12e0ae89c49803228305ea250b
-      internalID: -1905319533
+      spriteID: 3d54ce95c85c6e34ba6ec2d65f28dd19
+      internalID: 1862286513
       vertices: []
       indices: 
       edges: []
       weights: []
     - serializedVersion: 2
-      name: galcia_13
+      name: simo_13
       rect:
         serializedVersion: 2
         x: 120
         y: 12
         width: 32
         height: 67
-      alignment: 0
-      pivot: {x: 0.5, y: 0.5}
+      alignment: 7
+      pivot: {x: 0.5, y: 0}
       border: {x: 0, y: 0, z: 0, w: 0}
       customData: 
       outline: []
       physicsShape: []
       tessellationDetail: 0
       bones: []
-      spriteID: 6520ee40e915a4b4b8614137d9f9246b
-      internalID: 1117353682
+      spriteID: 6a990cc85bc6e3b4f9913ce030594d3b
+      internalID: 2140203267
       vertices: []
       indices: 
       edges: []
       weights: []
     - serializedVersion: 2
-      name: galcia_14
+      name: simo_14
       rect:
         serializedVersion: 2
         x: 192
@@ -459,118 +493,118 @@ TextureImporter:
       physicsShape: []
       tessellationDetail: 0
       bones: []
-      spriteID: d30d322fadc39cc4392a2018213d8a65
-      internalID: 2137168374
+      spriteID: 928860c06d7a54644b95bccf46ff9352
+      internalID: -742532653
       vertices: []
       indices: 
       edges: []
       weights: []
     - serializedVersion: 2
-      name: galcia_15
+      name: simo_15
       rect:
         serializedVersion: 2
         x: 300
         y: 12
         width: 8
         height: 8
-      alignment: 0
-      pivot: {x: 0.5, y: 0.5}
+      alignment: 7
+      pivot: {x: 0.5, y: 0}
       border: {x: 0, y: 0, z: 0, w: 0}
       customData: 
       outline: []
       physicsShape: []
       tessellationDetail: 0
       bones: []
-      spriteID: 700b08cd1fb9bc348b1baf24c9a865bc
-      internalID: -421360818
+      spriteID: 67e376e813b6ff3488e950b6d4216148
+      internalID: -737061950
       vertices: []
       indices: 
       edges: []
       weights: []
     - serializedVersion: 2
-      name: galcia_16
+      name: simo_16
       rect:
         serializedVersion: 2
         x: 310
         y: 12
         width: 4
         height: 8
-      alignment: 0
-      pivot: {x: 0.5, y: 0.5}
+      alignment: 7
+      pivot: {x: 0.5, y: 0}
       border: {x: 0, y: 0, z: 0, w: 0}
       customData: 
       outline: []
       physicsShape: []
       tessellationDetail: 0
       bones: []
-      spriteID: 422b7d15a5c48ee43bf7e3e4338a461d
-      internalID: -733960078
+      spriteID: 3df2d6dc2a6f93241abb000f42040ad6
+      internalID: -218244908
       vertices: []
       indices: 
       edges: []
       weights: []
     - serializedVersion: 2
-      name: galcia_17
+      name: simo_17
       rect:
         serializedVersion: 2
         x: 316
         y: 12
         width: 32
         height: 8
-      alignment: 0
-      pivot: {x: 0.5, y: 0.5}
+      alignment: 7
+      pivot: {x: 0.5, y: 0}
       border: {x: 0, y: 0, z: 0, w: 0}
       customData: 
       outline: []
       physicsShape: []
       tessellationDetail: 0
       bones: []
-      spriteID: 6aa0ffd96956646489701ad02c0d4044
-      internalID: 1036600770
+      spriteID: 43c92665355e79546b8d67a2b645d621
+      internalID: 1752958322
       vertices: []
       indices: 
       edges: []
       weights: []
     - serializedVersion: 2
-      name: galcia_18
+      name: simo_18
       rect:
         serializedVersion: 2
         x: 356
         y: 12
         width: 16
         height: 8
-      alignment: 0
-      pivot: {x: 0.5, y: 0.5}
+      alignment: 7
+      pivot: {x: 0.5, y: 0}
       border: {x: 0, y: 0, z: 0, w: 0}
       customData: 
       outline: []
       physicsShape: []
       tessellationDetail: 0
       bones: []
-      spriteID: c8843206b272ec54d9d01c95ff4c029c
-      internalID: 198903073
+      spriteID: 6a42b02b04cf30948910661983ac2253
+      internalID: 1351234126
       vertices: []
       indices: 
       edges: []
       weights: []
     - serializedVersion: 2
-      name: galcia_19
+      name: simo_19
       rect:
         serializedVersion: 2
         x: 380
         y: 12
         width: 64
         height: 8
-      alignment: 0
-      pivot: {x: 0.5, y: 0.5}
+      alignment: 7
+      pivot: {x: 0.5, y: 0}
       border: {x: 0, y: 0, z: 0, w: 0}
       customData: 
       outline: []
       physicsShape: []
       tessellationDetail: 0
       bones: []
-      spriteID: 53b82ca5da7fdd346ba531e75ac93ffd
-      internalID: -581713865
+      spriteID: cf7324f0f98b4494caff1753bd96f04f
+      internalID: 973775364
       vertices: []
       indices: 
       edges: []
@@ -579,7 +613,7 @@ TextureImporter:
     customData: 
     physicsShape: []
     bones: []
-    spriteID: 5e97eb03825dee720800000000000000
+    spriteID: cd3edf765712c334b86f90219a3b6324
     internalID: 0
     vertices: []
     indices: 
@@ -589,26 +623,26 @@ TextureImporter:
     spriteCustomMetadata:
       entries: []
     nameFileIdTable:
-      galcia_0: -1742962149
-      galcia_1: 728791646
-      galcia_10: 2050873083
-      galcia_11: 1082281990
-      galcia_12: -1905319533
-      galcia_13: 1117353682
-      galcia_14: 2137168374
-      galcia_15: -421360818
-      galcia_16: -733960078
-      galcia_17: 1036600770
-      galcia_18: 198903073
-      galcia_19: -581713865
-      galcia_2: 521271287
-      galcia_3: 865057724
-      galcia_4: 1980419230
-      galcia_5: -141859747
-      galcia_6: 295467621
-      galcia_7: -322969000
-      galcia_8: 1088992447
-      galcia_9: -1555816824
+      simo_0: -1721988780
+      simo_1: 181936439
+      simo_10: -321742374
+      simo_11: -1312812876
+      simo_12: 1862286513
+      simo_13: 2140203267
+      simo_14: -742532653
+      simo_15: -737061950
+      simo_16: -218244908
+      simo_17: 1752958322
+      simo_18: 1351234126
+      simo_19: 973775364
+      simo_2: 2033101002
+      simo_3: 840914575
+      simo_4: 671746767
+      simo_5: 1339363372
+      simo_6: 228720983
+      simo_7: -443463356
+      simo_8: -588250733
+      simo_9: 1877697225
   mipmapLimitGroupName: 
   pSDRemoveMatte: 0
   userData: 

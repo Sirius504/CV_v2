@@ -609,9 +609,10 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   _spawnPeriod: 3
   _enemies:
-  - {fileID: 763749987193519939, guid: 3f5045f70cf77864a8663ecb5e0ab943, type: 3}
+  - {fileID: 8237652766984754839, guid: 9472179c50c6f3a47b1a98164632e24d, type: 3}
   - {fileID: 1963617460376162128, guid: 5b67d2309837f7a44b4b29f0583c883f, type: 3}
   - {fileID: 1963617460376162128, guid: 856c12db3d5457a4381c35d545ca8461, type: 3}
+  - {fileID: 763749987193519939, guid: 3f5045f70cf77864a8663ecb5e0ab943, type: 3}
   _enabled: 1
   _roundTimer: {fileID: 958982343}
 --- !u!114 &144303779
@@ -2004,6 +2005,51 @@ CanvasRenderer:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1400227455}
   m_CullTransparentMesh: 1
+--- !u!1 &1401307934
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 1401307936}
+  - component: {fileID: 1401307935}
+  m_Layer: 0
+  m_Name: LasersDrawer
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!114 &1401307935
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1401307934}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 7477743a55e87ff499a2296278a78057, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  _laserPrefab: {fileID: 3433803870991859706, guid: 7305c9e3d0f56c94bae84379a5cbd389, type: 3}
+--- !u!4 &1401307936
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1401307934}
+  serializedVersion: 2
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: 0, y: 0, z: 0}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_ConstrainProportionsScale: 0
+  m_Children: []
+  m_Father: {fileID: 0}
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1 &1471233431
 GameObject:
   m_ObjectHideFlags: 0
@@ -2484,6 +2530,7 @@ MonoBehaviour:
   - {fileID: 144303774}
   - {fileID: 769000222}
   - {fileID: 1277144059}
+  - {fileID: 1401307934}
   _levelGrid: {fileID: 144303779}
   _level: {fileID: 144303777}
   _grid: {fileID: 144303775}
@@ -2518,3 +2565,4 @@ SceneRoots:
   - {fileID: 1471233432}
   - {fileID: 353696788}
   - {fileID: 1499783808}
+  - {fileID: 1401307936}
