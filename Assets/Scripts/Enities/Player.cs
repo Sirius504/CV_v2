@@ -1,9 +1,10 @@
-using ActionBehaviour;
-using System;
 using UnityEngine;
 using VContainer;
 
-public class Player : MonoEntity, ICellHabitant, IEnemyTarget, IUpdatable, IAttacker
+public class Player : CellComponent,
+    IEnemyTarget,
+    IUpdatable,
+    IAttacker
 {
     [Inject]
     private Level _level;
@@ -13,6 +14,7 @@ public class Player : MonoEntity, ICellHabitant, IEnemyTarget, IUpdatable, IAtta
     public int Damage => _damage;
 
     public UpdateOrder UpdateOrder => UpdateOrder.Player;
+
 
     private Vector2Int ReadInput()
     {
@@ -33,7 +35,7 @@ public class Player : MonoEntity, ICellHabitant, IEnemyTarget, IUpdatable, IAtta
             return;
         }
 
-        var currentPosition = _level.GetEntityPosition(this);
+        var currentPosition = _level.GetEntityPosition(Entity);
         var targetPosition = currentPosition + input;
         if (!_levelGrid.InBounds(targetPosition))
         {
@@ -43,11 +45,11 @@ public class Player : MonoEntity, ICellHabitant, IEnemyTarget, IUpdatable, IAtta
         var targetCell = _level.GetCell(targetPosition);
         if (targetCell.IsEmpty())
         {
-            _level.Move(this, targetPosition);
-            var @event = new MovementEvent(this, currentPosition, targetPosition);
+            _level.Move(Entity, targetPosition);
+            var @event = new MovementEvent(Entity, currentPosition, targetPosition);
             EventBus<MovementEvent>.Raise(@event);
         }
-        else if (targetCell.TryGet(out IAttackable target) && !targetCell.Has<IEnemyTarget>())
+        else if (targetCell.TryGetFirst(out IAttackable target) && !targetCell.Has<IEnemyTarget>(out _))
         {
             target.ReceiveAttack(this);
             var @event = new AttackEvent(this, target);

@@ -8,10 +8,8 @@ public enum AnimationType
     TickPercent
 }
 
-[RequireComponent(typeof(ICellHabitant))]
-public class Movement : MonoEntity, IUpdatable, IInitializable
+public class Movement : CellComponent, IUpdatable
 {
-    private ICellHabitant _entity;
     [Inject]
     private Metronome _metronome;
     [Inject]
@@ -32,12 +30,6 @@ public class Movement : MonoEntity, IUpdatable, IInitializable
     public event Action<float, float> OnMovementStart;
     public UpdateOrder UpdateOrder => UpdateOrder.Animation;
 
-    public InitOrder InitOrder => InitOrder.Entity;
-
-    public void Init()
-    {
-        _entity = GetComponent<ICellHabitant>();
-    }
 
     public void UpdateManual()
     {

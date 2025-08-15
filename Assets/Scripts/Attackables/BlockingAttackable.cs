@@ -15,7 +15,7 @@ public class BlockingAttackable : SimpleAttackable, ITickable
         }
 
         base.ReceiveAttack(attacker);
-        var @event = new BlockingEvent(Parent, _level.GetEntityPosition(attacker));
+        var @event = new BlockingEvent(Entity, _level.GetEntityPosition(attacker.Entity));
         EventBus<BlockingEvent>.Raise(@event);
         isBlocking = true;
     }

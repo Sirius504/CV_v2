@@ -1,4 +1,4 @@
-﻿public interface IAttacker : ICellHabitant
+﻿public interface IAttacker : ICellComponent
 {
     int Damage { get; }
 }

@@ -6,6 +6,7 @@ public class EntityScope : LifetimeScope
 {
     [SerializeField] private Plotter plotter;
     [SerializeField] private Enemy enemy;
+    [SerializeField] private CellEntity cellEntity;
 
     protected override void Configure(IContainerBuilder builder)
     {
@@ -18,5 +19,6 @@ public class EntityScope : LifetimeScope
         builder.RegisterComponent(enemy.GetComponent<IAttackable>()).AsSelf();
         builder.RegisterComponent(plotter).AsSelf();
         builder.RegisterComponent(enemy).AsImplementedInterfaces();
+        builder.RegisterComponent(cellEntity).AsImplementedInterfaces();
     }
 }

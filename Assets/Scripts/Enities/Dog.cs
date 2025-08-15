@@ -1,5 +1,4 @@
-using System;
-
-public class Dog : MonoEntity, ICellHabitant, IEnemyTarget
+public class Dog : CellComponent,    
+    IEnemyTarget
 {
 }

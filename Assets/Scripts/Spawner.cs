@@ -4,7 +4,7 @@ using UnityEngine;
 using VContainer;
 using Random = UnityEngine.Random;
 
-public class Spawner : MonoEntity, IInitializable, ITickable
+public class Spawner : MonoComponent, IInitializable, ITickable
 {
     [Inject]
     private Level _level;

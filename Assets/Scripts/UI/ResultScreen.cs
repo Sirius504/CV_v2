@@ -1,7 +1,7 @@
 using TMPro;
 using UnityEngine;
 
-public class ResultScreen : MonoEntity, IInitializable
+public class ResultScreen : MonoComponent, IInitializable
 {
     [SerializeField] private WinLoseConditions _winLose;
     [SerializeField] private TextMeshProUGUI _resultText;

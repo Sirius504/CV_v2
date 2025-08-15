@@ -2,7 +2,7 @@ using ActionBehaviour;
 using UnityEngine;
 using VContainer;
 
-public class Enemy : MonoEntity, ICellHabitant,
+public class Enemy : CellComponent,
     ITickable,
     IActionTelegraph,
     IUpdatable,
@@ -29,11 +29,12 @@ public class Enemy : MonoEntity, ICellHabitant,
 
     public int Damage => _damage;
 
-    public InitOrder InitOrder => InitOrder.Entity;
+    public override InitOrder InitOrder => InitOrder.Entity;
 
 
-    public void Init()
+    public override void Init()
     {
+        base.Init();
         _behaviourTree = _behaviourTreeAsset.BuildTree(_container);
     }
 
@@ -48,10 +49,10 @@ public class Enemy : MonoEntity, ICellHabitant,
         }
 
         var targetPosition = targetPositionNullable.Value;
-        var actionType = _level.GetCell(targetPosition).Has<IEnemyTarget>()
+        var actionType = _level.GetCell(targetPosition).Has<IEnemyTarget>(out _)
             ? Action.Attack
             : Action.Movement;
-        ActionInfo = new ActionInfo(targetPosition, _level.GetEntityPosition(this), actionType);
+        ActionInfo = new ActionInfo(targetPosition, _level.GetEntityPosition(Entity), actionType);
     }
 
     public void OnTick(uint tick)

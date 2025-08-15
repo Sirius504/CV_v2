@@ -1,18 +1,16 @@
 using UnityEngine;
 
-[RequireComponent(typeof(ICellHabitant))]
+[RequireComponent(typeof(ICellEntity))]
 public class Health : MonoBehaviour
 {
     [SerializeField] private int _maxHealth;
     public int Amount { get; private set; }
     public int MaxHealth => _maxHealth;
 
-    private ICellHabitant _entity;
 
     private void Start()
     {
         Amount = _maxHealth;
-        _entity = GetComponent<ICellHabitant>();
     }
 
     public void TakeDamage(int damage)
@@ -20,6 +18,7 @@ public class Health : MonoBehaviour
         Amount = Mathf.Max(0, Amount - damage);
         if (Amount == 0)
         {
+            // TODO: gain more control over object destruction
             Destroy(gameObject);
         }
     }

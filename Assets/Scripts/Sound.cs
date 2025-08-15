@@ -22,7 +22,7 @@ public class Sound : MonoBehaviour
         _basePitch = _source.pitch;
         _baseVolume = _source.volume;
 
-        var entity = GetComponentInParent<ICellHabitant>();
+        var entity = GetComponentInParent<ICellEntity>();
         bool movementPredicate(MovementEvent @event) => @event.entity == entity;
         movementBinding = new EventBinding<MovementEvent>(OnMovement, movementPredicate);
         EventBus<MovementEvent>.Register(movementBinding);

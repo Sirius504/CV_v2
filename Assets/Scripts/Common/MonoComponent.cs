@@ -1,7 +1,7 @@
 ﻿using System;
 using UnityEngine;
 
-public abstract class MonoEntity : MonoBehaviour, IDestroyable
+public abstract class MonoComponent : MonoBehaviour, IDestroyable
 {
     public event Action<IDestroyable> OnDestroyEvent;
 

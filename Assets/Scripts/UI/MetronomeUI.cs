@@ -2,7 +2,7 @@ using UnityEngine;
 using UnityEngine.UI;
 using VContainer;
 
-public class MetronomeUI : MonoEntity, IUpdatable
+public class MetronomeUI : MonoComponent, IUpdatable
 {
     [SerializeField] private Image _image;
 

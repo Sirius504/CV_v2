@@ -4,20 +4,18 @@ using System.Linq;
 using VContainer;
 
 // responsible for target selection and path recalculation
-[RequireComponent(typeof(ICellHabitant))]
-public class Plotter : MonoEntity, IInitializable, IUpdatable
+[RequireComponent(typeof(ICellEntity))]
+public class Plotter : CellComponent, IInitializable, IUpdatable
 {
     [Inject]
     private Astar _astar;
     [Inject]
     private Level _level;
-    private ICellHabitant _target;
+    private ICellEntity _target;
     private List<Vector2Int> _currentPath;
-    private ICellHabitant _owner;
 
     public UpdateOrder UpdateOrder => UpdateOrder.AI;
 
-    public InitOrder InitOrder => InitOrder.Entity;
 
     public Vector2Int? Peek()
     {
@@ -31,25 +29,21 @@ public class Plotter : MonoEntity, IInitializable, IUpdatable
     }
 
 
-    public void Init()
-    {
-        _owner = GetComponent<ICellHabitant>();
-    }
-
-
     // recalculate on
     //  - after tick
     //  - on level change
     //  - on target becoming untargetable
     //  - on entity added/removed from level
 
-    private ICellHabitant FindTarget()
+    private ICellEntity FindTarget()
     {
-        var ourPosition = _level.GetEntityPosition(_owner);
-        var availableTargets = _level.Entities.OfType<IEnemyTarget>();
+        var ourPosition = _level.GetEntityPosition(Entity);
+        bool predicate(ICellEntity entity) => entity.Has<IEnemyTarget>();
+
+        var availableTargets = _level.Entities.Where(predicate);
         if (!availableTargets.Any()) return null;
         var closestTargets = availableTargets
-            .GroupBy(enemy => _level.Distance(ourPosition, _level.GetEntityPosition(enemy)))
+            .GroupBy(target => _level.Distance(ourPosition, _level.GetEntityPosition(target)))
             .OrderBy(group => group.Key)
             .FirstOrDefault()
             .ToList();  // TODO: Move target predicate out
@@ -78,13 +72,13 @@ public class Plotter : MonoEntity, IInitializable, IUpdatable
         }
         
         _target.OnDestroyEvent += OnTargetDestroy;
-        var ourPosition = _level.GetEntityPosition(_owner);
+        var ourPosition = _level.GetEntityPosition(Entity);
         var targetPosition = _level.GetEntityPosition(_target);
         _currentPath = _astar.FindPath(ourPosition, targetPosition, cellPosition => _level.GetCell(cellPosition).IsEmpty());
     }
 
 
-    private bool ValidPath(List<Vector2Int> currentPath, ICellHabitant _target)
+    private bool ValidPath(List<Vector2Int> currentPath, ICellEntity _target)
     {
         var targetNull = _target == null;
         if (targetNull) return false;
@@ -94,7 +88,7 @@ public class Plotter : MonoEntity, IInitializable, IUpdatable
 
         var targetNotMoved = _level.GetEntityPosition(_target) == currentPath[^1];
         var pathIsClear = currentPath.Skip(1).Take(currentPath.Count - 2).All(cell => _level.GetCell(cell).IsEmpty());
-        var atTheStartOfPath =  _level.GetEntityPosition(_owner) == _currentPath[0];
+        var atTheStartOfPath =  _level.GetEntityPosition(Entity) == _currentPath[0];
 
         return targetNotMoved
             && pathIsClear

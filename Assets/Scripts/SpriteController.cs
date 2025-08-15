@@ -2,7 +2,7 @@ using UnityEngine;
 using VContainer;
 
 [RequireComponent(typeof(SpriteRenderer))]
-public class SpriteController : MonoEntity, IInitializable, IUpdatable, ITickable
+public class SpriteController : MonoComponent, IInitializable, IUpdatable, ITickable
 {
     private SpriteRenderer _spriteRenderer;
     private SpriteActionProcessor _activeProcessor;
@@ -27,7 +27,7 @@ public class SpriteController : MonoEntity, IInitializable, IUpdatable, ITickabl
         _spriteRenderer = GetComponent<SpriteRenderer>();
         var attacker = GetComponentInParent<IAttacker>();
         var attackable = GetComponentInParent<IAttackable>();
-        var entity = GetComponentInParent<ICellHabitant>();
+        var entity = GetComponentInParent<ICellEntity>();
 
         bool attackEventPredicate(AttackEvent @event) => @event.attacker == attacker;
         attackBinding = new EventBinding<AttackEvent>(OnAttack, attackEventPredicate);
@@ -73,8 +73,8 @@ public class SpriteController : MonoEntity, IInitializable, IUpdatable, ITickabl
 
     private void OnAttack(AttackEvent attackEvent)
     {
-        var from = _level.GetEntityPosition(attackEvent.attacker);
-        var to = _level.GetEntityPosition(attackEvent.attackable);
+        var from = _level.GetEntityPosition(attackEvent.attacker.Entity);
+        var to = _level.GetEntityPosition(attackEvent.attackable.Entity);
         UpdateDirection(from, to);
 
         if (!_processorList.TryGetProcessor(ActionBehaviour.Action.Attack, out _activeProcessor))

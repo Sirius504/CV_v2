@@ -14,11 +14,11 @@ public struct AttackEvent : IEvent
 
 public struct MovementEvent : IEvent
 {
-    public ICellHabitant entity;
+    public ICellEntity entity;
     public Vector2Int from;
     public Vector2Int to;
 
-    public MovementEvent(ICellHabitant entity, Vector2Int from, Vector2Int to) : this()
+    public MovementEvent(ICellEntity entity, Vector2Int from, Vector2Int to) : this()
     {
         this.to = to;
         this.from = from;
@@ -29,10 +29,10 @@ public struct MovementEvent : IEvent
 
 public struct BlockingEvent : IEvent
 {
-    public ICellHabitant entity;
+    public ICellEntity entity;
     public Vector2Int attackSource;
 
-    public BlockingEvent(ICellHabitant entity, Vector2Int attackSource)
+    public BlockingEvent(ICellEntity entity, Vector2Int attackSource)
     {
         this.entity = entity;
         this.attackSource = attackSource;

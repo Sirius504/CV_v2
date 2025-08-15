@@ -1,3 +1,3 @@
-﻿public interface IEnemyTarget : ICellHabitant
+﻿public interface IEnemyTarget : ICellComponent
 {
 }

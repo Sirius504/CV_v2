@@ -2,7 +2,7 @@
 using System.Collections.Generic;
 using UnityEngine;
 
-public class ActionInfoView : MonoEntity
+public class ActionInfoView : MonoComponent
 {
     [SerializeField] private Arrow _arrowPrefab;
     private readonly List<Arrow> _arrows = new(4);

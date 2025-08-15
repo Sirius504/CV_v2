@@ -4,17 +4,17 @@ using System.Linq;
 using UnityEngine;
 using VContainer;
 
-public class Level : SystemBase<Level, ICellHabitant>, IInitializable
+public class Level : SystemBase<Level, ICellEntity>, IInitializable
 {
     [SerializeField] private LevelGrid _grid;
 
     [Inject]
     private Astar _astar;
-    public IReadOnlyCollection<ICellHabitant> Entities => _entitiesPositionsMap.Keys;
+    public IReadOnlyCollection<ICellEntity> Entities => _entitiesPositionsMap.Keys;
     public IEnumerable<ICellInfo> Cells => _cells.Cast<ICellInfo>();
 
     private CellInfo[,] _cells;
-    private Dictionary<ICellHabitant, Vector2Int> _entitiesPositionsMap = new();
+    private Dictionary<ICellEntity, Vector2Int> _entitiesPositionsMap = new();
 
     public InitOrder InitOrder => InitOrder.System;
 
@@ -27,7 +27,7 @@ public class Level : SystemBase<Level, ICellHabitant>, IInitializable
                 _cells[i, j] = new CellInfo(new Vector2Int(i, j));
             }
 
-        _entitiesPositionsMap = new Dictionary<ICellHabitant, Vector2Int>(64);
+        _entitiesPositionsMap = new Dictionary<ICellEntity, Vector2Int>(64);
     }
 
     public double Distance(Vector2Int from, Vector2Int to) => _astar.ManhattanDistance(from, to);
@@ -67,17 +67,17 @@ public class Level : SystemBase<Level, ICellHabitant>, IInitializable
         }
     }
 
-    public Vector2Int GetEntityCellPosition<T>(T entity) where T : MonoBehaviour, ICellHabitant
+    public Vector2Int GetEntityCellPosition<T>(T entity) where T : MonoBehaviour, ICellEntity
     {
         return _grid.WorldToCell(entity.transform.position);
     }
 
-    public Vector3 GetEntitiyWorldPosition<T>(T entity) where T : MonoBehaviour, ICellHabitant
+    public Vector3 GetEntitiyWorldPosition<T>(T entity) where T : MonoBehaviour, ICellEntity
     {
         return _grid.CellToWorld(_entitiesPositionsMap[entity]);
     }
 
-    protected override void RegisterMany(IEnumerable<ICellHabitant> habitants)
+    protected override void RegisterMany(IEnumerable<ICellEntity> habitants)
     {
         foreach(var habitant in habitants)
         {
@@ -85,21 +85,16 @@ public class Level : SystemBase<Level, ICellHabitant>, IInitializable
         }
     }
 
-    private void Register(ICellHabitant entity)
+    private void Register(ICellEntity entity)
     {
         var mb = (MonoBehaviour)entity;
-        if (entity is IChildCellHabitant child)
-        {
-            mb = (MonoBehaviour)child.Parent;
-        }
-
         var cellPosition = _grid.WorldToCell(mb.transform.position);
         cellPosition.Clamp(Vector2Int.zero, _grid.Size - Vector2Int.one);
         Add(entity, cellPosition);
         mb.transform.position = _grid.CellToWorld(cellPosition);
     }
 
-    private void Add(ICellHabitant entity, Vector2Int position)
+    private void Add(ICellEntity entity, Vector2Int position)
     {
         if (_entitiesPositionsMap.TryAdd(entity, position))
         {
@@ -113,7 +108,7 @@ public class Level : SystemBase<Level, ICellHabitant>, IInitializable
         }
     }
 
-    public void Remove(ICellHabitant entity)
+    public void Remove(ICellEntity entity)
     {
         if (_entitiesPositionsMap.TryGetValue(entity, out var position))
         {
@@ -128,7 +123,7 @@ public class Level : SystemBase<Level, ICellHabitant>, IInitializable
         }
     }
 
-    public void Move(ICellHabitant entity, Vector2Int newPosition)
+    public void Move(ICellEntity entity, Vector2Int newPosition)
     {
         if (_entitiesPositionsMap.TryGetValue(entity, out var position))
         {
@@ -139,19 +134,9 @@ public class Level : SystemBase<Level, ICellHabitant>, IInitializable
                 return;
             }
 
-            var children = cell.Contents.Where(cont => cont is IChildCellHabitant child && child.Parent == entity).ToList();
-            foreach(var child in children)
-            {
-                cell?.Remove(child);
-            }
             cell?.Remove(entity);
 
             var newCell = GetCellInternal(newPosition);
-            foreach (var child in children)
-            {
-                newCell.Put(child);
-                _entitiesPositionsMap[child] = newPosition;
-            }
             newCell.Put(entity);
             _entitiesPositionsMap[entity] = newPosition;
         }
@@ -161,12 +146,7 @@ public class Level : SystemBase<Level, ICellHabitant>, IInitializable
         }
     }
 
-    public void Move(IChildCellHabitant _, Vector2Int __)
-    {
-        throw new Exception("Moving IChildCellHabitant is forbidden. Move ICellHabitant instead.");
-    }
-
-    public Vector2Int GetEntityPosition(ICellHabitant entity)
+    public Vector2Int GetEntityPosition(ICellEntity entity)
     {
         if (!_entitiesPositionsMap.TryGetValue(entity, out var position))
         {
@@ -178,7 +158,7 @@ public class Level : SystemBase<Level, ICellHabitant>, IInitializable
     private void OnEntityDestroy(IDestroyable destroyable)
     {
         destroyable.OnDestroyEvent -= OnEntityDestroy;
-        var entity = (ICellHabitant)destroyable;
+        var entity = (ICellEntity)destroyable;
         Remove(entity);
     }
     #endregion

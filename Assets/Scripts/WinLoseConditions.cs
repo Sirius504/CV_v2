@@ -10,7 +10,7 @@ public enum GameState
     Lose
 }
 
-public class WinLoseConditions : MonoEntity, IInitializable, IUpdatable
+public class WinLoseConditions : MonoComponent, IInitializable, IUpdatable
 {
     [SerializeField] private Level _level;
     [SerializeField] private Timer _roundTimer;
@@ -42,16 +42,18 @@ public class WinLoseConditions : MonoEntity, IInitializable, IUpdatable
     public void UpdateManual()
     {
         var entities = _level.Entities;
+        var player = entities.FirstOrDefault(entity => entity.Has<Player>());
+        var dog = entities.FirstOrDefault(entity => entity.Has<Dog>());
 
+        var enemiesExist = entities.Where(entity => entity.Has<Enemy>()).Any();
 
-        if (!entities.OfType<Dog>().Any()
-            || !entities.OfType<Player>().Any())
+        if (player == null || dog == null)
         {
             GameState = GameState.Lose;
             return;
         }
 
-        if (!_roundTimer.IsRunning && !entities.OfType<Enemy>().Any())
+        if (!_roundTimer.IsRunning && !enemiesExist)
         {
             GameState = GameState.Win;
             return;

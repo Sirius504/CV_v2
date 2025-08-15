@@ -21,7 +21,7 @@ public static class LevelExtensions
         return AdjacentCoords(grid, position.x, position.y);
     }
 
-    public static IEnumerable<Vector2Int> GetAdjacent(this LevelGrid grid, Level level, ICellHabitant entity)
+    public static IEnumerable<Vector2Int> GetAdjacent(this LevelGrid grid, Level level, ICellEntity entity)
     {
         return GetAdjacent(grid, level.GetEntityPosition(entity));
     }
@@ -34,7 +34,7 @@ public static class LevelExtensions
     {
         return GetAdjacentCells(grid, level, position.x, position.y);
     }
-    public static IEnumerable<ICellInfo> GetAdjacentCells(this LevelGrid grid, Level level, ICellHabitant entity)
+    public static IEnumerable<ICellInfo> GetAdjacentCells(this LevelGrid grid, Level level, ICellEntity entity)
     {
         return GetAdjacentCells(grid, level, level.GetEntityPosition(entity));
     }
@@ -51,12 +51,12 @@ public static class LevelExtensions
         return false;
     }
 
-    public static bool IsAdjacent(this Level level, ICellHabitant entity, ICellHabitant target)
+    public static bool IsAdjacent(this Level level, ICellEntity entity, ICellEntity target)
     {
         return IsAdjacent(level, level.GetEntityPosition(entity), level.GetEntityPosition(target));
     }
 
-    public static bool IsAdjacent(this Level level, ICellHabitant entity, Vector2Int target)
+    public static bool IsAdjacent(this Level level, ICellEntity entity, Vector2Int target)
     {
         return IsAdjacent(level, level.GetEntityPosition(entity), target);
     }

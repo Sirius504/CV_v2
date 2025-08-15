@@ -9,6 +9,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 3982374725751084187}
+  - component: {fileID: 505816141771136106}
   - component: {fileID: 3982374725751084185}
   - component: {fileID: 1963617460376162128}
   - component: {fileID: 7947045458872878129}
@@ -41,6 +42,23 @@ Transform:
   - {fileID: 8685564796299059697}
   m_Father: {fileID: 0}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!114 &505816141771136106
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 3982374725751084184}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 0a019562dd2646c49be61b43374720f2, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  _components:
+  - {fileID: 1963617460376162128}
+  - {fileID: 7947045458872878129}
+  - {fileID: 5565090869756094909}
+  - {fileID: 1200111692542852789}
 --- !u!114 &3982374725751084185
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -238,6 +256,7 @@ MonoBehaviour:
   - {fileID: 3982374725751084184}
   plotter: {fileID: 5565090869756094909}
   enemy: {fileID: 1963617460376162128}
+  cellEntity: {fileID: 505816141771136106}
 --- !u!1 &3982374726042670569
 GameObject:
   m_ObjectHideFlags: 0

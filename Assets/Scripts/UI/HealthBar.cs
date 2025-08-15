@@ -2,7 +2,7 @@ using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.UI;
 
-public class HealthBar : MonoEntity, IUpdatable
+public class HealthBar : MonoComponent, IUpdatable
 {
     [SerializeField] private Health _health;
     [SerializeField] private Image _healthPrefab;

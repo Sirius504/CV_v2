@@ -22,7 +22,7 @@ public class Attack : Node
 
         var nextPosition = _plotter.Peek().Value;
         var nextTile = _level.GetCell(nextPosition);
-        if (nextTile.TryGet<IAttackable>(out var attackable))
+        if (nextTile.TryGetFirst<IAttackable>(out var attackable))
         {
             attackable.ReceiveAttack(_owner);
             var @event = new AttackEvent(_owner, attackable);
