@@ -67,7 +67,7 @@ public static class EventBusUtil {
     /// Clears (removes all listeners from) all event buses in the application.
     /// </summary>
     public static void ClearAllBuses() {
-        Debug.Log("Clearing all buses...");
+        //Debug.Log("Clearing all buses...");
         for (int i = 0; i < EventBusTypes.Count; i++) {
             var busType = EventBusTypes[i];
             var clearMethod = busType.GetMethod("Clear", BindingFlags.Static | BindingFlags.NonPublic);

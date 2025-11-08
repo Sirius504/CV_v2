@@ -41,11 +41,11 @@ public class WinLoseConditions : MonoComponent, IInitializable, IUpdatable
 
     public void UpdateManual()
     {
-        var entities = _level.Entities;
-        var player = entities.FirstOrDefault(entity => entity.Has<Player>());
-        var dog = entities.FirstOrDefault(entity => entity.Has<Dog>());
+        _level.TryGetFirstWithComponent<Player>(out var player);
+        _level.TryGetFirstWithComponent<Dog>(out var dog);
+        _level.TryGetFirstWithComponent<Door>(out var door);
 
-        var enemiesExist = entities.Where(entity => entity.Has<Enemy>()).Any();
+        var enemiesExist = _level.TryGetFirstWithComponent<Enemy>(out var _);
 
         if (player == null || dog == null)
         {
@@ -53,7 +53,12 @@ public class WinLoseConditions : MonoComponent, IInitializable, IUpdatable
             return;
         }
 
-        if (!_roundTimer.IsRunning && !enemiesExist)
+        var playerPosition = _level.GetEntityPosition(player);
+        var doorPosition = _level.GetEntityPosition(door);
+        Debug.Log($"door: {doorPosition} - player: {playerPosition}");
+        var doorReached = playerPosition == doorPosition;
+
+        if (!_roundTimer.IsRunning && !enemiesExist && doorReached)
         {
             GameState = GameState.Win;
             return;

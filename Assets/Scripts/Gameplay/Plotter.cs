@@ -76,7 +76,7 @@ public class Plotter : CellComponent, IInitializable, IUpdatable
         _target.OnDestroyEvent += OnTargetDestroy;
         var ourPosition = _level.GetEntityPosition(Entity);
         var targetPosition = _level.GetEntityPosition(_target);
-        _currentPath = _astar.FindPath(ourPosition, targetPosition, cellPosition => _level.GetCell(cellPosition).IsEmpty());
+        _currentPath = _astar.FindPath(ourPosition, targetPosition, cellPosition => _level.GetCell(cellPosition).IsPassable());
     }
 
 
@@ -89,7 +89,7 @@ public class Plotter : CellComponent, IInitializable, IUpdatable
         if (isNull) return false;
 
         var targetNotMoved = _level.GetEntityPosition(_target) == currentPath[^1];
-        var pathIsClear = currentPath.Skip(1).Take(currentPath.Count - 2).All(cell => _level.GetCell(cell).IsEmpty());
+        var pathIsClear = currentPath.Skip(1).Take(currentPath.Count - 2).All(cell => _level.GetCell(cell).IsPassable());
         var atTheStartOfPath =  _level.GetEntityPosition(Entity) == _currentPath[0];
 
         return targetNotMoved
@@ -106,7 +106,6 @@ public class Plotter : CellComponent, IInitializable, IUpdatable
     {
         if (ValidPath(_currentPath, _target)) return;
         PlotToNewTarget();
-        Debug.Log(_target);
     }
 
     protected override void OnDestroy()

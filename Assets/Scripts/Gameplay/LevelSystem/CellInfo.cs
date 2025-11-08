@@ -15,9 +15,13 @@ public class CellInfo : ICellInfo
         _entities = new List<ICellEntity>();
     }
 
-    public bool IsEmpty()
+    public bool IsPassable()
     {
-        return _entities.Count == 0;
+        if (_entities.Count == 0)
+        {
+            return true;
+        }
+        return _entities.All(entity => entity.Has<Passable>());
     }
 
     public bool Has<T>(out ICellEntity entity) where T : ICellComponent

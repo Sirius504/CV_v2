@@ -68,4 +68,11 @@ public static class LevelExtensions
         return absX == 1 && absY == 0
             || absX == 0 && absY == 1;
     }
+
+    public static bool TryGetFirstWithComponent<T>(this Level level, out ICellEntity entity) where T : ICellComponent
+    {
+        var entities = level.Entities;
+        entity = entities.FirstOrDefault(entity => entity.Has<T>());
+        return entity != default(ICellEntity); 
+    }
 }

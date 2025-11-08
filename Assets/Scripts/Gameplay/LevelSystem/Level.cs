@@ -67,11 +67,6 @@ public class Level : SystemBase<Level, ICellEntity>, IInitializable
         }
     }
 
-    public Vector2Int GetEntityCellPosition(ICellEntity entity)
-    {
-        return _entitiesPositionsMap[entity];
-    }
-
     public Vector3 GetEntitiyWorldPosition(ICellEntity entity)
     {
         return _grid.CellToWorld(_entitiesPositionsMap[entity]);

@@ -51,8 +51,8 @@ public class LaserDrawingSystem : SystemBase<LaserDrawingSystem, ILaserDrawer>,
         var laser = _lasers[drawer];
         _lasers.Remove(drawer);
         _gradients.Remove(laser);
-        Destroy(laser);
         drawer.OnDestroyEvent -= OnDrawerDestroyed;
+        Destroy(laser.gameObject);
     }
 
     public void UpdateManual()

@@ -10,6 +10,32 @@ public class CellEntity : MonoComponent, ICellEntity
 
     public InitOrder InitOrder => InitOrder.Entity;
 
+    protected override void Awake()
+    {
+        base.Awake();
+        SearchComponents();
+    }
+
+    private void OnValidate()
+    {
+        SearchComponents();
+    }
+
+
+    private void SearchComponents()
+    {
+        foreach (var component in GetComponents<CellComponent>())
+        {
+            if (_components.Contains(component)) continue;
+            _components.Add(component);
+        }
+
+        foreach (var component in GetComponentsInChildren<CellComponent>())
+        {
+            if (_components.Contains(component)) continue;
+            _components.Add(component);
+        }
+    }
 
     public bool Has<T>() where T : ICellComponent
     {
@@ -26,5 +52,11 @@ public class CellEntity : MonoComponent, ICellEntity
         }
         value = default;
         return false;
+    }
+
+    public void Add<T>() where T : CellComponent
+    {
+        var newComponent = gameObject.AddComponent<T>();
+        _components.Add(newComponent);
     }
 }

@@ -43,7 +43,7 @@ public class Player : CellComponent,
         }
 
         var targetCell = _level.GetCell(targetPosition);
-        if (targetCell.IsEmpty())
+        if (targetCell.IsPassable())
         {
             _level.Move(Entity, targetPosition);
             var @event = new MovementEvent(Entity, currentPosition, targetPosition);

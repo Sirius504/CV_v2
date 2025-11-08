@@ -38,7 +38,7 @@ public class Spawner : MonoComponent, IInitializable, ITickable
 
     private bool IsEligibleCell(ICellInfo cell)
     {
-        if (!cell.IsEmpty()) return false;
+        if (!cell.IsPassable()) return false;
         if (cell.Position.x != 0 && cell.Position.x != _levelGrid.Size.x - 1) return false;
         return true;
     }
