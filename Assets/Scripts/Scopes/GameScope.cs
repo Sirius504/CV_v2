@@ -10,6 +10,7 @@ public class GameScope : LifetimeScope
     [SerializeField] private Grid _grid;
     [SerializeField] private Metronome _metronome;
     [SerializeField] private DialogueRunner _dialogueRunner;
+    [SerializeField] private LevelLoader _levelLoader;
 
     protected override void Configure(IContainerBuilder builder)
     {
@@ -18,6 +19,7 @@ public class GameScope : LifetimeScope
         builder.RegisterComponent(_level);
         builder.RegisterComponent(_metronome);
         builder.RegisterComponent(_dialogueRunner);
+        builder.RegisterComponent(_levelLoader);
         builder.Register<Astar>(Lifetime.Singleton);
     }
 }

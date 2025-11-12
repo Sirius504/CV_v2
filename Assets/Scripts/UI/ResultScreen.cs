@@ -3,7 +3,7 @@ using UnityEngine;
 
 public class ResultScreen : MonoComponent, IInitializable
 {
-    [SerializeField] private WinLoseConditions _winLose;
+    [SerializeField] private WinLoseManager _winLose;
     [SerializeField] private TextMeshProUGUI _resultText;
     [SerializeField] private Canvas _canvas;
 

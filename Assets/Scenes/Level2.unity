@@ -1724,6 +1724,8 @@ GameObject:
   - component: {fileID: 958982342}
   - component: {fileID: 958982343}
   - component: {fileID: 958982344}
+  - component: {fileID: 958982345}
+  - component: {fileID: 958982346}
   m_Layer: 0
   m_Name: Game
   m_TagString: Untagged
@@ -1783,8 +1785,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 9d376163bf1d3b64c8194f946438bd15, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  _level: {fileID: 144303777}
   _roundTimer: {fileID: 958982343}
+  _condition: {fileID: 958982346}
 --- !u!114 &958982339
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -2056,6 +2058,31 @@ AudioSource:
     m_PreInfinity: 2
     m_PostInfinity: 2
     m_RotationOrder: 4
+--- !u!114 &958982345
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 958982333}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: fd698c5c45c51b74ba8b5fb79244ec37, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+--- !u!114 &958982346
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 958982333}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 806a1d45f0d286a4b90254dee6ec5da2, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  _roundTimer: {fileID: 958982343}
 --- !u!1001 &1094197463
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -3568,11 +3595,13 @@ MonoBehaviour:
   - {fileID: 1277144059}
   - {fileID: 1401307934}
   - {fileID: 1199642391}
+  - {fileID: 958982333}
   _levelGrid: {fileID: 144303779}
   _level: {fileID: 144303777}
   _grid: {fileID: 144303775}
   _metronome: {fileID: 958982337}
   _dialogueRunner: {fileID: 1631120711}
+  _levelLoader: {fileID: 958982345}
 --- !u!4 &8935739762869291375
 Transform:
   m_ObjectHideFlags: 0
