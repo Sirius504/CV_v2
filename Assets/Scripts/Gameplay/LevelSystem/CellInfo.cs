@@ -57,6 +57,18 @@ public class CellInfo : ICellInfo
 
     public bool TryGetAll<T>(out IReadOnlyDictionary<ICellEntity, T> entities) where T : ICellComponent
     {
-        throw new System.NotImplementedException();
+        Dictionary<ICellEntity, T> result = new();
+        foreach (var entity in _entities)
+        {
+            if (!entity.TryGet<T>(out var value))
+            {
+                continue;
+            }
+
+            result.Add(entity, value);
+        }
+
+        entities = result;
+        return result.Count > 0;
     }
 }

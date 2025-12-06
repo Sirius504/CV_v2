@@ -2,6 +2,7 @@ using System.Collections.Generic;
 using System.Linq;
 using UnityEngine;
 
+[SelectionBase]
 public class CellEntity : MonoComponent, ICellEntity
 {
     [SerializeField] private List<CellComponent> _components;

@@ -1,6 +1,9 @@
-﻿public interface ILaserDrawer : IDestroyable
+﻿using UnityEngine;
+
+public interface ILaserDrawer : IDestroyable
 {
-    ICellEntity Source { get; }
-    ICellEntity Target { get; }
+    bool Enabled { get; }
+    Vector2Int Source { get; }
+    Vector2Int Target { get; }
     float Progress { get; }
 }

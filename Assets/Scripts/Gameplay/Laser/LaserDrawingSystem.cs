@@ -10,7 +10,7 @@ public class LaserDrawingSystem : SystemBase<LaserDrawingSystem, ILaserDrawer>,
 {
     [SerializeField] private LineRenderer _laserPrefab;
     [Inject]
-    private Level _level;
+    private LevelGrid _levelGrid;
 
     private Gradient _originalGradient;
 
@@ -59,19 +59,19 @@ public class LaserDrawingSystem : SystemBase<LaserDrawingSystem, ILaserDrawer>,
     {
         foreach((var drawer, var laser) in _lasers)
         {
-            var enabled = drawer.Source != null && drawer.Target != null;
-            laser.gameObject.SetActive(enabled);
-            if (!enabled) continue;
+            //var enabled = drawer.Source != null && drawer.Target != null;
+            laser.gameObject.SetActive(drawer.Enabled);
+            if (!drawer.Enabled) continue;
 
-            laser.SetPosition(0, _level.GetEntitiyWorldPosition(drawer.Source));
-            laser.SetPosition(1, _level.GetEntitiyWorldPosition(drawer.Target));
+            laser.SetPosition(0, _levelGrid.CellToWorld(drawer.Source));
+            laser.SetPosition(1, _levelGrid.CellToWorld(drawer.Target));
 
             var gradient = _gradients[laser];
 
             var newAlpha = new GradientAlphaKey[2]
             {
-                new GradientAlphaKey() { alpha = drawer.Progress, time = 0f },
-                new GradientAlphaKey() { alpha = drawer.Progress, time = 1f }
+                new() { alpha = drawer.Progress, time = 0f },
+                new() { alpha = drawer.Progress, time = 1f }
             };
 
             gradient.SetKeys(gradient.colorKeys, newAlpha);

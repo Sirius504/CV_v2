@@ -78,3 +78,8 @@ crashlytics-build.properties
 # Ignore temporaries from GameCI
 /[Aa]rtifacts/
 /[Cc]odeCoverage/
+
+# Krita files
+*.kra
+*.kra~
+*.kra.meta

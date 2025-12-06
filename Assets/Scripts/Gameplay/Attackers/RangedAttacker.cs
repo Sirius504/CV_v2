@@ -1,3 +1,4 @@
+using TMPro;
 using UnityEngine;
 using VContainer;
 
@@ -8,6 +9,8 @@ public class RangedAttacker : CellComponent, IAttacker, ILaserDrawer
 
     [Inject]
     private Plotter _plotter;
+    [Inject]
+    private Level _level;
 
     private ICellEntity _currentTarget;
 
@@ -19,9 +22,11 @@ public class RangedAttacker : CellComponent, IAttacker, ILaserDrawer
 
     public bool HasLockedIn => _aimProgress == _ticksToAim - 1;
 
-    public ICellEntity Source => Entity;
+    public Vector2Int Source => _level.GetEntityPosition(Entity);
 
-    public ICellEntity Target => _plotter.Target;
+    public Vector2Int Target => _level.GetEntityPosition(_currentTarget);
+
+    public bool Enabled => _currentTarget != null;
 
     public float Progress => _aimProgress / (float)(_ticksToAim - 1);
 
